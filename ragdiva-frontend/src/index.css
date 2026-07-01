@@ -1,130 +1,492 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "shadcn/tailwind.css";
-@import "@fontsource-variable/inter";
 
 @custom-variant dark (&:is(.dark *));
 
-@theme inline {
-    --font-heading: var(--font-sans);
-    --font-sans: 'Inter Variable', sans-serif;
-    --color-sidebar-ring: var(--sidebar-ring);
-    --color-sidebar-border: var(--sidebar-border);
-    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-    --color-sidebar-accent: var(--sidebar-accent);
-    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-    --color-sidebar-primary: var(--sidebar-primary);
-    --color-sidebar-foreground: var(--sidebar-foreground);
-    --color-sidebar: var(--sidebar);
-    --color-chart-5: var(--chart-5);
-    --color-chart-4: var(--chart-4);
-    --color-chart-3: var(--chart-3);
-    --color-chart-2: var(--chart-2);
-    --color-chart-1: var(--chart-1);
-    --color-ring: var(--ring);
-    --color-input: var(--input);
-    --color-border: var(--border);
-    --color-destructive: var(--destructive);
-    --color-accent-foreground: var(--accent-foreground);
-    --color-accent: var(--accent);
-    --color-muted-foreground: var(--muted-foreground);
-    --color-muted: var(--muted);
-    --color-secondary-foreground: var(--secondary-foreground);
-    --color-secondary: var(--secondary);
-    --color-primary-foreground: var(--primary-foreground);
-    --color-primary: var(--primary);
-    --color-popover-foreground: var(--popover-foreground);
-    --color-popover: var(--popover);
-    --color-card-foreground: var(--card-foreground);
-    --color-card: var(--card);
-    --color-foreground: var(--foreground);
-    --color-background: var(--background);
-    --radius-sm: calc(var(--radius) * 0.6);
-    --radius-md: calc(var(--radius) * 0.8);
-    --radius-lg: var(--radius);
-    --radius-xl: calc(var(--radius) * 1.4);
-    --radius-2xl: calc(var(--radius) * 1.8);
-    --radius-3xl: calc(var(--radius) * 2.2);
-    --radius-4xl: calc(var(--radius) * 2.6);
+/* =========================================================
+   1) FULL LUMINA SCALE TOKENS
+   Tetap dipertahankan biar bisa dipakai langsung, contoh:
+   bg-accent-dark-400, text-text-muted-light-700, dll.
+   ========================================================= */
+@theme {
+  /* ---------- DARK THEME SCALES ---------- */
+
+  /* Background utama | Default: #0D1117 */
+  --color-background-dark-50: #F4F6F8;
+  --color-background-dark-100: #E8ECF1;
+  --color-background-dark-200: #C5CED9;
+  --color-background-dark-300: #9DB0C1;
+  --color-background-dark-400: #7391A9;
+  --color-background-dark-500: #52728C;
+  --color-background-dark-600: #3D556C;
+  --color-background-dark-700: #2C3E50;
+  --color-background-dark-800: #1D2A37;
+  --color-background-dark-900: #131C25;
+  --color-background-dark-950: #0D1117;
+  --color-background-dark: #0D1117;
+
+  /* Surface (Card, Navbar) | Default: #111827 */
+  --color-surface-dark-50: #F3F4F6;
+  --color-surface-dark-100: #E5E7EB;
+  --color-surface-dark-200: #D1D5DB;
+  --color-surface-dark-300: #9CA3AF;
+  --color-surface-dark-400: #6B7280;
+  --color-surface-dark-500: #4B5563;
+  --color-surface-dark-600: #374151;
+  --color-surface-dark-700: #1F2937;
+  --color-surface-dark-800: #151D29;
+  --color-surface-dark-900: #111827;
+  --color-surface-dark-950: #0B0F19;
+  --color-surface-dark: #111827;
+
+  /* Surface 2 (Panel, Code Block) | Default: #1A2333 */
+  --color-surface-2-dark-50: #F5F7FA;
+  --color-surface-2-dark-100: #EBEFF4;
+  --color-surface-2-dark-200: #CDD7E6;
+  --color-surface-2-dark-300: #AABDD5;
+  --color-surface-2-dark-400: #839EC1;
+  --color-surface-2-dark-500: #5E7DAA;
+  --color-surface-2-dark-600: #456086;
+  --color-surface-2-dark-700: #324663;
+  --color-surface-2-dark-800: #1A2333;
+  --color-surface-2-dark-900: #121824;
+  --color-surface-2-dark-950: #0B0F17;
+  --color-surface-2-dark: #1A2333;
+
+  /* Border & Primary | Default: #1E3A5F */
+  --color-border-dark-50: #F2F6FA;
+  --color-border-dark-100: #E3ECF5;
+  --color-border-dark-200: #C0D5E9;
+  --color-border-dark-300: #96B9DA;
+  --color-border-dark-400: #689AC9;
+  --color-border-dark-500: #437DB2;
+  --color-border-dark-600: #316290;
+  --color-border-dark-700: #1E3A5F;
+  --color-border-dark-800: #18304F;
+  --color-border-dark-900: #142741;
+  --color-border-dark-950: #0D192C;
+  --color-border-dark: #1E3A5F;
+
+  --color-primary-dark-50: #F2F6FA;
+  --color-primary-dark-100: #E3ECF5;
+  --color-primary-dark-200: #C0D5E9;
+  --color-primary-dark-300: #96B9DA;
+  --color-primary-dark-400: #689AC9;
+  --color-primary-dark-500: #437DB2;
+  --color-primary-dark-600: #316290;
+  --color-primary-dark-700: #1E3A5F;
+  --color-primary-dark-800: #18304F;
+  --color-primary-dark-900: #142741;
+  --color-primary-dark-950: #0D192C;
+  --color-primary-dark: #1E3A5F;
+
+  /* Accent (CTA, Highlight) | Default: #22D3BA */
+  --color-accent-dark-50: #EAFBF8;
+  --color-accent-dark-100: #CDF6EF;
+  --color-accent-dark-200: #A0EDE0;
+  --color-accent-dark-300: #6ADECB;
+  --color-accent-dark-400: #22D3BA;
+  --color-accent-dark-500: #13B39C;
+  --color-accent-dark-600: #0E8F7D;
+  --color-accent-dark-700: #0B7264;
+  --color-accent-dark-800: #095C51;
+  --color-accent-dark-900: #084C43;
+  --color-accent-dark-950: #042C27;
+  --color-accent-dark: #22D3BA;
+
+  /* Accent Secondary (Hover) | Default: #0F7B6C */
+  --color-accent-secondary-dark-50: #EDF8F7;
+  --color-accent-secondary-dark-100: #D3EEEB;
+  --color-accent-secondary-dark-200: #A8DDD8;
+  --color-accent-secondary-dark-300: #75C5BE;
+  --color-accent-secondary-dark-400: #47A8A0;
+  --color-accent-secondary-dark-500: #2D8E85;
+  --color-accent-secondary-dark-600: #1D7068;
+  --color-accent-secondary-dark-700: #0F7B6C;
+  --color-accent-secondary-dark-800: #0E4841;
+  --color-accent-secondary-dark-900: #0D3D37;
+  --color-accent-secondary-dark-950: #062421;
+  --color-accent-secondary-dark: #0F7B6C;
+
+  /* Text Utama | Default: #E2E8F0 */
+  --color-text-dark-50: #F8FAFC;
+  --color-text-dark-100: #F1F5F9;
+  --color-text-dark-200: #E2E8F0;
+  --color-text-dark-300: #CBD5E1;
+  --color-text-dark-400: #94A3B8;
+  --color-text-dark-500: #64748B;
+  --color-text-dark-600: #475569;
+  --color-text-dark-700: #334155;
+  --color-text-dark-800: #1E293B;
+  --color-text-dark-900: #0F172A;
+  --color-text-dark-950: #020617;
+  --color-text-dark: #E2E8F0;
+
+  /* Text Muted | Default: #8B9AAD */
+  --color-text-muted-dark-50: #F5F7F9;
+  --color-text-muted-dark-100: #E9EEF2;
+  --color-text-muted-dark-200: #D0DBE5;
+  --color-text-muted-dark-300: #B0C4D5;
+  --color-text-muted-dark-400: #8B9AAD;
+  --color-text-muted-dark-500: #687E96;
+  --color-text-muted-dark-600: #51657A;
+  --color-text-muted-dark-700: #415263;
+  --color-text-muted-dark-800: #354350;
+  --color-text-muted-dark-900: #2D3742;
+  --color-text-muted-dark-950: #1C232A;
+  --color-text-muted-dark: #8B9AAD;
+
+  /* Text Disabled | Default: #4A5568 */
+  --color-text-disabled-dark-50: #F7F8F9;
+  --color-text-disabled-dark-100: #EEF0F3;
+  --color-text-disabled-dark-200: #D9DDE4;
+  --color-text-disabled-dark-300: #BCC4D1;
+  --color-text-disabled-dark-400: #9BA7B9;
+  --color-text-disabled-dark-500: #79889E;
+  --color-text-disabled-dark-600: #4A5568;
+  --color-text-disabled-dark-700: #46556B;
+  --color-text-disabled-dark-800: #3C485A;
+  --color-text-disabled-dark-900: #333D4B;
+  --color-text-disabled-dark-950: #202630;
+  --color-text-disabled-dark: #4A5568;
+
+  /* ---------- LIGHT THEME SCALES ---------- */
+
+  /* Background utama | Default: #F0F4F8 */
+  --color-background-light-50: #F0F4F8;
+  --color-background-light-100: #E2EBF4;
+  --color-background-light-200: #C7D9EA;
+  --color-background-light-300: #A0C2DD;
+  --color-background-light-400: #75A5CC;
+  --color-background-light-500: #5588B6;
+  --color-background-light-600: #406C97;
+  --color-background-light-700: #34567A;
+  --color-background-light-800: #2D4865;
+  --color-background-light-900: #273C54;
+  --color-background-light-950: #192738;
+  --color-background-light: #F0F4F8;
+
+  /* Surface | Default: #FFFFFF */
+  --color-surface-light-50: #FFFFFF;
+  --color-surface-light-100: #FAFAFA;
+  --color-surface-light-200: #F4F4F5;
+  --color-surface-light-300: #E4E4E7;
+  --color-surface-light-400: #D4D4D8;
+  --color-surface-light-500: #A1A1AA;
+  --color-surface-light-600: #71717A;
+  --color-surface-light-700: #52525B;
+  --color-surface-light-800: #3F3F46;
+  --color-surface-light-900: #27272A;
+  --color-surface-light-950: #18181B;
+  --color-surface-light: #FFFFFF;
+
+  /* Surface 2 | Default: #E8EFF7 */
+  --color-surface-2-light-50: #F3F7FB;
+  --color-surface-2-light-100: #E8EFF7;
+  --color-surface-2-light-200: #CDDFF0;
+  --color-surface-2-light-300: #A5C9E5;
+  --color-surface-2-light-400: #77ACD5;
+  --color-surface-2-light-500: #568FC2;
+  --color-surface-2-light-600: #4172A2;
+  --color-surface-2-light-700: #355B83;
+  --color-surface-2-light-800: #2D4C6C;
+  --color-surface-2-light-900: #27405A;
+  --color-surface-2-light-950: #1A2A3D;
+  --color-surface-2-light: #E8EFF7;
+
+  /* Border | Default: #B8CFE8 */
+  --color-border-light-50: #F5F8FB;
+  --color-border-light-100: #E5EFF6;
+  --color-border-light-200: #B8CFE8;
+  --color-border-light-300: #92B7D9;
+  --color-border-light-400: #699CC6;
+  --color-border-light-500: #4B81B1;
+  --color-border-light-600: #386691;
+  --color-border-light-700: #2E5276;
+  --color-border-light-800: #274461;
+  --color-border-light-900: #223951;
+  --color-border-light-950: #162638;
+  --color-border-light: #B8CFE8;
+
+  /* Primary | Default: #1E3A5F */
+  --color-primary-light-50: #F2F6FA;
+  --color-primary-light-100: #E3ECF5;
+  --color-primary-light-200: #C0D5E9;
+  --color-primary-light-300: #96B9DA;
+  --color-primary-light-400: #689AC9;
+  --color-primary-light-500: #437DB2;
+  --color-primary-light-600: #316290;
+  --color-primary-light-700: #254E75;
+  --color-primary-light-800: #1E3A5F;
+  --color-primary-light-900: #1E3A5F;
+  --color-primary-light-950: #0D192C;
+  --color-primary-light: #1E3A5F;
+
+  /* Accent | Default: #0F7B6C */
+  --color-accent-light-50: #EDF8F7;
+  --color-accent-light-100: #D3EEEB;
+  --color-accent-light-200: #A8DDD8;
+  --color-accent-light-300: #75C5BE;
+  --color-accent-light-400: #47A8A0;
+  --color-accent-light-500: #2D8E85;
+  --color-accent-light-600: #1D7068;
+  --color-accent-light-700: #0F7B6C;
+  --color-accent-light-800: #126055;
+  --color-accent-light-900: #124F47;
+  --color-accent-light-950: #082D28;
+  --color-accent-light: #0F7B6C;
+
+  /* Accent Secondary | Default: #0A5C50 */
+  --color-accent-secondary-light-50: #EBF7F6;
+  --color-accent-secondary-light-100: #CDEBE8;
+  --color-accent-secondary-light-200: #A0D8D2;
+  --color-accent-secondary-light-300: #6ABEB5;
+  --color-accent-secondary-light-400: #3FA197;
+  --color-accent-secondary-light-500: #27857C;
+  --color-accent-secondary-light-600: #1A6A62;
+  --color-accent-secondary-light-700: #14554F;
+  --color-accent-secondary-light-800: #0A5C50;
+  --color-accent-secondary-light-900: #103F3B;
+  --color-accent-secondary-light-950: #072422;
+  --color-accent-secondary-light: #0A5C50;
+
+  /* Text Utama | Default: #0D1117 */
+  --color-text-light-50: #F4F6F8;
+  --color-text-light-100: #E8ECF1;
+  --color-text-light-200: #C5CED9;
+  --color-text-light-300: #9DB0C1;
+  --color-text-light-400: #7391A9;
+  --color-text-light-500: #52728C;
+  --color-text-light-600: #3D556C;
+  --color-text-light-700: #2C3E50;
+  --color-text-light-800: #1D2A37;
+  --color-text-light-900: #0D1117;
+  --color-text-light-950: #06090D;
+  --color-text-light: #0D1117;
+
+  /* Text Muted | Default: #3D5166 */
+  --color-text-muted-light-50: #F6F7F9;
+  --color-text-muted-light-100: #EBEFF3;
+  --color-text-muted-light-200: #CFDAE5;
+  --color-text-muted-light-300: #AABFD3;
+  --color-text-muted-light-400: #80A0BC;
+  --color-text-muted-light-500: #5E82A1;
+  --color-text-muted-light-600: #476885;
+  --color-text-muted-light-700: #3D5166;
+  --color-text-muted-light-800: #2F4051;
+  --color-text-muted-light-900: #283645;
+  --color-text-muted-light-950: #1A232E;
+  --color-text-muted-light: #3D5166;
+
+  /* Text Disabled | Default: #7A9AB5 */
+  --color-text-disabled-light-50: #F5F7F9;
+  --color-text-disabled-light-100: #EAEFF3;
+  --color-text-disabled-light-200: #CBD8E5;
+  --color-text-disabled-light-300: #A2BDD3;
+  --color-text-disabled-light-400: #7A9AB5;
+  --color-text-disabled-light-500: #5A7F9D;
+  --color-text-disabled-light-600: #436581;
+  --color-text-disabled-light-700: #36526A;
+  --color-text-disabled-light-800: #2E4558;
+  --color-text-disabled-light-900: #283A4B;
+  --color-text-disabled-light-950: #192632;
+  --color-text-disabled-light: #7A9AB5;
 }
 
+/* =========================================================
+   2) SHADCN SEMANTIC TOKENS
+   Wajib pakai nama variable ini (--background, --primary, dst)
+   supaya component shadcn (Button, Card, Dialog, dll) jalan
+   otomatis tanpa perlu di-edit satu-satu.
+   ========================================================= */
 :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
+  --radius: 0.625rem;
+
+  /* Light mode = mapping dari skala *-light kamu */
+  --background: var(--color-background-light-50);
+  --foreground: var(--color-text-light);
+
+  --card: var(--color-surface-light);
+  --card-foreground: var(--color-text-light);
+
+  --popover: var(--color-surface-light);
+  --popover-foreground: var(--color-text-light);
+
+  --primary: var(--color-primary-light);
+  --primary-foreground: var(--color-surface-light-50);
+
+  --secondary: var(--color-surface-2-light);
+  --secondary-foreground: var(--color-primary-light);
+
+  --muted: var(--color-surface-2-light);
+  --muted-foreground: var(--color-text-muted-light);
+
+  --accent: var(--color-accent-light);
+  --accent-foreground: var(--color-surface-light-50);
+
+  --destructive: #B3261E;
+  --destructive-foreground: var(--color-surface-light-50);
+
+  --border: var(--color-border-light);
+  --input: var(--color-border-light);
+  --ring: var(--color-accent-light-400);
+
+  --chart-1: var(--color-accent-light-400);
+  --chart-2: var(--color-primary-light-500);
+  --chart-3: var(--color-accent-secondary-light-400);
+  --chart-4: var(--color-border-light-500);
+  --chart-5: var(--color-text-muted-light-400);
+
+  --sidebar: var(--color-surface-light);
+  --sidebar-foreground: var(--color-text-light);
+  --sidebar-primary: var(--color-primary-light);
+  --sidebar-primary-foreground: var(--color-surface-light-50);
+  --sidebar-accent: var(--color-surface-2-light);
+  --sidebar-accent-foreground: var(--color-primary-light);
+  --sidebar-border: var(--color-border-light);
+  --sidebar-ring: var(--color-accent-light-400);
 }
 
 .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.922 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
+  /* Dark mode = mapping dari skala *-dark kamu (Lumina default) */
+  --background: var(--color-background-dark);
+  --foreground: var(--color-text-dark);
+
+  --card: var(--color-surface-dark);
+  --card-foreground: var(--color-text-dark);
+
+  --popover: var(--color-surface-dark);
+  --popover-foreground: var(--color-text-dark);
+
+  --primary: var(--color-primary-dark);
+  --primary-foreground: var(--color-background-dark);
+
+  --secondary: var(--color-surface-2-dark);
+  --secondary-foreground: var(--color-text-dark);
+
+  --muted: var(--color-surface-2-dark);
+  --muted-foreground: var(--color-text-muted-dark);
+
+  --accent: var(--color-accent-dark);
+  --accent-foreground: var(--color-background-dark);
+
+  --destructive: #E5534B;
+  --destructive-foreground: var(--color-text-dark-50);
+
+  --border: var(--color-border-dark);
+  --input: var(--color-border-dark);
+  --ring: var(--color-accent-dark-400);
+
+  --chart-1: var(--color-accent-dark-400);
+  --chart-2: var(--color-border-dark-400);
+  --chart-3: var(--color-accent-secondary-dark-400);
+  --chart-4: var(--color-text-muted-dark-400);
+  --chart-5: var(--color-surface-2-dark-400);
+
+  --sidebar: var(--color-surface-dark);
+  --sidebar-foreground: var(--color-text-dark);
+  --sidebar-primary: var(--color-accent-dark);
+  --sidebar-primary-foreground: var(--color-background-dark);
+  --sidebar-accent: var(--color-surface-2-dark);
+  --sidebar-accent-foreground: var(--color-text-dark);
+  --sidebar-border: var(--color-border-dark);
+  --sidebar-ring: var(--color-accent-dark-400);
+}
+
+/* =========================================================
+   3) BIND SHADCN TOKENS KE TAILWIND @theme
+   Ini bagian yang bikin class seperti bg-background,
+   text-foreground, bg-primary, border-border dst muncul.
+   ========================================================= */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    }
+  }
   body {
     @apply bg-background text-foreground;
-    }
-  html {
-    @apply font-sans;
-    }
+  }
+}
+
+@theme {
+  --animate-pop: pop 0.2s ease;
+  --animate-pulse-ring: pulse-ring 6s ease-in-out infinite;
+  --color-orb-1: radial-gradient(ellipse 60% 60% at 30% 20%, color-mix(in srgb, var(--accent) 15%, transparent) 0%, transparent 70%);
+  --color-orb-2: radial-gradient(ellipse 50% 50% at 75% 80%, color-mix(in srgb, var(--primary) 40%, transparent) 0%, transparent 70%);
+  --background-image-orbs: var(--color-orb-1), var(--color-orb-2);
+  --background-image-gradient: linear-gradient(90deg, var(--color-accent), transparent);
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-ring {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
 }
