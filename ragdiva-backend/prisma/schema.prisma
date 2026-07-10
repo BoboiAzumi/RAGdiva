@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model Users {
+  id       String @id @default(uuid())
+  username String @unique
+  password String
+  fullName String @map("full_name")
+  majorId  String @map("major_id")
+
+  majors       Majors         @relation(fields: [majorId], references: [id])
+  activityLogs ActivityLogs[]
+
+  @@map("users")
+}
+
+model Majors {
+  id        String     @id @unique
+  majorName String     @map("major_name")
+  users     Users[]
+  criteria  Criteria[]
+
+  @@map("majors")
+}
+
+model Criteria {
+  id          String  @id @default(uuid())
+  parent      String?
+  code        String  @default("")
+  name        String  @default("")
+  description String  @default("")
+  access      String?
+
+  major          Majors?    @relation(fields: [access], references: [id])
+  parentCriteria Criteria?  @relation("CriteriaHierarchy", fields: [parent], references: [id])
+  childCriteria  Criteria[] @relation("CriteriaHierarchy")
+  files          Files[]
+
+  @@map("criteria")
+}
+
+model Files {
+  id         String   @id @default(uuid())
+  criteriaId String   @map("criteria_id")
+  title      String
+  fileName   String   @map("file_name")
+  fileHash   String   @map("file_hash")
+  mimeType   String   @map("mime_type")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updateAt   DateTime @updatedAt @map("update_at")
+
+  criteria     Criteria       @relation(fields: [criteriaId], references: [id])
+  activityLogs ActivityLogs[]
+
+  @@map("files")
+}
+
+model ActivityLogs {
+  id        String   @id @default(uuid())
+  fileId    String   @map("file_id")
+  userId    String   @map("user_id")
+  action    Action
+  createdAt DateTime @default(now()) @map("created_at")
+
+  users Users @relation(fields: [userId], references: [id])
+  files Files @relation(fields: [fileId], references: [id])
+
+  @@map("activity_logs")
+}
+
+enum Action {
+  Upload
+  Delete
+  Update
+  Rename
+  Download
+
+  @@map("action")
+}
