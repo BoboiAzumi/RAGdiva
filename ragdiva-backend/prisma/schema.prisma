@@ -13,13 +13,14 @@ datasource db {
 }
 
 model Users {
-  id       String @id @default(uuid())
-  username String @unique
+  id       String  @id @default(uuid())
+  username String  @unique
   password String
-  fullName String @map("full_name")
-  majorId  String @map("major_id")
+  fullName String  @map("full_name")
+  majorId  String? @map("major_id")
+  level    Level
 
-  majors       Majors         @relation(fields: [majorId], references: [id])
+  majors       Majors?        @relation(fields: [majorId], references: [id])
   activityLogs ActivityLogs[]
 
   @@map("users")
@@ -87,4 +88,10 @@ enum Action {
   Download
 
   @@map("action")
+}
+
+enum Level {
+  Admin
+  User
+  Asesor
 }

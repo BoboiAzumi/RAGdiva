@@ -1,10 +1,28 @@
+import "dotenv/config"
 import { serve } from '@hono/node-server'
-import { Hono } from 'hono'
+import { Context, Hono } from 'hono'
+import { authRoute } from './routes/auth-route.js'
+import type { HTTPResponseError } from 'hono/types'
+import { HTTPException } from 'hono/http-exception'
 
 const app = new Hono()
 
 app.get('/', (c) => {
   return c.text('Hello Hono!')
+})
+
+app.route("/auth", authRoute)
+
+app.onError(async (err: Error | HTTPResponseError | HTTPException, c: Context) => {
+  if (err instanceof HTTPException) {
+    return c.json({
+      message: err.message
+    }, err.status)
+  }
+
+  return c.json({
+    message: 'Internal Server Error : ' + err.message
+  }, 500)
 })
 
 serve({
