@@ -1,0 +1,131 @@
+# ============================================================
+# Docker Compose — Orkestrasi Multi-Container
+# ============================================================
+# Docker Compose memungkinkan kita menjalankan BANYAK container
+# (service) sekaligus dengan satu perintah: docker compose up
+#
+# KONSEP:
+# - Setiap "service" = satu container = satu aplikasi
+# - Semua service bisa saling berkomunikasi via network internal
+# - Container terisolasi satu sama lain (seperti VM ringan)
+#
+# PERINTAH PENTING:
+# - docker compose up -d        → Start semua service (background)
+# - docker compose down          → Stop & hapus semua container
+# - docker compose logs -f       → Lihat log semua service (realtime)
+# - docker compose logs -f converter → Lihat log service tertentu
+# - docker compose build         → Rebuild image (setelah ubah kode)
+# ============================================================
+
+services:
+
+  # ============================================================
+  # RABBITMQ — Message Broker
+  # ============================================================
+  # RabbitMQ = "kantor pos" untuk message antar service.
+  # Service tidak berkomunikasi langsung, tapi lewat RabbitMQ.
+  #
+  # Keuntungan message broker:
+  # 1. DECOUPLING: Service tidak perlu tahu alamat service lain
+  # 2. RELIABILITY: Message tidak hilang meskipun consumer mati
+  # 3. SCALABILITY: Bisa tambah consumer tanpa ubah producer
+  # 4. BUFFERING: Jika consumer lambat, message antri di RabbitMQ
+  # ============================================================
+  rabbitmq:
+    # Image official RabbitMQ dengan Management Plugin.
+    # Tag "management" menyertakan web UI untuk monitoring.
+    image: rabbitmq:4-management
+
+    # Port mapping: [port_host]:[port_container]
+    ports:
+      # 5672: Port AMQP — digunakan oleh aplikasi untuk connect
+      - "5672:5672"
+      # 15672: Port Management UI — buka http://localhost:15672
+      # di browser untuk monitoring queues, connections, dll.
+      # Default login: guest / guest
+      - "15672:15672"
+
+    # Environment variables untuk konfigurasi RabbitMQ
+    environment:
+      # Username dan password default.
+      # GANTI di production!
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+    # Volume: Simpan data RabbitMQ di luar container.
+    # Tanpa volume, data hilang saat container dihapus.
+    # Named volume "rabbitmq_data" di-manage oleh Docker.
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
+    # Healthcheck: Docker secara berkala mengecek apakah
+    # RabbitMQ benar-benar siap menerima koneksi.
+    # rabbitmq-diagnostics check_port_connectivity mengecek
+    # apakah port AMQP (5672) sudah bisa menerima koneksi.
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "check_port_connectivity"]
+      interval: 10s    # Cek setiap 10 detik
+      timeout: 5s      # Timeout per cek
+      retries: 5       # Anggap unhealthy setelah 5x gagal
+      start_period: 30s # Tunggu 30 detik sebelum mulai cek
+
+  # ============================================================
+  # DOCUMENT CONVERTER — Python Service
+  # ============================================================
+  # Service ini mengkonsumsi message dari RabbitMQ, mengkonversi
+  # dokumen ke Markdown via MarkItDown, dan mengirim hasilnya
+  # kembali ke RabbitMQ.
+  # ============================================================
+  document-converter:
+    # Build dari Dockerfile di folder ragdiva-document-converter
+    build:
+      context: ./ragdiva-document-converter
+      dockerfile: Dockerfile
+
+    # Environment variables (override .env.example)
+    environment:
+      # "rabbitmq" = nama service di atas.
+      # Docker Compose membuat DNS internal sehingga
+      # service bisa saling akses menggunakan nama service.
+      # Jadi "rabbitmq" di sini akan resolve ke IP container RabbitMQ.
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USER: guest
+      RABBITMQ_PASS: guest
+      QUEUE_NAME: document_convert
+      MAX_WORKERS: 4
+
+    # Volume: Mount folder uploads dari host ke container.
+    # Ini memungkinkan Python service mengakses file yang
+    # di-upload oleh backend Node.js.
+    #
+    # Format: [path_host]:[path_container]
+    # Anda bisa sesuaikan path ini dengan kebutuhan.
+    volumes:
+      - ./uploads:/data/uploads
+
+    # depends_on + condition: Jangan start service ini
+    # SAMPAI RabbitMQ healthcheck statusnya "healthy".
+    #
+    # Tanpa ini, converter bisa start duluan dan crash
+    # karena RabbitMQ belum siap. depends_on TANPA condition
+    # hanya menunggu container START (bukan READY).
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+
+    # Restart policy: Otomatis restart jika container crash.
+    # "unless-stopped" = restart terus kecuali di-stop manual.
+    # Berguna jika service crash karena error sementara.
+    restart: unless-stopped
+
+# ============================================================
+# VOLUMES — Persistent Storage
+# ============================================================
+# Named volumes dikelola oleh Docker dan bertahan bahkan
+# setelah container dihapus (docker compose down).
+# Data hanya hilang jika volume dihapus secara eksplisit
+# (docker volume rm <nama_volume>).
+# ============================================================
+volumes:
+  rabbitmq_data:
