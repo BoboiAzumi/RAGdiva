@@ -385,6 +385,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   Users: 'Users',
+  MajorAccess: 'MajorAccess',
   Majors: 'Majors',
   Criteria: 'Criteria',
   Files: 'Files',
@@ -404,7 +405,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "users" | "majors" | "criteria" | "files" | "activityLogs"
+    modelProps: "users" | "majorAccess" | "majors" | "criteria" | "files" | "activityLogs"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -471,6 +472,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.UsersCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.UsersCountAggregateOutputType> | number
+        }
+      }
+    }
+    MajorAccess: {
+      payload: Prisma.$MajorAccessPayload<ExtArgs>
+      fields: Prisma.MajorAccessFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MajorAccessFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MajorAccessPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MajorAccessFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MajorAccessPayload>
+        }
+        findFirst: {
+          args: Prisma.MajorAccessFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MajorAccessPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MajorAccessFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MajorAccessPayload>
+        }
+        findMany: {
+          args: Prisma.MajorAccessFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MajorAccessPayload>[]
+        }
+        create: {
+          args: Prisma.MajorAccessCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MajorAccessPayload>
+        }
+        createMany: {
+          args: Prisma.MajorAccessCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.MajorAccessDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MajorAccessPayload>
+        }
+        update: {
+          args: Prisma.MajorAccessUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MajorAccessPayload>
+        }
+        deleteMany: {
+          args: Prisma.MajorAccessDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MajorAccessUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.MajorAccessUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MajorAccessPayload>
+        }
+        aggregate: {
+          args: Prisma.MajorAccessAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMajorAccess>
+        }
+        groupBy: {
+          args: Prisma.MajorAccessGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MajorAccessGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MajorAccessCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MajorAccessCountAggregateOutputType> | number
         }
       }
     }
@@ -782,11 +849,19 @@ export const UsersScalarFieldEnum = {
   username: 'username',
   password: 'password',
   fullName: 'fullName',
-  majorId: 'majorId',
   level: 'level'
 } as const
 
 export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
+
+
+export const MajorAccessScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  majorId: 'majorId'
+} as const
+
+export type MajorAccessScalarFieldEnum = (typeof MajorAccessScalarFieldEnum)[keyof typeof MajorAccessScalarFieldEnum]
 
 
 export const MajorsScalarFieldEnum = {
@@ -817,7 +892,8 @@ export const FilesScalarFieldEnum = {
   fileHash: 'fileHash',
   mimeType: 'mimeType',
   createdAt: 'createdAt',
-  updateAt: 'updateAt'
+  updateAt: 'updateAt',
+  status: 'status'
 } as const
 
 export type FilesScalarFieldEnum = (typeof FilesScalarFieldEnum)[keyof typeof FilesScalarFieldEnum]
@@ -842,23 +918,23 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
-export const NullsOrder = {
-  first: 'first',
-  last: 'last'
-} as const
-
-export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
 export const UsersOrderByRelevanceFieldEnum = {
   id: 'id',
   username: 'username',
   password: 'password',
-  fullName: 'fullName',
-  majorId: 'majorId'
+  fullName: 'fullName'
 } as const
 
 export type UsersOrderByRelevanceFieldEnum = (typeof UsersOrderByRelevanceFieldEnum)[keyof typeof UsersOrderByRelevanceFieldEnum]
+
+
+export const MajorAccessOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  majorId: 'majorId'
+} as const
+
+export type MajorAccessOrderByRelevanceFieldEnum = (typeof MajorAccessOrderByRelevanceFieldEnum)[keyof typeof MajorAccessOrderByRelevanceFieldEnum]
 
 
 export const MajorsOrderByRelevanceFieldEnum = {
@@ -867,6 +943,14 @@ export const MajorsOrderByRelevanceFieldEnum = {
 } as const
 
 export type MajorsOrderByRelevanceFieldEnum = (typeof MajorsOrderByRelevanceFieldEnum)[keyof typeof MajorsOrderByRelevanceFieldEnum]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
 export const CriteriaOrderByRelevanceFieldEnum = {
@@ -926,6 +1010,13 @@ export type EnumLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMode
  * Reference to a field of type 'DateTime'
  */
 export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+/**
+ * Reference to a field of type 'Status'
+ */
+export type EnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Status'>
     
 
 
@@ -1053,6 +1144,7 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   users?: Prisma.UsersOmit
+  majorAccess?: Prisma.MajorAccessOmit
   majors?: Prisma.MajorsOmit
   criteria?: Prisma.CriteriaOmit
   files?: Prisma.FilesOmit

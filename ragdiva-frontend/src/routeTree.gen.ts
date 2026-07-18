@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as LogoutRouteImport } from './routes/logout'
 import { Route as publicRouteRouteImport } from './routes/(public)/route'
 import { Route as authRouteRouteImport } from './routes/(auth)/route'
 import { Route as IndexRouteImport } from './routes/index'
@@ -17,6 +18,11 @@ import { Route as authUserDashboardRouteImport } from './routes/(auth)/user/dash
 import { Route as authAsesorDashboardRouteImport } from './routes/(auth)/asesor/dashboard'
 import { Route as authAdminDashboardRouteImport } from './routes/(auth)/admin/dashboard'
 
+const LogoutRoute = LogoutRouteImport.update({
+  id: '/logout',
+  path: '/logout',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const publicRouteRoute = publicRouteRouteImport.update({
   id: '/(public)',
   getParentRoute: () => rootRouteImport,
@@ -53,6 +59,7 @@ const authAdminDashboardRoute = authAdminDashboardRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/logout': typeof LogoutRoute
   '/login': typeof publicLoginRoute
   '/admin/dashboard': typeof authAdminDashboardRoute
   '/asesor/dashboard': typeof authAsesorDashboardRoute
@@ -60,6 +67,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/logout': typeof LogoutRoute
   '/login': typeof publicLoginRoute
   '/admin/dashboard': typeof authAdminDashboardRoute
   '/asesor/dashboard': typeof authAsesorDashboardRoute
@@ -70,6 +78,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/(auth)': typeof authRouteRouteWithChildren
   '/(public)': typeof publicRouteRouteWithChildren
+  '/logout': typeof LogoutRoute
   '/(public)/login': typeof publicLoginRoute
   '/(auth)/admin/dashboard': typeof authAdminDashboardRoute
   '/(auth)/asesor/dashboard': typeof authAsesorDashboardRoute
@@ -79,6 +88,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/logout'
     | '/login'
     | '/admin/dashboard'
     | '/asesor/dashboard'
@@ -86,6 +96,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/logout'
     | '/login'
     | '/admin/dashboard'
     | '/asesor/dashboard'
@@ -95,6 +106,7 @@ export interface FileRouteTypes {
     | '/'
     | '/(auth)'
     | '/(public)'
+    | '/logout'
     | '/(public)/login'
     | '/(auth)/admin/dashboard'
     | '/(auth)/asesor/dashboard'
@@ -105,10 +117,18 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   authRouteRoute: typeof authRouteRouteWithChildren
   publicRouteRoute: typeof publicRouteRouteWithChildren
+  LogoutRoute: typeof LogoutRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/logout': {
+      id: '/logout'
+      path: '/logout'
+      fullPath: '/logout'
+      preLoaderRoute: typeof LogoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/(public)': {
       id: '/(public)'
       path: ''
@@ -193,6 +213,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   authRouteRoute: authRouteRouteWithChildren,
   publicRouteRoute: publicRouteRouteWithChildren,
+  LogoutRoute: LogoutRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

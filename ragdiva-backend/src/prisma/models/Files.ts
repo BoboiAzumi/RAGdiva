@@ -33,6 +33,7 @@ export type FilesMinAggregateOutputType = {
   mimeType: string | null
   createdAt: Date | null
   updateAt: Date | null
+  status: $Enums.Status | null
 }
 
 export type FilesMaxAggregateOutputType = {
@@ -44,6 +45,7 @@ export type FilesMaxAggregateOutputType = {
   mimeType: string | null
   createdAt: Date | null
   updateAt: Date | null
+  status: $Enums.Status | null
 }
 
 export type FilesCountAggregateOutputType = {
@@ -55,6 +57,7 @@ export type FilesCountAggregateOutputType = {
   mimeType: number
   createdAt: number
   updateAt: number
+  status: number
   _all: number
 }
 
@@ -68,6 +71,7 @@ export type FilesMinAggregateInputType = {
   mimeType?: true
   createdAt?: true
   updateAt?: true
+  status?: true
 }
 
 export type FilesMaxAggregateInputType = {
@@ -79,6 +83,7 @@ export type FilesMaxAggregateInputType = {
   mimeType?: true
   createdAt?: true
   updateAt?: true
+  status?: true
 }
 
 export type FilesCountAggregateInputType = {
@@ -90,6 +95,7 @@ export type FilesCountAggregateInputType = {
   mimeType?: true
   createdAt?: true
   updateAt?: true
+  status?: true
   _all?: true
 }
 
@@ -174,6 +180,7 @@ export type FilesGroupByOutputType = {
   mimeType: string
   createdAt: Date
   updateAt: Date
+  status: $Enums.Status
   _count: FilesCountAggregateOutputType | null
   _min: FilesMinAggregateOutputType | null
   _max: FilesMaxAggregateOutputType | null
@@ -206,6 +213,7 @@ export type FilesWhereInput = {
   mimeType?: Prisma.StringFilter<"Files"> | string
   createdAt?: Prisma.DateTimeFilter<"Files"> | Date | string
   updateAt?: Prisma.DateTimeFilter<"Files"> | Date | string
+  status?: Prisma.EnumStatusFilter<"Files"> | $Enums.Status
   criteria?: Prisma.XOR<Prisma.CriteriaScalarRelationFilter, Prisma.CriteriaWhereInput>
   activityLogs?: Prisma.ActivityLogsListRelationFilter
 }
@@ -219,6 +227,7 @@ export type FilesOrderByWithRelationInput = {
   mimeType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updateAt?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   criteria?: Prisma.CriteriaOrderByWithRelationInput
   activityLogs?: Prisma.ActivityLogsOrderByRelationAggregateInput
   _relevance?: Prisma.FilesOrderByRelevanceInput
@@ -236,6 +245,7 @@ export type FilesWhereUniqueInput = Prisma.AtLeast<{
   mimeType?: Prisma.StringFilter<"Files"> | string
   createdAt?: Prisma.DateTimeFilter<"Files"> | Date | string
   updateAt?: Prisma.DateTimeFilter<"Files"> | Date | string
+  status?: Prisma.EnumStatusFilter<"Files"> | $Enums.Status
   criteria?: Prisma.XOR<Prisma.CriteriaScalarRelationFilter, Prisma.CriteriaWhereInput>
   activityLogs?: Prisma.ActivityLogsListRelationFilter
 }, "id">
@@ -249,6 +259,7 @@ export type FilesOrderByWithAggregationInput = {
   mimeType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updateAt?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   _count?: Prisma.FilesCountOrderByAggregateInput
   _max?: Prisma.FilesMaxOrderByAggregateInput
   _min?: Prisma.FilesMinOrderByAggregateInput
@@ -266,6 +277,7 @@ export type FilesScalarWhereWithAggregatesInput = {
   mimeType?: Prisma.StringWithAggregatesFilter<"Files"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Files"> | Date | string
   updateAt?: Prisma.DateTimeWithAggregatesFilter<"Files"> | Date | string
+  status?: Prisma.EnumStatusWithAggregatesFilter<"Files"> | $Enums.Status
 }
 
 export type FilesCreateInput = {
@@ -276,6 +288,7 @@ export type FilesCreateInput = {
   mimeType: string
   createdAt?: Date | string
   updateAt?: Date | string
+  status: $Enums.Status
   criteria: Prisma.CriteriaCreateNestedOneWithoutFilesInput
   activityLogs?: Prisma.ActivityLogsCreateNestedManyWithoutFilesInput
 }
@@ -289,6 +302,7 @@ export type FilesUncheckedCreateInput = {
   mimeType: string
   createdAt?: Date | string
   updateAt?: Date | string
+  status: $Enums.Status
   activityLogs?: Prisma.ActivityLogsUncheckedCreateNestedManyWithoutFilesInput
 }
 
@@ -300,6 +314,7 @@ export type FilesUpdateInput = {
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   criteria?: Prisma.CriteriaUpdateOneRequiredWithoutFilesNestedInput
   activityLogs?: Prisma.ActivityLogsUpdateManyWithoutFilesNestedInput
 }
@@ -313,6 +328,7 @@ export type FilesUncheckedUpdateInput = {
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   activityLogs?: Prisma.ActivityLogsUncheckedUpdateManyWithoutFilesNestedInput
 }
 
@@ -325,6 +341,7 @@ export type FilesCreateManyInput = {
   mimeType: string
   createdAt?: Date | string
   updateAt?: Date | string
+  status: $Enums.Status
 }
 
 export type FilesUpdateManyMutationInput = {
@@ -335,6 +352,7 @@ export type FilesUpdateManyMutationInput = {
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
 }
 
 export type FilesUncheckedUpdateManyInput = {
@@ -346,6 +364,7 @@ export type FilesUncheckedUpdateManyInput = {
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
 }
 
 export type FilesListRelationFilter = {
@@ -373,6 +392,7 @@ export type FilesCountOrderByAggregateInput = {
   mimeType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updateAt?: Prisma.SortOrder
+  status?: Prisma.SortOrder
 }
 
 export type FilesMaxOrderByAggregateInput = {
@@ -384,6 +404,7 @@ export type FilesMaxOrderByAggregateInput = {
   mimeType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updateAt?: Prisma.SortOrder
+  status?: Prisma.SortOrder
 }
 
 export type FilesMinOrderByAggregateInput = {
@@ -395,6 +416,7 @@ export type FilesMinOrderByAggregateInput = {
   mimeType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updateAt?: Prisma.SortOrder
+  status?: Prisma.SortOrder
 }
 
 export type FilesScalarRelationFilter = {
@@ -448,6 +470,10 @@ export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
+export type EnumStatusFieldUpdateOperationsInput = {
+  set?: $Enums.Status
+}
+
 export type FilesCreateNestedOneWithoutActivityLogsInput = {
   create?: Prisma.XOR<Prisma.FilesCreateWithoutActivityLogsInput, Prisma.FilesUncheckedCreateWithoutActivityLogsInput>
   connectOrCreate?: Prisma.FilesCreateOrConnectWithoutActivityLogsInput
@@ -470,6 +496,7 @@ export type FilesCreateWithoutCriteriaInput = {
   mimeType: string
   createdAt?: Date | string
   updateAt?: Date | string
+  status: $Enums.Status
   activityLogs?: Prisma.ActivityLogsCreateNestedManyWithoutFilesInput
 }
 
@@ -481,6 +508,7 @@ export type FilesUncheckedCreateWithoutCriteriaInput = {
   mimeType: string
   createdAt?: Date | string
   updateAt?: Date | string
+  status: $Enums.Status
   activityLogs?: Prisma.ActivityLogsUncheckedCreateNestedManyWithoutFilesInput
 }
 
@@ -522,6 +550,7 @@ export type FilesScalarWhereInput = {
   mimeType?: Prisma.StringFilter<"Files"> | string
   createdAt?: Prisma.DateTimeFilter<"Files"> | Date | string
   updateAt?: Prisma.DateTimeFilter<"Files"> | Date | string
+  status?: Prisma.EnumStatusFilter<"Files"> | $Enums.Status
 }
 
 export type FilesCreateWithoutActivityLogsInput = {
@@ -532,6 +561,7 @@ export type FilesCreateWithoutActivityLogsInput = {
   mimeType: string
   createdAt?: Date | string
   updateAt?: Date | string
+  status: $Enums.Status
   criteria: Prisma.CriteriaCreateNestedOneWithoutFilesInput
 }
 
@@ -544,6 +574,7 @@ export type FilesUncheckedCreateWithoutActivityLogsInput = {
   mimeType: string
   createdAt?: Date | string
   updateAt?: Date | string
+  status: $Enums.Status
 }
 
 export type FilesCreateOrConnectWithoutActivityLogsInput = {
@@ -570,6 +601,7 @@ export type FilesUpdateWithoutActivityLogsInput = {
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   criteria?: Prisma.CriteriaUpdateOneRequiredWithoutFilesNestedInput
 }
 
@@ -582,6 +614,7 @@ export type FilesUncheckedUpdateWithoutActivityLogsInput = {
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
 }
 
 export type FilesCreateManyCriteriaInput = {
@@ -592,6 +625,7 @@ export type FilesCreateManyCriteriaInput = {
   mimeType: string
   createdAt?: Date | string
   updateAt?: Date | string
+  status: $Enums.Status
 }
 
 export type FilesUpdateWithoutCriteriaInput = {
@@ -602,6 +636,7 @@ export type FilesUpdateWithoutCriteriaInput = {
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   activityLogs?: Prisma.ActivityLogsUpdateManyWithoutFilesNestedInput
 }
 
@@ -613,6 +648,7 @@ export type FilesUncheckedUpdateWithoutCriteriaInput = {
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   activityLogs?: Prisma.ActivityLogsUncheckedUpdateManyWithoutFilesNestedInput
 }
 
@@ -624,6 +660,7 @@ export type FilesUncheckedUpdateManyWithoutCriteriaInput = {
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
 }
 
 
@@ -666,6 +703,7 @@ export type FilesSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   mimeType?: boolean
   createdAt?: boolean
   updateAt?: boolean
+  status?: boolean
   criteria?: boolean | Prisma.CriteriaDefaultArgs<ExtArgs>
   activityLogs?: boolean | Prisma.Files$activityLogsArgs<ExtArgs>
   _count?: boolean | Prisma.FilesCountOutputTypeDefaultArgs<ExtArgs>
@@ -682,9 +720,10 @@ export type FilesSelectScalar = {
   mimeType?: boolean
   createdAt?: boolean
   updateAt?: boolean
+  status?: boolean
 }
 
-export type FilesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "criteriaId" | "title" | "fileName" | "fileHash" | "mimeType" | "createdAt" | "updateAt", ExtArgs["result"]["files"]>
+export type FilesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "criteriaId" | "title" | "fileName" | "fileHash" | "mimeType" | "createdAt" | "updateAt" | "status", ExtArgs["result"]["files"]>
 export type FilesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   criteria?: boolean | Prisma.CriteriaDefaultArgs<ExtArgs>
   activityLogs?: boolean | Prisma.Files$activityLogsArgs<ExtArgs>
@@ -706,6 +745,7 @@ export type $FilesPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     mimeType: string
     createdAt: Date
     updateAt: Date
+    status: $Enums.Status
   }, ExtArgs["result"]["files"]>
   composites: {}
 }
@@ -1085,6 +1125,7 @@ export interface FilesFieldRefs {
   readonly mimeType: Prisma.FieldRef<"Files", 'String'>
   readonly createdAt: Prisma.FieldRef<"Files", 'DateTime'>
   readonly updateAt: Prisma.FieldRef<"Files", 'DateTime'>
+  readonly status: Prisma.FieldRef<"Files", 'Status'>
 }
     
 

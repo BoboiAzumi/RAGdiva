@@ -9,6 +9,7 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/Users.js'
+export type * from './models/MajorAccess.js'
 export type * from './models/Majors.js'
 export type * from './models/Criteria.js'
 export type * from './models/Files.js'

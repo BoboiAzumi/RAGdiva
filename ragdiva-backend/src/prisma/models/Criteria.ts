@@ -458,6 +458,10 @@ export type CriteriaUpdateManyWithoutParentCriteriaNestedInput = {
   deleteMany?: Prisma.CriteriaScalarWhereInput | Prisma.CriteriaScalarWhereInput[]
 }
 
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
 export type CriteriaUncheckedUpdateManyWithoutParentCriteriaNestedInput = {
   create?: Prisma.XOR<Prisma.CriteriaCreateWithoutParentCriteriaInput, Prisma.CriteriaUncheckedCreateWithoutParentCriteriaInput> | Prisma.CriteriaCreateWithoutParentCriteriaInput[] | Prisma.CriteriaUncheckedCreateWithoutParentCriteriaInput[]
   connectOrCreate?: Prisma.CriteriaCreateOrConnectWithoutParentCriteriaInput | Prisma.CriteriaCreateOrConnectWithoutParentCriteriaInput[]

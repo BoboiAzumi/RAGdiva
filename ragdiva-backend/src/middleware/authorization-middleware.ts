@@ -8,13 +8,13 @@ export function AuthorizationMiddleware(role: Level[]) {
         const token = c.req.header()["authorization"];
 
         if (!token) {
-            throw new HTTPException(403, { message: "access forbidden" });
+            throw new HTTPException(403, { message: "unauthenticated" });
         }
 
         const verify = await verifyToken(token.replaceAll("Bearer", "").trim())
 
         if(!role.includes(verify?.level as Level)){
-            throw new HTTPException(403, { message: "access denied" })
+            throw new HTTPException(403, { message: "access forbidden" })
         }
 
         await next()

@@ -13,24 +13,33 @@ datasource db {
 }
 
 model Users {
-  id       String  @id @default(uuid())
-  username String  @unique
+  id       String @id @default(uuid())
+  username String @unique
   password String
-  fullName String  @map("full_name")
-  majorId  String? @map("major_id")
+  fullName String @map("full_name")
   level    Level
 
-  majors       Majors?        @relation(fields: [majorId], references: [id])
-  activityLogs ActivityLogs[]
+  activityLogs  ActivityLogs[]
+  majorAccess MajorAccess[]
 
   @@map("users")
 }
 
+model MajorAccess {
+  id      String @id @default(uuid())
+  userId  String @map("user_id")
+  majorId String @map("major_id")
+
+  majors Majors @relation(fields: [majorId], references: [id])
+  users  Users  @relation(fields: [userId], references: [id])
+}
+
 model Majors {
-  id        String     @id @unique
-  majorName String     @map("major_name")
-  users     Users[]
-  criteria  Criteria[]
+  id        String @id @unique
+  majorName String @map("major_name")
+
+  criteria      Criteria[]
+  majorAccesses MajorAccess[]
 
   @@map("majors")
 }
@@ -60,6 +69,7 @@ model Files {
   mimeType   String   @map("mime_type")
   createdAt  DateTime @default(now()) @map("created_at")
   updateAt   DateTime @updatedAt @map("update_at")
+  status     Status
 
   criteria     Criteria       @relation(fields: [criteriaId], references: [id])
   activityLogs ActivityLogs[]
@@ -94,4 +104,11 @@ enum Level {
   Admin
   User
   Asesor
+}
+
+enum Status {
+  Processing
+  Completed
+  Reprocessing
+  Failed
 }

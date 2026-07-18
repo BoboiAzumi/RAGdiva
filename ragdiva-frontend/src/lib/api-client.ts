@@ -9,7 +9,7 @@ export async function request<T>(path: string, options: RequestInit = {}): Promi
         credentials: 'include',
         headers: { 
             'Content-Type': 'application/json',
-            'Authorization': getSession() != "" ? '' : `Bearer ${getSession()}`,
+            'Authorization': getSession() === "" ? '' : `Bearer ${getSession()}`,
             ...options.headers 
         }
     })
@@ -32,5 +32,6 @@ export const apiClient = {
     post: <T>(path: string, body?:unknown) => request<T>(path, { method: 'POST', body: JSON.stringify(body) }),
     put: <T>(path: string, body?:unknown) => request<T>(path, { method: 'PUT', body: JSON.stringify(body) }),
     patch: <T>(path: string, body?:unknown) => request<T>(path, { method: 'PATCH', body: JSON.stringify(body) }),
-    delete: <T>(path: string, body?:unknown) => request<T>(path, { method: 'DELETE', body: JSON.stringify(body) })
+    delete: <T>(path: string, body?:unknown) => request<T>(path, { method: 'DELETE', body: JSON.stringify(body) }),
+    multipart: <T>(path: string, body: FormData) => request<T>(path, { method: "POST", body })
 }

@@ -29,7 +29,6 @@ export type UsersMinAggregateOutputType = {
   username: string | null
   password: string | null
   fullName: string | null
-  majorId: string | null
   level: $Enums.Level | null
 }
 
@@ -38,7 +37,6 @@ export type UsersMaxAggregateOutputType = {
   username: string | null
   password: string | null
   fullName: string | null
-  majorId: string | null
   level: $Enums.Level | null
 }
 
@@ -47,7 +45,6 @@ export type UsersCountAggregateOutputType = {
   username: number
   password: number
   fullName: number
-  majorId: number
   level: number
   _all: number
 }
@@ -58,7 +55,6 @@ export type UsersMinAggregateInputType = {
   username?: true
   password?: true
   fullName?: true
-  majorId?: true
   level?: true
 }
 
@@ -67,7 +63,6 @@ export type UsersMaxAggregateInputType = {
   username?: true
   password?: true
   fullName?: true
-  majorId?: true
   level?: true
 }
 
@@ -76,7 +71,6 @@ export type UsersCountAggregateInputType = {
   username?: true
   password?: true
   fullName?: true
-  majorId?: true
   level?: true
   _all?: true
 }
@@ -158,7 +152,6 @@ export type UsersGroupByOutputType = {
   username: string
   password: string
   fullName: string
-  majorId: string | null
   level: $Enums.Level
   _count: UsersCountAggregateOutputType | null
   _min: UsersMinAggregateOutputType | null
@@ -188,10 +181,9 @@ export type UsersWhereInput = {
   username?: Prisma.StringFilter<"Users"> | string
   password?: Prisma.StringFilter<"Users"> | string
   fullName?: Prisma.StringFilter<"Users"> | string
-  majorId?: Prisma.StringNullableFilter<"Users"> | string | null
   level?: Prisma.EnumLevelFilter<"Users"> | $Enums.Level
-  majors?: Prisma.XOR<Prisma.MajorsNullableScalarRelationFilter, Prisma.MajorsWhereInput> | null
   activityLogs?: Prisma.ActivityLogsListRelationFilter
+  majorAccess?: Prisma.MajorAccessListRelationFilter
 }
 
 export type UsersOrderByWithRelationInput = {
@@ -199,10 +191,9 @@ export type UsersOrderByWithRelationInput = {
   username?: Prisma.SortOrder
   password?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
-  majorId?: Prisma.SortOrderInput | Prisma.SortOrder
   level?: Prisma.SortOrder
-  majors?: Prisma.MajorsOrderByWithRelationInput
   activityLogs?: Prisma.ActivityLogsOrderByRelationAggregateInput
+  majorAccess?: Prisma.MajorAccessOrderByRelationAggregateInput
   _relevance?: Prisma.UsersOrderByRelevanceInput
 }
 
@@ -214,10 +205,9 @@ export type UsersWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.UsersWhereInput | Prisma.UsersWhereInput[]
   password?: Prisma.StringFilter<"Users"> | string
   fullName?: Prisma.StringFilter<"Users"> | string
-  majorId?: Prisma.StringNullableFilter<"Users"> | string | null
   level?: Prisma.EnumLevelFilter<"Users"> | $Enums.Level
-  majors?: Prisma.XOR<Prisma.MajorsNullableScalarRelationFilter, Prisma.MajorsWhereInput> | null
   activityLogs?: Prisma.ActivityLogsListRelationFilter
+  majorAccess?: Prisma.MajorAccessListRelationFilter
 }, "id" | "username">
 
 export type UsersOrderByWithAggregationInput = {
@@ -225,7 +215,6 @@ export type UsersOrderByWithAggregationInput = {
   username?: Prisma.SortOrder
   password?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
-  majorId?: Prisma.SortOrderInput | Prisma.SortOrder
   level?: Prisma.SortOrder
   _count?: Prisma.UsersCountOrderByAggregateInput
   _max?: Prisma.UsersMaxOrderByAggregateInput
@@ -240,7 +229,6 @@ export type UsersScalarWhereWithAggregatesInput = {
   username?: Prisma.StringWithAggregatesFilter<"Users"> | string
   password?: Prisma.StringWithAggregatesFilter<"Users"> | string
   fullName?: Prisma.StringWithAggregatesFilter<"Users"> | string
-  majorId?: Prisma.StringNullableWithAggregatesFilter<"Users"> | string | null
   level?: Prisma.EnumLevelWithAggregatesFilter<"Users"> | $Enums.Level
 }
 
@@ -250,8 +238,8 @@ export type UsersCreateInput = {
   password: string
   fullName: string
   level: $Enums.Level
-  majors?: Prisma.MajorsCreateNestedOneWithoutUsersInput
   activityLogs?: Prisma.ActivityLogsCreateNestedManyWithoutUsersInput
+  majorAccess?: Prisma.MajorAccessCreateNestedManyWithoutUsersInput
 }
 
 export type UsersUncheckedCreateInput = {
@@ -259,9 +247,9 @@ export type UsersUncheckedCreateInput = {
   username: string
   password: string
   fullName: string
-  majorId?: string | null
   level: $Enums.Level
   activityLogs?: Prisma.ActivityLogsUncheckedCreateNestedManyWithoutUsersInput
+  majorAccess?: Prisma.MajorAccessUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UsersUpdateInput = {
@@ -270,8 +258,8 @@ export type UsersUpdateInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   level?: Prisma.EnumLevelFieldUpdateOperationsInput | $Enums.Level
-  majors?: Prisma.MajorsUpdateOneWithoutUsersNestedInput
   activityLogs?: Prisma.ActivityLogsUpdateManyWithoutUsersNestedInput
+  majorAccess?: Prisma.MajorAccessUpdateManyWithoutUsersNestedInput
 }
 
 export type UsersUncheckedUpdateInput = {
@@ -279,9 +267,9 @@ export type UsersUncheckedUpdateInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  majorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   level?: Prisma.EnumLevelFieldUpdateOperationsInput | $Enums.Level
   activityLogs?: Prisma.ActivityLogsUncheckedUpdateManyWithoutUsersNestedInput
+  majorAccess?: Prisma.MajorAccessUncheckedUpdateManyWithoutUsersNestedInput
 }
 
 export type UsersCreateManyInput = {
@@ -289,7 +277,6 @@ export type UsersCreateManyInput = {
   username: string
   password: string
   fullName: string
-  majorId?: string | null
   level: $Enums.Level
 }
 
@@ -306,7 +293,6 @@ export type UsersUncheckedUpdateManyInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  majorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   level?: Prisma.EnumLevelFieldUpdateOperationsInput | $Enums.Level
 }
 
@@ -321,7 +307,6 @@ export type UsersCountOrderByAggregateInput = {
   username?: Prisma.SortOrder
   password?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
-  majorId?: Prisma.SortOrder
   level?: Prisma.SortOrder
 }
 
@@ -330,7 +315,6 @@ export type UsersMaxOrderByAggregateInput = {
   username?: Prisma.SortOrder
   password?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
-  majorId?: Prisma.SortOrder
   level?: Prisma.SortOrder
 }
 
@@ -339,18 +323,7 @@ export type UsersMinOrderByAggregateInput = {
   username?: Prisma.SortOrder
   password?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
-  majorId?: Prisma.SortOrder
   level?: Prisma.SortOrder
-}
-
-export type UsersListRelationFilter = {
-  every?: Prisma.UsersWhereInput
-  some?: Prisma.UsersWhereInput
-  none?: Prisma.UsersWhereInput
-}
-
-export type UsersOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
 }
 
 export type UsersScalarRelationFilter = {
@@ -366,50 +339,18 @@ export type EnumLevelFieldUpdateOperationsInput = {
   set?: $Enums.Level
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
+export type UsersCreateNestedOneWithoutMajorAccessInput = {
+  create?: Prisma.XOR<Prisma.UsersCreateWithoutMajorAccessInput, Prisma.UsersUncheckedCreateWithoutMajorAccessInput>
+  connectOrCreate?: Prisma.UsersCreateOrConnectWithoutMajorAccessInput
+  connect?: Prisma.UsersWhereUniqueInput
 }
 
-export type UsersCreateNestedManyWithoutMajorsInput = {
-  create?: Prisma.XOR<Prisma.UsersCreateWithoutMajorsInput, Prisma.UsersUncheckedCreateWithoutMajorsInput> | Prisma.UsersCreateWithoutMajorsInput[] | Prisma.UsersUncheckedCreateWithoutMajorsInput[]
-  connectOrCreate?: Prisma.UsersCreateOrConnectWithoutMajorsInput | Prisma.UsersCreateOrConnectWithoutMajorsInput[]
-  createMany?: Prisma.UsersCreateManyMajorsInputEnvelope
-  connect?: Prisma.UsersWhereUniqueInput | Prisma.UsersWhereUniqueInput[]
-}
-
-export type UsersUncheckedCreateNestedManyWithoutMajorsInput = {
-  create?: Prisma.XOR<Prisma.UsersCreateWithoutMajorsInput, Prisma.UsersUncheckedCreateWithoutMajorsInput> | Prisma.UsersCreateWithoutMajorsInput[] | Prisma.UsersUncheckedCreateWithoutMajorsInput[]
-  connectOrCreate?: Prisma.UsersCreateOrConnectWithoutMajorsInput | Prisma.UsersCreateOrConnectWithoutMajorsInput[]
-  createMany?: Prisma.UsersCreateManyMajorsInputEnvelope
-  connect?: Prisma.UsersWhereUniqueInput | Prisma.UsersWhereUniqueInput[]
-}
-
-export type UsersUpdateManyWithoutMajorsNestedInput = {
-  create?: Prisma.XOR<Prisma.UsersCreateWithoutMajorsInput, Prisma.UsersUncheckedCreateWithoutMajorsInput> | Prisma.UsersCreateWithoutMajorsInput[] | Prisma.UsersUncheckedCreateWithoutMajorsInput[]
-  connectOrCreate?: Prisma.UsersCreateOrConnectWithoutMajorsInput | Prisma.UsersCreateOrConnectWithoutMajorsInput[]
-  upsert?: Prisma.UsersUpsertWithWhereUniqueWithoutMajorsInput | Prisma.UsersUpsertWithWhereUniqueWithoutMajorsInput[]
-  createMany?: Prisma.UsersCreateManyMajorsInputEnvelope
-  set?: Prisma.UsersWhereUniqueInput | Prisma.UsersWhereUniqueInput[]
-  disconnect?: Prisma.UsersWhereUniqueInput | Prisma.UsersWhereUniqueInput[]
-  delete?: Prisma.UsersWhereUniqueInput | Prisma.UsersWhereUniqueInput[]
-  connect?: Prisma.UsersWhereUniqueInput | Prisma.UsersWhereUniqueInput[]
-  update?: Prisma.UsersUpdateWithWhereUniqueWithoutMajorsInput | Prisma.UsersUpdateWithWhereUniqueWithoutMajorsInput[]
-  updateMany?: Prisma.UsersUpdateManyWithWhereWithoutMajorsInput | Prisma.UsersUpdateManyWithWhereWithoutMajorsInput[]
-  deleteMany?: Prisma.UsersScalarWhereInput | Prisma.UsersScalarWhereInput[]
-}
-
-export type UsersUncheckedUpdateManyWithoutMajorsNestedInput = {
-  create?: Prisma.XOR<Prisma.UsersCreateWithoutMajorsInput, Prisma.UsersUncheckedCreateWithoutMajorsInput> | Prisma.UsersCreateWithoutMajorsInput[] | Prisma.UsersUncheckedCreateWithoutMajorsInput[]
-  connectOrCreate?: Prisma.UsersCreateOrConnectWithoutMajorsInput | Prisma.UsersCreateOrConnectWithoutMajorsInput[]
-  upsert?: Prisma.UsersUpsertWithWhereUniqueWithoutMajorsInput | Prisma.UsersUpsertWithWhereUniqueWithoutMajorsInput[]
-  createMany?: Prisma.UsersCreateManyMajorsInputEnvelope
-  set?: Prisma.UsersWhereUniqueInput | Prisma.UsersWhereUniqueInput[]
-  disconnect?: Prisma.UsersWhereUniqueInput | Prisma.UsersWhereUniqueInput[]
-  delete?: Prisma.UsersWhereUniqueInput | Prisma.UsersWhereUniqueInput[]
-  connect?: Prisma.UsersWhereUniqueInput | Prisma.UsersWhereUniqueInput[]
-  update?: Prisma.UsersUpdateWithWhereUniqueWithoutMajorsInput | Prisma.UsersUpdateWithWhereUniqueWithoutMajorsInput[]
-  updateMany?: Prisma.UsersUpdateManyWithWhereWithoutMajorsInput | Prisma.UsersUpdateManyWithWhereWithoutMajorsInput[]
-  deleteMany?: Prisma.UsersScalarWhereInput | Prisma.UsersScalarWhereInput[]
+export type UsersUpdateOneRequiredWithoutMajorAccessNestedInput = {
+  create?: Prisma.XOR<Prisma.UsersCreateWithoutMajorAccessInput, Prisma.UsersUncheckedCreateWithoutMajorAccessInput>
+  connectOrCreate?: Prisma.UsersCreateOrConnectWithoutMajorAccessInput
+  upsert?: Prisma.UsersUpsertWithoutMajorAccessInput
+  connect?: Prisma.UsersWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UsersUpdateToOneWithWhereWithoutMajorAccessInput, Prisma.UsersUpdateWithoutMajorAccessInput>, Prisma.UsersUncheckedUpdateWithoutMajorAccessInput>
 }
 
 export type UsersCreateNestedOneWithoutActivityLogsInput = {
@@ -426,7 +367,7 @@ export type UsersUpdateOneRequiredWithoutActivityLogsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UsersUpdateToOneWithWhereWithoutActivityLogsInput, Prisma.UsersUpdateWithoutActivityLogsInput>, Prisma.UsersUncheckedUpdateWithoutActivityLogsInput>
 }
 
-export type UsersCreateWithoutMajorsInput = {
+export type UsersCreateWithoutMajorAccessInput = {
   id?: string
   username: string
   password: string
@@ -435,7 +376,7 @@ export type UsersCreateWithoutMajorsInput = {
   activityLogs?: Prisma.ActivityLogsCreateNestedManyWithoutUsersInput
 }
 
-export type UsersUncheckedCreateWithoutMajorsInput = {
+export type UsersUncheckedCreateWithoutMajorAccessInput = {
   id?: string
   username: string
   password: string
@@ -444,42 +385,38 @@ export type UsersUncheckedCreateWithoutMajorsInput = {
   activityLogs?: Prisma.ActivityLogsUncheckedCreateNestedManyWithoutUsersInput
 }
 
-export type UsersCreateOrConnectWithoutMajorsInput = {
+export type UsersCreateOrConnectWithoutMajorAccessInput = {
   where: Prisma.UsersWhereUniqueInput
-  create: Prisma.XOR<Prisma.UsersCreateWithoutMajorsInput, Prisma.UsersUncheckedCreateWithoutMajorsInput>
+  create: Prisma.XOR<Prisma.UsersCreateWithoutMajorAccessInput, Prisma.UsersUncheckedCreateWithoutMajorAccessInput>
 }
 
-export type UsersCreateManyMajorsInputEnvelope = {
-  data: Prisma.UsersCreateManyMajorsInput | Prisma.UsersCreateManyMajorsInput[]
-  skipDuplicates?: boolean
+export type UsersUpsertWithoutMajorAccessInput = {
+  update: Prisma.XOR<Prisma.UsersUpdateWithoutMajorAccessInput, Prisma.UsersUncheckedUpdateWithoutMajorAccessInput>
+  create: Prisma.XOR<Prisma.UsersCreateWithoutMajorAccessInput, Prisma.UsersUncheckedCreateWithoutMajorAccessInput>
+  where?: Prisma.UsersWhereInput
 }
 
-export type UsersUpsertWithWhereUniqueWithoutMajorsInput = {
-  where: Prisma.UsersWhereUniqueInput
-  update: Prisma.XOR<Prisma.UsersUpdateWithoutMajorsInput, Prisma.UsersUncheckedUpdateWithoutMajorsInput>
-  create: Prisma.XOR<Prisma.UsersCreateWithoutMajorsInput, Prisma.UsersUncheckedCreateWithoutMajorsInput>
+export type UsersUpdateToOneWithWhereWithoutMajorAccessInput = {
+  where?: Prisma.UsersWhereInput
+  data: Prisma.XOR<Prisma.UsersUpdateWithoutMajorAccessInput, Prisma.UsersUncheckedUpdateWithoutMajorAccessInput>
 }
 
-export type UsersUpdateWithWhereUniqueWithoutMajorsInput = {
-  where: Prisma.UsersWhereUniqueInput
-  data: Prisma.XOR<Prisma.UsersUpdateWithoutMajorsInput, Prisma.UsersUncheckedUpdateWithoutMajorsInput>
+export type UsersUpdateWithoutMajorAccessInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  level?: Prisma.EnumLevelFieldUpdateOperationsInput | $Enums.Level
+  activityLogs?: Prisma.ActivityLogsUpdateManyWithoutUsersNestedInput
 }
 
-export type UsersUpdateManyWithWhereWithoutMajorsInput = {
-  where: Prisma.UsersScalarWhereInput
-  data: Prisma.XOR<Prisma.UsersUpdateManyMutationInput, Prisma.UsersUncheckedUpdateManyWithoutMajorsInput>
-}
-
-export type UsersScalarWhereInput = {
-  AND?: Prisma.UsersScalarWhereInput | Prisma.UsersScalarWhereInput[]
-  OR?: Prisma.UsersScalarWhereInput[]
-  NOT?: Prisma.UsersScalarWhereInput | Prisma.UsersScalarWhereInput[]
-  id?: Prisma.StringFilter<"Users"> | string
-  username?: Prisma.StringFilter<"Users"> | string
-  password?: Prisma.StringFilter<"Users"> | string
-  fullName?: Prisma.StringFilter<"Users"> | string
-  majorId?: Prisma.StringNullableFilter<"Users"> | string | null
-  level?: Prisma.EnumLevelFilter<"Users"> | $Enums.Level
+export type UsersUncheckedUpdateWithoutMajorAccessInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  level?: Prisma.EnumLevelFieldUpdateOperationsInput | $Enums.Level
+  activityLogs?: Prisma.ActivityLogsUncheckedUpdateManyWithoutUsersNestedInput
 }
 
 export type UsersCreateWithoutActivityLogsInput = {
@@ -488,7 +425,7 @@ export type UsersCreateWithoutActivityLogsInput = {
   password: string
   fullName: string
   level: $Enums.Level
-  majors?: Prisma.MajorsCreateNestedOneWithoutUsersInput
+  majorAccess?: Prisma.MajorAccessCreateNestedManyWithoutUsersInput
 }
 
 export type UsersUncheckedCreateWithoutActivityLogsInput = {
@@ -496,8 +433,8 @@ export type UsersUncheckedCreateWithoutActivityLogsInput = {
   username: string
   password: string
   fullName: string
-  majorId?: string | null
   level: $Enums.Level
+  majorAccess?: Prisma.MajorAccessUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UsersCreateOrConnectWithoutActivityLogsInput = {
@@ -522,7 +459,7 @@ export type UsersUpdateWithoutActivityLogsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   level?: Prisma.EnumLevelFieldUpdateOperationsInput | $Enums.Level
-  majors?: Prisma.MajorsUpdateOneWithoutUsersNestedInput
+  majorAccess?: Prisma.MajorAccessUpdateManyWithoutUsersNestedInput
 }
 
 export type UsersUncheckedUpdateWithoutActivityLogsInput = {
@@ -530,42 +467,8 @@ export type UsersUncheckedUpdateWithoutActivityLogsInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  majorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   level?: Prisma.EnumLevelFieldUpdateOperationsInput | $Enums.Level
-}
-
-export type UsersCreateManyMajorsInput = {
-  id?: string
-  username: string
-  password: string
-  fullName: string
-  level: $Enums.Level
-}
-
-export type UsersUpdateWithoutMajorsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.EnumLevelFieldUpdateOperationsInput | $Enums.Level
-  activityLogs?: Prisma.ActivityLogsUpdateManyWithoutUsersNestedInput
-}
-
-export type UsersUncheckedUpdateWithoutMajorsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.EnumLevelFieldUpdateOperationsInput | $Enums.Level
-  activityLogs?: Prisma.ActivityLogsUncheckedUpdateManyWithoutUsersNestedInput
-}
-
-export type UsersUncheckedUpdateManyWithoutMajorsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.EnumLevelFieldUpdateOperationsInput | $Enums.Level
+  majorAccess?: Prisma.MajorAccessUncheckedUpdateManyWithoutUsersNestedInput
 }
 
 
@@ -575,10 +478,12 @@ export type UsersUncheckedUpdateManyWithoutMajorsInput = {
 
 export type UsersCountOutputType = {
   activityLogs: number
+  majorAccess: number
 }
 
 export type UsersCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   activityLogs?: boolean | UsersCountOutputTypeCountActivityLogsArgs
+  majorAccess?: boolean | UsersCountOutputTypeCountMajorAccessArgs
 }
 
 /**
@@ -598,16 +503,22 @@ export type UsersCountOutputTypeCountActivityLogsArgs<ExtArgs extends runtime.Ty
   where?: Prisma.ActivityLogsWhereInput
 }
 
+/**
+ * UsersCountOutputType without action
+ */
+export type UsersCountOutputTypeCountMajorAccessArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MajorAccessWhereInput
+}
+
 
 export type UsersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   username?: boolean
   password?: boolean
   fullName?: boolean
-  majorId?: boolean
   level?: boolean
-  majors?: boolean | Prisma.Users$majorsArgs<ExtArgs>
   activityLogs?: boolean | Prisma.Users$activityLogsArgs<ExtArgs>
+  majorAccess?: boolean | Prisma.Users$majorAccessArgs<ExtArgs>
   _count?: boolean | Prisma.UsersCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["users"]>
 
@@ -618,29 +529,27 @@ export type UsersSelectScalar = {
   username?: boolean
   password?: boolean
   fullName?: boolean
-  majorId?: boolean
   level?: boolean
 }
 
-export type UsersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "password" | "fullName" | "majorId" | "level", ExtArgs["result"]["users"]>
+export type UsersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "password" | "fullName" | "level", ExtArgs["result"]["users"]>
 export type UsersInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  majors?: boolean | Prisma.Users$majorsArgs<ExtArgs>
   activityLogs?: boolean | Prisma.Users$activityLogsArgs<ExtArgs>
+  majorAccess?: boolean | Prisma.Users$majorAccessArgs<ExtArgs>
   _count?: boolean | Prisma.UsersCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $UsersPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Users"
   objects: {
-    majors: Prisma.$MajorsPayload<ExtArgs> | null
     activityLogs: Prisma.$ActivityLogsPayload<ExtArgs>[]
+    majorAccess: Prisma.$MajorAccessPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     username: string
     password: string
     fullName: string
-    majorId: string | null
     level: $Enums.Level
   }, ExtArgs["result"]["users"]>
   composites: {}
@@ -982,8 +891,8 @@ readonly fields: UsersFieldRefs;
  */
 export interface Prisma__UsersClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  majors<T extends Prisma.Users$majorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Users$majorsArgs<ExtArgs>>): Prisma.Prisma__MajorsClient<runtime.Types.Result.GetResult<Prisma.$MajorsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   activityLogs<T extends Prisma.Users$activityLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Users$activityLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActivityLogsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  majorAccess<T extends Prisma.Users$majorAccessArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Users$majorAccessArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MajorAccessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1017,7 +926,6 @@ export interface UsersFieldRefs {
   readonly username: Prisma.FieldRef<"Users", 'String'>
   readonly password: Prisma.FieldRef<"Users", 'String'>
   readonly fullName: Prisma.FieldRef<"Users", 'String'>
-  readonly majorId: Prisma.FieldRef<"Users", 'String'>
   readonly level: Prisma.FieldRef<"Users", 'Level'>
 }
     
@@ -1367,25 +1275,6 @@ export type UsersDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
- * Users.majors
- */
-export type Users$majorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Majors
-   */
-  select?: Prisma.MajorsSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Majors
-   */
-  omit?: Prisma.MajorsOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.MajorsInclude<ExtArgs> | null
-  where?: Prisma.MajorsWhereInput
-}
-
-/**
  * Users.activityLogs
  */
 export type Users$activityLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1407,6 +1296,30 @@ export type Users$activityLogsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.ActivityLogsScalarFieldEnum | Prisma.ActivityLogsScalarFieldEnum[]
+}
+
+/**
+ * Users.majorAccess
+ */
+export type Users$majorAccessArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MajorAccess
+   */
+  select?: Prisma.MajorAccessSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MajorAccess
+   */
+  omit?: Prisma.MajorAccessOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MajorAccessInclude<ExtArgs> | null
+  where?: Prisma.MajorAccessWhereInput
+  orderBy?: Prisma.MajorAccessOrderByWithRelationInput | Prisma.MajorAccessOrderByWithRelationInput[]
+  cursor?: Prisma.MajorAccessWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MajorAccessScalarFieldEnum | Prisma.MajorAccessScalarFieldEnum[]
 }
 
 /**

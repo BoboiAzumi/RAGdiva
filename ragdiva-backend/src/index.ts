@@ -16,12 +16,14 @@ app.route("/auth", authRoute)
 app.onError(async (err: Error | HTTPResponseError | HTTPException, c: Context) => {
   if (err instanceof HTTPException) {
     return c.json({
-      message: err.message
+      message: err.message,
+      data: []
     }, err.status)
   }
 
   return c.json({
-    message: 'Internal Server Error : ' + err.message
+    message: 'Internal Server Error : ' + err.message,
+    data: []
   }, 500)
 })
 

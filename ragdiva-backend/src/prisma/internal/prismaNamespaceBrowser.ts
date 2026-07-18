@@ -52,6 +52,7 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   Users: 'Users',
+  MajorAccess: 'MajorAccess',
   Majors: 'Majors',
   Criteria: 'Criteria',
   Files: 'Files',
@@ -79,11 +80,19 @@ export const UsersScalarFieldEnum = {
   username: 'username',
   password: 'password',
   fullName: 'fullName',
-  majorId: 'majorId',
   level: 'level'
 } as const
 
 export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
+
+
+export const MajorAccessScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  majorId: 'majorId'
+} as const
+
+export type MajorAccessScalarFieldEnum = (typeof MajorAccessScalarFieldEnum)[keyof typeof MajorAccessScalarFieldEnum]
 
 
 export const MajorsScalarFieldEnum = {
@@ -114,7 +123,8 @@ export const FilesScalarFieldEnum = {
   fileHash: 'fileHash',
   mimeType: 'mimeType',
   createdAt: 'createdAt',
-  updateAt: 'updateAt'
+  updateAt: 'updateAt',
+  status: 'status'
 } as const
 
 export type FilesScalarFieldEnum = (typeof FilesScalarFieldEnum)[keyof typeof FilesScalarFieldEnum]
@@ -139,23 +149,23 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
-export const NullsOrder = {
-  first: 'first',
-  last: 'last'
-} as const
-
-export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
 export const UsersOrderByRelevanceFieldEnum = {
   id: 'id',
   username: 'username',
   password: 'password',
-  fullName: 'fullName',
-  majorId: 'majorId'
+  fullName: 'fullName'
 } as const
 
 export type UsersOrderByRelevanceFieldEnum = (typeof UsersOrderByRelevanceFieldEnum)[keyof typeof UsersOrderByRelevanceFieldEnum]
+
+
+export const MajorAccessOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  majorId: 'majorId'
+} as const
+
+export type MajorAccessOrderByRelevanceFieldEnum = (typeof MajorAccessOrderByRelevanceFieldEnum)[keyof typeof MajorAccessOrderByRelevanceFieldEnum]
 
 
 export const MajorsOrderByRelevanceFieldEnum = {
@@ -164,6 +174,14 @@ export const MajorsOrderByRelevanceFieldEnum = {
 } as const
 
 export type MajorsOrderByRelevanceFieldEnum = (typeof MajorsOrderByRelevanceFieldEnum)[keyof typeof MajorsOrderByRelevanceFieldEnum]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
 export const CriteriaOrderByRelevanceFieldEnum = {

@@ -6,7 +6,7 @@ export async function AuthenticationMiddleware(c: Context, next: Next) {
     const token = c.req.header()["authorization"];
 
     if (!token) {
-        throw new HTTPException(403, { message: "access forbidden" });
+        throw new HTTPException(403, { message: "unauthenticated" });
     }
 
     if (await verifyToken(token.replaceAll("Bearer", "").trim())) {

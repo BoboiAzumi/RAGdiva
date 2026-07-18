@@ -27,3 +27,13 @@ export const Level = {
 } as const
 
 export type Level = (typeof Level)[keyof typeof Level]
+
+
+export const Status = {
+  Processing: 'Processing',
+  Completed: 'Completed',
+  Reprocessing: 'Reprocessing',
+  Failed: 'Failed'
+} as const
+
+export type Status = (typeof Status)[keyof typeof Status]

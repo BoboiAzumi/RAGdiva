@@ -8,7 +8,9 @@ export async function authPost(c: Context) {
 
     return c.json({
         message: "success",
-        token
+        data: {
+            token
+        }
     })
 }
 
@@ -23,7 +25,8 @@ export async function getMe(c: Context) {
             id: user?.id,
             username: user?.username,
             fullName: user?.fullName,
-            majors: user?.majors
+            level: user?.level.toLowerCase(),
+            majors: user?.majorAccess
         }
     })
 }

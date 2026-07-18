@@ -14,7 +14,11 @@ export async function findUserById(id: string){
             id
         },
         include: {
-            majors: true
+            majorAccess: {
+                include: {
+                    majors: true
+                }
+            }
         }
     })
 }
