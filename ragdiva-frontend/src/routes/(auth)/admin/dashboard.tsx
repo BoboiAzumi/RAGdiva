@@ -1,12 +1,6 @@
-import { AuthProviderContext } from '@/context/auth-context'
+import { AdminDashboardPage } from '@/pages/admin-dashboard-page'
 import { createFileRoute } from '@tanstack/react-router'
-import { useContext } from 'react'
 
 export const Route = createFileRoute('/(auth)/admin/dashboard')({
-  component: RouteComponent,
+  component: AdminDashboardPage,
 })
-
-function RouteComponent() {
-  const authContext = useContext(AuthProviderContext)
-  return <div>Hello {authContext.userInfo?.fullName}!</div>
-}

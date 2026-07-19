@@ -8,6 +8,7 @@ import "./index.css";
 import { ThemeProvider } from "./providers/theme-providers";
 import { Toaster } from "./components/ui/sonner";
 import { AuthProvider } from "./providers/auth-providers";
+import { TooltipProvider } from "./components/ui/tooltip";
 
 const queryClient = new QueryClient();
 const router = createRouter({
@@ -28,9 +29,11 @@ createRoot(document.getElementById("root")!).render(
         <ThemeProvider defaultTheme="dark" storageKey="ragdiva-ui-theme">
             <AuthProvider>
                 <QueryClientProvider client={queryClient}>
-                    <RouterProvider router={router} />
-                    <ReactQueryDevtools />
-                    <Toaster />
+                    <TooltipProvider>
+                        <RouterProvider router={router} />
+                        <ReactQueryDevtools />
+                        <Toaster />
+                    </TooltipProvider>
                 </QueryClientProvider>
             </AuthProvider>
         </ThemeProvider>
