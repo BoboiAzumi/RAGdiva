@@ -1,4 +1,4 @@
-import { prisma } from "../utils/database.js";
+import { prisma } from "../lib/database.js";
 
 export async function findUserByUsername(username: string){
     return await prisma.users.findFirst({
