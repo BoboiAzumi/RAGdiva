@@ -68,6 +68,7 @@ model FileLink {
   criteriaId   String @map("criteria_id")
   fileId       String @map("file_id")
   criteriaLink String @map("criteria_link")
+  page         Int    @default(1)
 
   files    Files    @relation(fields: [fileId], references: [id])
   criteria Criteria @relation(fields: [criteriaId], references: [id])
@@ -77,7 +78,7 @@ model Files {
   id        String   @id @default(uuid())
   title     String
   fileName  String   @map("file_name")
-  fileHash  String   @map("file_hash")
+  fileHash  String   @unique @map("file_hash")
   mimeType  String   @map("mime_type")
   createdAt DateTime @default(now()) @map("created_at")
   updateAt  DateTime @updatedAt @map("update_at")
@@ -100,6 +101,15 @@ model ActivityLogs {
   files Files @relation(fields: [fileId], references: [id])
 
   @@map("activity_logs")
+}
+
+model AIChatHistory {
+  id        String @id @default(uuid())
+  sessionId String @map("session_id")
+  role      String
+  content   String @db.LongText
+
+  @@map("ai_chat_history")
 }
 
 enum Action {

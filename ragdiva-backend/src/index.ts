@@ -8,6 +8,7 @@ import { SSEStreamingApi, streamSSE } from "hono/streaming";
 import { v4 } from "uuid";
 import { broadcastPool } from "./lib/broadcast.js";
 import { criteriaRoute } from "./routes/criteria-route.js";
+import { fileRoute } from "./routes/file-route.js";
 
 const app = new Hono();
 
@@ -17,6 +18,7 @@ app.get("/", (c) => {
 
 app.route("/auth", authRoute);
 app.route("/criteria", criteriaRoute)
+app.route("/file", fileRoute)
 
 app.get("/stream", async (c: Context) => {
     return streamSSE(c, async (stream: SSEStreamingApi) => {

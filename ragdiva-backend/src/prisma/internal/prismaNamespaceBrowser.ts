@@ -57,7 +57,8 @@ export const ModelName = {
   Criteria: 'Criteria',
   FileLink: 'FileLink',
   Files: 'Files',
-  ActivityLogs: 'ActivityLogs'
+  ActivityLogs: 'ActivityLogs',
+  AIChatHistory: 'AIChatHistory'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -121,7 +122,8 @@ export const FileLinkScalarFieldEnum = {
   id: 'id',
   criteriaId: 'criteriaId',
   fileId: 'fileId',
-  criteriaLink: 'criteriaLink'
+  criteriaLink: 'criteriaLink',
+  page: 'page'
 } as const
 
 export type FileLinkScalarFieldEnum = (typeof FileLinkScalarFieldEnum)[keyof typeof FileLinkScalarFieldEnum]
@@ -150,6 +152,16 @@ export const ActivityLogsScalarFieldEnum = {
 } as const
 
 export type ActivityLogsScalarFieldEnum = (typeof ActivityLogsScalarFieldEnum)[keyof typeof ActivityLogsScalarFieldEnum]
+
+
+export const AIChatHistoryScalarFieldEnum = {
+  id: 'id',
+  sessionId: 'sessionId',
+  role: 'role',
+  content: 'content'
+} as const
+
+export type AIChatHistoryScalarFieldEnum = (typeof AIChatHistoryScalarFieldEnum)[keyof typeof AIChatHistoryScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -235,4 +247,14 @@ export const ActivityLogsOrderByRelevanceFieldEnum = {
 } as const
 
 export type ActivityLogsOrderByRelevanceFieldEnum = (typeof ActivityLogsOrderByRelevanceFieldEnum)[keyof typeof ActivityLogsOrderByRelevanceFieldEnum]
+
+
+export const AIChatHistoryOrderByRelevanceFieldEnum = {
+  id: 'id',
+  sessionId: 'sessionId',
+  role: 'role',
+  content: 'content'
+} as const
+
+export type AIChatHistoryOrderByRelevanceFieldEnum = (typeof AIChatHistoryOrderByRelevanceFieldEnum)[keyof typeof AIChatHistoryOrderByRelevanceFieldEnum]
 

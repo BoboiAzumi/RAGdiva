@@ -11,4 +11,4 @@ criteriaRoute.get('/:id', AuthorizationMiddleware(["Admin", "User", "Asesor"]), 
 criteriaRoute.post('/', AuthorizationMiddleware(["Admin", "User"]), ValidatorMiddleware(CriteriaPostSchema), postCriteria)
 criteriaRoute.post('/:id', AuthorizationMiddleware(["Admin", "User"]), ValidatorMiddleware(CriteriaPostSchema), postCriteria)
 criteriaRoute.patch('/:id', AuthorizationMiddleware(["Admin", "User"]), ValidatorMiddleware(CriteriaPostSchema), patchCriteria)
-criteriaRoute.delete('/:id')
+criteriaRoute.delete('/:id') // TODO nanti setelah file

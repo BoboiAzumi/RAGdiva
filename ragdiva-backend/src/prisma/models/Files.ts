@@ -226,19 +226,19 @@ export type FilesOrderByWithRelationInput = {
 
 export type FilesWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  fileHash?: string
   AND?: Prisma.FilesWhereInput | Prisma.FilesWhereInput[]
   OR?: Prisma.FilesWhereInput[]
   NOT?: Prisma.FilesWhereInput | Prisma.FilesWhereInput[]
   title?: Prisma.StringFilter<"Files"> | string
   fileName?: Prisma.StringFilter<"Files"> | string
-  fileHash?: Prisma.StringFilter<"Files"> | string
   mimeType?: Prisma.StringFilter<"Files"> | string
   createdAt?: Prisma.DateTimeFilter<"Files"> | Date | string
   updateAt?: Prisma.DateTimeFilter<"Files"> | Date | string
   status?: Prisma.EnumStatusFilter<"Files"> | $Enums.Status
   activityLogs?: Prisma.ActivityLogsListRelationFilter
   fileLinks?: Prisma.FileLinkListRelationFilter
-}, "id">
+}, "id" | "fileHash">
 
 export type FilesOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

@@ -36,3 +36,31 @@ export async function updateCriteria(id: string, data: CriteriaType){
         data
     })
 }
+
+export async function createCriteriaLink(id: string){
+    const pathArray: string[] = []
+
+    const recursive = async (idx: string) => {
+        const criteria = await prisma.criteria.findFirst({
+            where: {
+                id: idx
+            }
+        })
+
+        if(!criteria){
+            return
+        }
+
+        pathArray.push(`${criteria.code ? `${criteria.code}. ${criteria.name}` : criteria.name}`)
+        
+        if(criteria.parent){
+            await recursive(criteria.parent)
+        }
+
+        return
+    }
+
+    await recursive(id)
+
+    return pathArray.reverse().map((v) => `/${v}`).join('')
+}

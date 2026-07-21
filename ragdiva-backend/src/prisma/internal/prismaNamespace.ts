@@ -390,7 +390,8 @@ export const ModelName = {
   Criteria: 'Criteria',
   FileLink: 'FileLink',
   Files: 'Files',
-  ActivityLogs: 'ActivityLogs'
+  ActivityLogs: 'ActivityLogs',
+  AIChatHistory: 'AIChatHistory'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -406,7 +407,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "users" | "majorAccess" | "majors" | "criteria" | "fileLink" | "files" | "activityLogs"
+    modelProps: "users" | "majorAccess" | "majors" | "criteria" | "fileLink" | "files" | "activityLogs" | "aIChatHistory"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -872,6 +873,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    AIChatHistory: {
+      payload: Prisma.$AIChatHistoryPayload<ExtArgs>
+      fields: Prisma.AIChatHistoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AIChatHistoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIChatHistoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AIChatHistoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIChatHistoryPayload>
+        }
+        findFirst: {
+          args: Prisma.AIChatHistoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIChatHistoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AIChatHistoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIChatHistoryPayload>
+        }
+        findMany: {
+          args: Prisma.AIChatHistoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIChatHistoryPayload>[]
+        }
+        create: {
+          args: Prisma.AIChatHistoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIChatHistoryPayload>
+        }
+        createMany: {
+          args: Prisma.AIChatHistoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.AIChatHistoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIChatHistoryPayload>
+        }
+        update: {
+          args: Prisma.AIChatHistoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIChatHistoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.AIChatHistoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AIChatHistoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.AIChatHistoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIChatHistoryPayload>
+        }
+        aggregate: {
+          args: Prisma.AIChatHistoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAIChatHistory>
+        }
+        groupBy: {
+          args: Prisma.AIChatHistoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AIChatHistoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AIChatHistoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AIChatHistoryCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -956,7 +1023,8 @@ export const FileLinkScalarFieldEnum = {
   id: 'id',
   criteriaId: 'criteriaId',
   fileId: 'fileId',
-  criteriaLink: 'criteriaLink'
+  criteriaLink: 'criteriaLink',
+  page: 'page'
 } as const
 
 export type FileLinkScalarFieldEnum = (typeof FileLinkScalarFieldEnum)[keyof typeof FileLinkScalarFieldEnum]
@@ -985,6 +1053,16 @@ export const ActivityLogsScalarFieldEnum = {
 } as const
 
 export type ActivityLogsScalarFieldEnum = (typeof ActivityLogsScalarFieldEnum)[keyof typeof ActivityLogsScalarFieldEnum]
+
+
+export const AIChatHistoryScalarFieldEnum = {
+  id: 'id',
+  sessionId: 'sessionId',
+  role: 'role',
+  content: 'content'
+} as const
+
+export type AIChatHistoryScalarFieldEnum = (typeof AIChatHistoryScalarFieldEnum)[keyof typeof AIChatHistoryScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1072,6 +1150,16 @@ export const ActivityLogsOrderByRelevanceFieldEnum = {
 export type ActivityLogsOrderByRelevanceFieldEnum = (typeof ActivityLogsOrderByRelevanceFieldEnum)[keyof typeof ActivityLogsOrderByRelevanceFieldEnum]
 
 
+export const AIChatHistoryOrderByRelevanceFieldEnum = {
+  id: 'id',
+  sessionId: 'sessionId',
+  role: 'role',
+  content: 'content'
+} as const
+
+export type AIChatHistoryOrderByRelevanceFieldEnum = (typeof AIChatHistoryOrderByRelevanceFieldEnum)[keyof typeof AIChatHistoryOrderByRelevanceFieldEnum]
+
+
 
 /**
  * Field references
@@ -1100,6 +1188,13 @@ export type EnumAccreditationFieldRefInput<$PrismaModel> = FieldRefInputType<$Pr
 
 
 /**
+ * Reference to a field of type 'Int'
+ */
+export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+/**
  * Reference to a field of type 'DateTime'
  */
 export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -1121,9 +1216,9 @@ export type EnumActionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
 
 
 /**
- * Reference to a field of type 'Int'
+ * Reference to a field of type 'Float'
  */
-export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
 
 /**
@@ -1243,6 +1338,7 @@ export type GlobalOmitConfig = {
   fileLink?: Prisma.FileLinkOmit
   files?: Prisma.FilesOmit
   activityLogs?: Prisma.ActivityLogsOmit
+  aIChatHistory?: Prisma.AIChatHistoryOmit
 }
 
 /* Types for Logging */

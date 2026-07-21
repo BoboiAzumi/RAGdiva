@@ -1,0 +1,7 @@
+-- AlterTable
+ALTER TABLE `criteria` MODIFY `code` VARCHAR(191) NOT NULL DEFAULT '',
+    MODIFY `name` VARCHAR(191) NOT NULL DEFAULT '',
+    MODIFY `description` VARCHAR(191) NOT NULL DEFAULT '';
+
+-- AlterTable
+ALTER TABLE `files` ADD COLUMN `page` INTEGER NULL;

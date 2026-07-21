@@ -20,8 +20,18 @@ export type FileLinkModel = runtime.Types.Result.DefaultSelection<Prisma.$FileLi
 
 export type AggregateFileLink = {
   _count: FileLinkCountAggregateOutputType | null
+  _avg: FileLinkAvgAggregateOutputType | null
+  _sum: FileLinkSumAggregateOutputType | null
   _min: FileLinkMinAggregateOutputType | null
   _max: FileLinkMaxAggregateOutputType | null
+}
+
+export type FileLinkAvgAggregateOutputType = {
+  page: number | null
+}
+
+export type FileLinkSumAggregateOutputType = {
+  page: number | null
 }
 
 export type FileLinkMinAggregateOutputType = {
@@ -29,6 +39,7 @@ export type FileLinkMinAggregateOutputType = {
   criteriaId: string | null
   fileId: string | null
   criteriaLink: string | null
+  page: number | null
 }
 
 export type FileLinkMaxAggregateOutputType = {
@@ -36,6 +47,7 @@ export type FileLinkMaxAggregateOutputType = {
   criteriaId: string | null
   fileId: string | null
   criteriaLink: string | null
+  page: number | null
 }
 
 export type FileLinkCountAggregateOutputType = {
@@ -43,15 +55,25 @@ export type FileLinkCountAggregateOutputType = {
   criteriaId: number
   fileId: number
   criteriaLink: number
+  page: number
   _all: number
 }
 
+
+export type FileLinkAvgAggregateInputType = {
+  page?: true
+}
+
+export type FileLinkSumAggregateInputType = {
+  page?: true
+}
 
 export type FileLinkMinAggregateInputType = {
   id?: true
   criteriaId?: true
   fileId?: true
   criteriaLink?: true
+  page?: true
 }
 
 export type FileLinkMaxAggregateInputType = {
@@ -59,6 +81,7 @@ export type FileLinkMaxAggregateInputType = {
   criteriaId?: true
   fileId?: true
   criteriaLink?: true
+  page?: true
 }
 
 export type FileLinkCountAggregateInputType = {
@@ -66,6 +89,7 @@ export type FileLinkCountAggregateInputType = {
   criteriaId?: true
   fileId?: true
   criteriaLink?: true
+  page?: true
   _all?: true
 }
 
@@ -107,6 +131,18 @@ export type FileLinkAggregateArgs<ExtArgs extends runtime.Types.Extensions.Inter
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: FileLinkAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: FileLinkSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: FileLinkMinAggregateInputType
@@ -137,6 +173,8 @@ export type FileLinkGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   _count?: FileLinkCountAggregateInputType | true
+  _avg?: FileLinkAvgAggregateInputType
+  _sum?: FileLinkSumAggregateInputType
   _min?: FileLinkMinAggregateInputType
   _max?: FileLinkMaxAggregateInputType
 }
@@ -146,7 +184,10 @@ export type FileLinkGroupByOutputType = {
   criteriaId: string
   fileId: string
   criteriaLink: string
+  page: number
   _count: FileLinkCountAggregateOutputType | null
+  _avg: FileLinkAvgAggregateOutputType | null
+  _sum: FileLinkSumAggregateOutputType | null
   _min: FileLinkMinAggregateOutputType | null
   _max: FileLinkMaxAggregateOutputType | null
 }
@@ -174,6 +215,7 @@ export type FileLinkWhereInput = {
   criteriaId?: Prisma.StringFilter<"FileLink"> | string
   fileId?: Prisma.StringFilter<"FileLink"> | string
   criteriaLink?: Prisma.StringFilter<"FileLink"> | string
+  page?: Prisma.IntFilter<"FileLink"> | number
   files?: Prisma.XOR<Prisma.FilesScalarRelationFilter, Prisma.FilesWhereInput>
   criteria?: Prisma.XOR<Prisma.CriteriaScalarRelationFilter, Prisma.CriteriaWhereInput>
 }
@@ -183,6 +225,7 @@ export type FileLinkOrderByWithRelationInput = {
   criteriaId?: Prisma.SortOrder
   fileId?: Prisma.SortOrder
   criteriaLink?: Prisma.SortOrder
+  page?: Prisma.SortOrder
   files?: Prisma.FilesOrderByWithRelationInput
   criteria?: Prisma.CriteriaOrderByWithRelationInput
   _relevance?: Prisma.FileLinkOrderByRelevanceInput
@@ -196,6 +239,7 @@ export type FileLinkWhereUniqueInput = Prisma.AtLeast<{
   criteriaId?: Prisma.StringFilter<"FileLink"> | string
   fileId?: Prisma.StringFilter<"FileLink"> | string
   criteriaLink?: Prisma.StringFilter<"FileLink"> | string
+  page?: Prisma.IntFilter<"FileLink"> | number
   files?: Prisma.XOR<Prisma.FilesScalarRelationFilter, Prisma.FilesWhereInput>
   criteria?: Prisma.XOR<Prisma.CriteriaScalarRelationFilter, Prisma.CriteriaWhereInput>
 }, "id">
@@ -205,9 +249,12 @@ export type FileLinkOrderByWithAggregationInput = {
   criteriaId?: Prisma.SortOrder
   fileId?: Prisma.SortOrder
   criteriaLink?: Prisma.SortOrder
+  page?: Prisma.SortOrder
   _count?: Prisma.FileLinkCountOrderByAggregateInput
+  _avg?: Prisma.FileLinkAvgOrderByAggregateInput
   _max?: Prisma.FileLinkMaxOrderByAggregateInput
   _min?: Prisma.FileLinkMinOrderByAggregateInput
+  _sum?: Prisma.FileLinkSumOrderByAggregateInput
 }
 
 export type FileLinkScalarWhereWithAggregatesInput = {
@@ -218,11 +265,13 @@ export type FileLinkScalarWhereWithAggregatesInput = {
   criteriaId?: Prisma.StringWithAggregatesFilter<"FileLink"> | string
   fileId?: Prisma.StringWithAggregatesFilter<"FileLink"> | string
   criteriaLink?: Prisma.StringWithAggregatesFilter<"FileLink"> | string
+  page?: Prisma.IntWithAggregatesFilter<"FileLink"> | number
 }
 
 export type FileLinkCreateInput = {
   id?: string
   criteriaLink: string
+  page?: number
   files: Prisma.FilesCreateNestedOneWithoutFileLinksInput
   criteria: Prisma.CriteriaCreateNestedOneWithoutFileLinksInput
 }
@@ -232,11 +281,13 @@ export type FileLinkUncheckedCreateInput = {
   criteriaId: string
   fileId: string
   criteriaLink: string
+  page?: number
 }
 
 export type FileLinkUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   criteriaLink?: Prisma.StringFieldUpdateOperationsInput | string
+  page?: Prisma.IntFieldUpdateOperationsInput | number
   files?: Prisma.FilesUpdateOneRequiredWithoutFileLinksNestedInput
   criteria?: Prisma.CriteriaUpdateOneRequiredWithoutFileLinksNestedInput
 }
@@ -246,6 +297,7 @@ export type FileLinkUncheckedUpdateInput = {
   criteriaId?: Prisma.StringFieldUpdateOperationsInput | string
   fileId?: Prisma.StringFieldUpdateOperationsInput | string
   criteriaLink?: Prisma.StringFieldUpdateOperationsInput | string
+  page?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type FileLinkCreateManyInput = {
@@ -253,11 +305,13 @@ export type FileLinkCreateManyInput = {
   criteriaId: string
   fileId: string
   criteriaLink: string
+  page?: number
 }
 
 export type FileLinkUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   criteriaLink?: Prisma.StringFieldUpdateOperationsInput | string
+  page?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type FileLinkUncheckedUpdateManyInput = {
@@ -265,6 +319,7 @@ export type FileLinkUncheckedUpdateManyInput = {
   criteriaId?: Prisma.StringFieldUpdateOperationsInput | string
   fileId?: Prisma.StringFieldUpdateOperationsInput | string
   criteriaLink?: Prisma.StringFieldUpdateOperationsInput | string
+  page?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type FileLinkListRelationFilter = {
@@ -288,6 +343,11 @@ export type FileLinkCountOrderByAggregateInput = {
   criteriaId?: Prisma.SortOrder
   fileId?: Prisma.SortOrder
   criteriaLink?: Prisma.SortOrder
+  page?: Prisma.SortOrder
+}
+
+export type FileLinkAvgOrderByAggregateInput = {
+  page?: Prisma.SortOrder
 }
 
 export type FileLinkMaxOrderByAggregateInput = {
@@ -295,6 +355,7 @@ export type FileLinkMaxOrderByAggregateInput = {
   criteriaId?: Prisma.SortOrder
   fileId?: Prisma.SortOrder
   criteriaLink?: Prisma.SortOrder
+  page?: Prisma.SortOrder
 }
 
 export type FileLinkMinOrderByAggregateInput = {
@@ -302,6 +363,11 @@ export type FileLinkMinOrderByAggregateInput = {
   criteriaId?: Prisma.SortOrder
   fileId?: Prisma.SortOrder
   criteriaLink?: Prisma.SortOrder
+  page?: Prisma.SortOrder
+}
+
+export type FileLinkSumOrderByAggregateInput = {
+  page?: Prisma.SortOrder
 }
 
 export type FileLinkCreateNestedManyWithoutCriteriaInput = {
@@ -344,6 +410,14 @@ export type FileLinkUncheckedUpdateManyWithoutCriteriaNestedInput = {
   update?: Prisma.FileLinkUpdateWithWhereUniqueWithoutCriteriaInput | Prisma.FileLinkUpdateWithWhereUniqueWithoutCriteriaInput[]
   updateMany?: Prisma.FileLinkUpdateManyWithWhereWithoutCriteriaInput | Prisma.FileLinkUpdateManyWithWhereWithoutCriteriaInput[]
   deleteMany?: Prisma.FileLinkScalarWhereInput | Prisma.FileLinkScalarWhereInput[]
+}
+
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type FileLinkCreateNestedManyWithoutFilesInput = {
@@ -391,6 +465,7 @@ export type FileLinkUncheckedUpdateManyWithoutFilesNestedInput = {
 export type FileLinkCreateWithoutCriteriaInput = {
   id?: string
   criteriaLink: string
+  page?: number
   files: Prisma.FilesCreateNestedOneWithoutFileLinksInput
 }
 
@@ -398,6 +473,7 @@ export type FileLinkUncheckedCreateWithoutCriteriaInput = {
   id?: string
   fileId: string
   criteriaLink: string
+  page?: number
 }
 
 export type FileLinkCreateOrConnectWithoutCriteriaInput = {
@@ -434,11 +510,13 @@ export type FileLinkScalarWhereInput = {
   criteriaId?: Prisma.StringFilter<"FileLink"> | string
   fileId?: Prisma.StringFilter<"FileLink"> | string
   criteriaLink?: Prisma.StringFilter<"FileLink"> | string
+  page?: Prisma.IntFilter<"FileLink"> | number
 }
 
 export type FileLinkCreateWithoutFilesInput = {
   id?: string
   criteriaLink: string
+  page?: number
   criteria: Prisma.CriteriaCreateNestedOneWithoutFileLinksInput
 }
 
@@ -446,6 +524,7 @@ export type FileLinkUncheckedCreateWithoutFilesInput = {
   id?: string
   criteriaId: string
   criteriaLink: string
+  page?: number
 }
 
 export type FileLinkCreateOrConnectWithoutFilesInput = {
@@ -478,11 +557,13 @@ export type FileLinkCreateManyCriteriaInput = {
   id?: string
   fileId: string
   criteriaLink: string
+  page?: number
 }
 
 export type FileLinkUpdateWithoutCriteriaInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   criteriaLink?: Prisma.StringFieldUpdateOperationsInput | string
+  page?: Prisma.IntFieldUpdateOperationsInput | number
   files?: Prisma.FilesUpdateOneRequiredWithoutFileLinksNestedInput
 }
 
@@ -490,23 +571,27 @@ export type FileLinkUncheckedUpdateWithoutCriteriaInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   fileId?: Prisma.StringFieldUpdateOperationsInput | string
   criteriaLink?: Prisma.StringFieldUpdateOperationsInput | string
+  page?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type FileLinkUncheckedUpdateManyWithoutCriteriaInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   fileId?: Prisma.StringFieldUpdateOperationsInput | string
   criteriaLink?: Prisma.StringFieldUpdateOperationsInput | string
+  page?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type FileLinkCreateManyFilesInput = {
   id?: string
   criteriaId: string
   criteriaLink: string
+  page?: number
 }
 
 export type FileLinkUpdateWithoutFilesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   criteriaLink?: Prisma.StringFieldUpdateOperationsInput | string
+  page?: Prisma.IntFieldUpdateOperationsInput | number
   criteria?: Prisma.CriteriaUpdateOneRequiredWithoutFileLinksNestedInput
 }
 
@@ -514,12 +599,14 @@ export type FileLinkUncheckedUpdateWithoutFilesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   criteriaId?: Prisma.StringFieldUpdateOperationsInput | string
   criteriaLink?: Prisma.StringFieldUpdateOperationsInput | string
+  page?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type FileLinkUncheckedUpdateManyWithoutFilesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   criteriaId?: Prisma.StringFieldUpdateOperationsInput | string
   criteriaLink?: Prisma.StringFieldUpdateOperationsInput | string
+  page?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
@@ -529,6 +616,7 @@ export type FileLinkSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   criteriaId?: boolean
   fileId?: boolean
   criteriaLink?: boolean
+  page?: boolean
   files?: boolean | Prisma.FilesDefaultArgs<ExtArgs>
   criteria?: boolean | Prisma.CriteriaDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fileLink"]>
@@ -540,9 +628,10 @@ export type FileLinkSelectScalar = {
   criteriaId?: boolean
   fileId?: boolean
   criteriaLink?: boolean
+  page?: boolean
 }
 
-export type FileLinkOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "criteriaId" | "fileId" | "criteriaLink", ExtArgs["result"]["fileLink"]>
+export type FileLinkOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "criteriaId" | "fileId" | "criteriaLink" | "page", ExtArgs["result"]["fileLink"]>
 export type FileLinkInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   files?: boolean | Prisma.FilesDefaultArgs<ExtArgs>
   criteria?: boolean | Prisma.CriteriaDefaultArgs<ExtArgs>
@@ -559,6 +648,7 @@ export type $FileLinkPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     criteriaId: string
     fileId: string
     criteriaLink: string
+    page: number
   }, ExtArgs["result"]["fileLink"]>
   composites: {}
 }
@@ -934,6 +1024,7 @@ export interface FileLinkFieldRefs {
   readonly criteriaId: Prisma.FieldRef<"FileLink", 'String'>
   readonly fileId: Prisma.FieldRef<"FileLink", 'String'>
   readonly criteriaLink: Prisma.FieldRef<"FileLink", 'String'>
+  readonly page: Prisma.FieldRef<"FileLink", 'Int'>
 }
     
 
