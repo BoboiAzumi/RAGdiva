@@ -1,6 +1,7 @@
 import { unlinkSync } from "fs";
 import {
     createCriteria,
+    createCriteriaLink,
     deleteCriteriaMultipleId,
     findCriteria,
     traversalChildren,
@@ -8,6 +9,7 @@ import {
 } from "../repositories/criteria-repo.js";
 import {
     findFileLinksByCriteriaIdListOuter,
+    patchClinkByCid,
     unLinkGroup,
 } from "../repositories/file-link-repo.js";
 import {
@@ -29,7 +31,10 @@ export async function newCriteriaService(data: CriteriaType) {
 }
 
 export async function updateCriteriaService(id: string, data: CriteriaType) {
-    return await updateCriteria(id, data);
+    const criteria = await updateCriteria(id, data);
+    const clink = await createCriteriaLink(id)
+
+    await patchClinkByCid(clink, criteria.id)
 }
 
 export async function deleteCriteriaService(id: string) {

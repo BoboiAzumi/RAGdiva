@@ -1,110 +1,132 @@
 import { HTTPException } from "hono/http-exception";
 import { prisma } from "../lib/database.js";
 
-export async function setLinkByHash(cid: string, hash: string, clink: string, page: number = 1){
+export async function setLinkByHash(
+    cid: string,
+    hash: string,
+    clink: string,
+    page: number = 1,
+) {
     const file = await prisma.files.findFirst({
         where: {
-            fileHash: hash
-        }
-    })
+            fileHash: hash,
+        },
+    });
 
-    if(!file){
-        throw new HTTPException(500, { message: 'Internal server error' })
+    if (!file) {
+        throw new HTTPException(500, { message: "Internal server error" });
     }
-    
+
     return await prisma.fileLink.create({
         data: {
             id: undefined,
             criteriaId: cid,
             fileId: file.id,
             criteriaLink: clink,
-            page
-        }
-    })
+            page,
+        },
+    });
 }
 
-export async function findLinkByHashCriteria(cid: string, hash: string){
+export async function findLinkByHashCriteria(cid: string, hash: string) {
     return await prisma.fileLink.findFirst({
         where: {
             criteriaId: cid,
             files: {
-                fileHash: hash
-            }
-        }
-    })
+                fileHash: hash,
+            },
+        },
+    });
 }
 
-export async function countLinkByFileId(fileId: string){
+export async function countLinkByFileId(fileId: string) {
     return await prisma.fileLink.count({
         where: {
-            fileId
-        }
-    })
+            fileId,
+        },
+    });
 }
 
-export async function findLink(fid: string, cid: string){
+export async function findLink(fid: string, cid: string) {
     return await prisma.fileLink.findMany({
         where: {
             fileId: fid,
             criteriaId: cid,
-        }
-    })
+        },
+    });
 }
 
-export async function unLink(id: string[]){
+export async function unLink(id: string[]) {
     return await prisma.fileLink.deleteMany({
         where: {
             id: {
-                in: id
-            }
-        }
-    })
+                in: id,
+            },
+        },
+    });
 }
 
-export async function unLinkGroup(criteriaId: string[], fileId: string[]){
+export async function unLinkGroup(criteriaId: string[], fileId: string[]) {
     return await prisma.fileLink.deleteMany({
         where: {
             AND: [
                 {
                     criteriaId: {
-                        in: criteriaId
-                    }
+                        in: criteriaId,
+                    },
                 },
                 {
                     fileId: {
-                        in: fileId
-                    }
-                }
-            ]
-        }
-    })
+                        in: fileId,
+                    },
+                },
+            ],
+        },
+    });
 }
 
-export async function updatePage(fid: string, cid: string, page: number){
+export async function updatePage(fid: string, cid: string, page: number) {
     return await prisma.fileLink.updateMany({
         where: {
             fileId: fid,
-            criteriaId: cid
+            criteriaId: cid,
         },
         data: {
-            page
-        }
-    })
+            page,
+        },
+    });
 }
 
-export async function findFileLinksByCriteriaIdListOuter(fileIds: string[], criteriaIds: string[]){
+export async function findFileLinksByCriteriaIdListOuter(
+    fileIds: string[],
+    criteriaIds: string[],
+) {
     return await prisma.fileLink.findMany({
         where: {
             AND: [
                 {
                     fileId: {
-                        in: fileIds
+                        in: fileIds,
                     },
                     criteriaId: {
-                        notIn: criteriaIds
-                    }
-                }
-            ]
-        }
-    })
+                        notIn: criteriaIds,
+                    },
+                },
+            ],
+        },
+    });
+}
+
+export async function patchClinkByCid(
+    criteriaLink: string,
+    criteriaId: string,
+) {
+    return await prisma.fileLink.updateMany({
+        where: {
+            criteriaId,
+        },
+        data: {
+            criteriaLink,
+        },
+    });
 }

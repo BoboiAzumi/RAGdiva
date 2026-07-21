@@ -119,7 +119,10 @@ export async function updateFileService(file: File, fid: string) {
         return;
     }
 
-    unlinkSync(`./files/${fileInDB.fileName}`)
+    try {
+        unlinkSync(`./files/${fileInDB.fileName}`)
+    }
+    catch {}
 
     const fileNameSplit = file.name.split(".");
     const ext = fileNameSplit[fileNameSplit.length - 1];
