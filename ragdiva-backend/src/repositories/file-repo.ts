@@ -31,11 +31,35 @@ export async function deleteFile(id: string){
     })
 }
 
+export async function deleteFileMultipleId(id: string[]){
+    return await prisma.files.deleteMany({
+        where: {
+            id: {
+                in: id
+            }
+        }
+    })
+}
+
 export async function updateFile(id: string, file: FileType){
     return await prisma.files.update({
         where: {
             id
         },
         data: file
+    })
+}
+
+export async function findFileByCriteriaIdList(ids: string[]){
+    return await prisma.files.findMany({
+        where: {
+            fileLinks: {
+                some: {
+                    criteriaId: {
+                        in: ids
+                    }
+                }
+            }
+        },
     })
 }

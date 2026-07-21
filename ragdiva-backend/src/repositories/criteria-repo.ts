@@ -1,4 +1,5 @@
 import { prisma } from "../lib/database.js";
+import type { CriteriaModel } from "../prisma/models.js";
 import type { CriteriaFindType, CriteriaType } from "../types/criteria-type.js";
 
 export async function findCriteria(by?: CriteriaFindType){
@@ -63,4 +64,35 @@ export async function createCriteriaLink(id: string){
     await recursive(id)
 
     return pathArray.reverse().map((v) => `/${v}`).join('')
+}
+
+export async function traversalChildren(id: string){
+    const children: CriteriaModel[] = []
+
+    const recursive = async (parent: string) => {
+        const childs = await prisma.criteria.findMany({
+            where: {
+                parent
+            }
+        })
+
+        for(const child of childs){
+            await recursive(child.id)
+            children.push(child)
+        }
+    }
+
+    await recursive(id)
+
+    return children
+}
+
+export async function deleteCriteriaMultipleId(ids: string[]){
+    return await prisma.criteria.deleteMany({
+        where: {
+            id: {
+                in: ids
+            }
+        }
+    })
 }

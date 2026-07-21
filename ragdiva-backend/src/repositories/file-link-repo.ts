@@ -61,6 +61,25 @@ export async function unLink(id: string[]){
     })
 }
 
+export async function unLinkGroup(criteriaId: string[], fileId: string[]){
+    return await prisma.fileLink.deleteMany({
+        where: {
+            AND: [
+                {
+                    criteriaId: {
+                        in: criteriaId
+                    }
+                },
+                {
+                    fileId: {
+                        in: fileId
+                    }
+                }
+            ]
+        }
+    })
+}
+
 export async function updatePage(fid: string, cid: string, page: number){
     return await prisma.fileLink.updateMany({
         where: {
@@ -69,6 +88,23 @@ export async function updatePage(fid: string, cid: string, page: number){
         },
         data: {
             page
+        }
+    })
+}
+
+export async function findFileLinksByCriteriaIdListOuter(fileIds: string[], criteriaIds: string[]){
+    return await prisma.fileLink.findMany({
+        where: {
+            AND: [
+                {
+                    fileId: {
+                        in: fileIds
+                    },
+                    criteriaId: {
+                        notIn: criteriaIds
+                    }
+                }
+            ]
         }
     })
 }
