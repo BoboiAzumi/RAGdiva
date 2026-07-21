@@ -62,6 +62,11 @@ export type Majors = Prisma.MajorsModel
  */
 export type Criteria = Prisma.CriteriaModel
 /**
+ * Model FileLink
+ * 
+ */
+export type FileLink = Prisma.FileLinkModel
+/**
  * Model Files
  * 
  */

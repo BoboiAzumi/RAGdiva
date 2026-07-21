@@ -27,16 +27,19 @@ export type AggregateMajors = {
 export type MajorsMinAggregateOutputType = {
   id: string | null
   majorName: string | null
+  accreditation: $Enums.Accreditation | null
 }
 
 export type MajorsMaxAggregateOutputType = {
   id: string | null
   majorName: string | null
+  accreditation: $Enums.Accreditation | null
 }
 
 export type MajorsCountAggregateOutputType = {
   id: number
   majorName: number
+  accreditation: number
   _all: number
 }
 
@@ -44,16 +47,19 @@ export type MajorsCountAggregateOutputType = {
 export type MajorsMinAggregateInputType = {
   id?: true
   majorName?: true
+  accreditation?: true
 }
 
 export type MajorsMaxAggregateInputType = {
   id?: true
   majorName?: true
+  accreditation?: true
 }
 
 export type MajorsCountAggregateInputType = {
   id?: true
   majorName?: true
+  accreditation?: true
   _all?: true
 }
 
@@ -132,6 +138,7 @@ export type MajorsGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 export type MajorsGroupByOutputType = {
   id: string
   majorName: string
+  accreditation: $Enums.Accreditation
   _count: MajorsCountAggregateOutputType | null
   _min: MajorsMinAggregateOutputType | null
   _max: MajorsMaxAggregateOutputType | null
@@ -158,6 +165,7 @@ export type MajorsWhereInput = {
   NOT?: Prisma.MajorsWhereInput | Prisma.MajorsWhereInput[]
   id?: Prisma.StringFilter<"Majors"> | string
   majorName?: Prisma.StringFilter<"Majors"> | string
+  accreditation?: Prisma.EnumAccreditationFilter<"Majors"> | $Enums.Accreditation
   criteria?: Prisma.CriteriaListRelationFilter
   majorAccesses?: Prisma.MajorAccessListRelationFilter
 }
@@ -165,6 +173,7 @@ export type MajorsWhereInput = {
 export type MajorsOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   majorName?: Prisma.SortOrder
+  accreditation?: Prisma.SortOrder
   criteria?: Prisma.CriteriaOrderByRelationAggregateInput
   majorAccesses?: Prisma.MajorAccessOrderByRelationAggregateInput
   _relevance?: Prisma.MajorsOrderByRelevanceInput
@@ -176,6 +185,7 @@ export type MajorsWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.MajorsWhereInput[]
   NOT?: Prisma.MajorsWhereInput | Prisma.MajorsWhereInput[]
   majorName?: Prisma.StringFilter<"Majors"> | string
+  accreditation?: Prisma.EnumAccreditationFilter<"Majors"> | $Enums.Accreditation
   criteria?: Prisma.CriteriaListRelationFilter
   majorAccesses?: Prisma.MajorAccessListRelationFilter
 }, "id" | "id">
@@ -183,6 +193,7 @@ export type MajorsWhereUniqueInput = Prisma.AtLeast<{
 export type MajorsOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   majorName?: Prisma.SortOrder
+  accreditation?: Prisma.SortOrder
   _count?: Prisma.MajorsCountOrderByAggregateInput
   _max?: Prisma.MajorsMaxOrderByAggregateInput
   _min?: Prisma.MajorsMinOrderByAggregateInput
@@ -194,11 +205,13 @@ export type MajorsScalarWhereWithAggregatesInput = {
   NOT?: Prisma.MajorsScalarWhereWithAggregatesInput | Prisma.MajorsScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Majors"> | string
   majorName?: Prisma.StringWithAggregatesFilter<"Majors"> | string
+  accreditation?: Prisma.EnumAccreditationWithAggregatesFilter<"Majors"> | $Enums.Accreditation
 }
 
 export type MajorsCreateInput = {
   id: string
   majorName: string
+  accreditation: $Enums.Accreditation
   criteria?: Prisma.CriteriaCreateNestedManyWithoutMajorInput
   majorAccesses?: Prisma.MajorAccessCreateNestedManyWithoutMajorsInput
 }
@@ -206,6 +219,7 @@ export type MajorsCreateInput = {
 export type MajorsUncheckedCreateInput = {
   id: string
   majorName: string
+  accreditation: $Enums.Accreditation
   criteria?: Prisma.CriteriaUncheckedCreateNestedManyWithoutMajorInput
   majorAccesses?: Prisma.MajorAccessUncheckedCreateNestedManyWithoutMajorsInput
 }
@@ -213,6 +227,7 @@ export type MajorsUncheckedCreateInput = {
 export type MajorsUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   majorName?: Prisma.StringFieldUpdateOperationsInput | string
+  accreditation?: Prisma.EnumAccreditationFieldUpdateOperationsInput | $Enums.Accreditation
   criteria?: Prisma.CriteriaUpdateManyWithoutMajorNestedInput
   majorAccesses?: Prisma.MajorAccessUpdateManyWithoutMajorsNestedInput
 }
@@ -220,6 +235,7 @@ export type MajorsUpdateInput = {
 export type MajorsUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   majorName?: Prisma.StringFieldUpdateOperationsInput | string
+  accreditation?: Prisma.EnumAccreditationFieldUpdateOperationsInput | $Enums.Accreditation
   criteria?: Prisma.CriteriaUncheckedUpdateManyWithoutMajorNestedInput
   majorAccesses?: Prisma.MajorAccessUncheckedUpdateManyWithoutMajorsNestedInput
 }
@@ -227,16 +243,19 @@ export type MajorsUncheckedUpdateInput = {
 export type MajorsCreateManyInput = {
   id: string
   majorName: string
+  accreditation: $Enums.Accreditation
 }
 
 export type MajorsUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   majorName?: Prisma.StringFieldUpdateOperationsInput | string
+  accreditation?: Prisma.EnumAccreditationFieldUpdateOperationsInput | $Enums.Accreditation
 }
 
 export type MajorsUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   majorName?: Prisma.StringFieldUpdateOperationsInput | string
+  accreditation?: Prisma.EnumAccreditationFieldUpdateOperationsInput | $Enums.Accreditation
 }
 
 export type MajorsScalarRelationFilter = {
@@ -253,16 +272,19 @@ export type MajorsOrderByRelevanceInput = {
 export type MajorsCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   majorName?: Prisma.SortOrder
+  accreditation?: Prisma.SortOrder
 }
 
 export type MajorsMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   majorName?: Prisma.SortOrder
+  accreditation?: Prisma.SortOrder
 }
 
 export type MajorsMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   majorName?: Prisma.SortOrder
+  accreditation?: Prisma.SortOrder
 }
 
 export type MajorsNullableScalarRelationFilter = {
@@ -284,6 +306,10 @@ export type MajorsUpdateOneRequiredWithoutMajorAccessesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MajorsUpdateToOneWithWhereWithoutMajorAccessesInput, Prisma.MajorsUpdateWithoutMajorAccessesInput>, Prisma.MajorsUncheckedUpdateWithoutMajorAccessesInput>
 }
 
+export type EnumAccreditationFieldUpdateOperationsInput = {
+  set?: $Enums.Accreditation
+}
+
 export type MajorsCreateNestedOneWithoutCriteriaInput = {
   create?: Prisma.XOR<Prisma.MajorsCreateWithoutCriteriaInput, Prisma.MajorsUncheckedCreateWithoutCriteriaInput>
   connectOrCreate?: Prisma.MajorsCreateOrConnectWithoutCriteriaInput
@@ -303,12 +329,14 @@ export type MajorsUpdateOneWithoutCriteriaNestedInput = {
 export type MajorsCreateWithoutMajorAccessesInput = {
   id: string
   majorName: string
+  accreditation: $Enums.Accreditation
   criteria?: Prisma.CriteriaCreateNestedManyWithoutMajorInput
 }
 
 export type MajorsUncheckedCreateWithoutMajorAccessesInput = {
   id: string
   majorName: string
+  accreditation: $Enums.Accreditation
   criteria?: Prisma.CriteriaUncheckedCreateNestedManyWithoutMajorInput
 }
 
@@ -331,24 +359,28 @@ export type MajorsUpdateToOneWithWhereWithoutMajorAccessesInput = {
 export type MajorsUpdateWithoutMajorAccessesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   majorName?: Prisma.StringFieldUpdateOperationsInput | string
+  accreditation?: Prisma.EnumAccreditationFieldUpdateOperationsInput | $Enums.Accreditation
   criteria?: Prisma.CriteriaUpdateManyWithoutMajorNestedInput
 }
 
 export type MajorsUncheckedUpdateWithoutMajorAccessesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   majorName?: Prisma.StringFieldUpdateOperationsInput | string
+  accreditation?: Prisma.EnumAccreditationFieldUpdateOperationsInput | $Enums.Accreditation
   criteria?: Prisma.CriteriaUncheckedUpdateManyWithoutMajorNestedInput
 }
 
 export type MajorsCreateWithoutCriteriaInput = {
   id: string
   majorName: string
+  accreditation: $Enums.Accreditation
   majorAccesses?: Prisma.MajorAccessCreateNestedManyWithoutMajorsInput
 }
 
 export type MajorsUncheckedCreateWithoutCriteriaInput = {
   id: string
   majorName: string
+  accreditation: $Enums.Accreditation
   majorAccesses?: Prisma.MajorAccessUncheckedCreateNestedManyWithoutMajorsInput
 }
 
@@ -371,12 +403,14 @@ export type MajorsUpdateToOneWithWhereWithoutCriteriaInput = {
 export type MajorsUpdateWithoutCriteriaInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   majorName?: Prisma.StringFieldUpdateOperationsInput | string
+  accreditation?: Prisma.EnumAccreditationFieldUpdateOperationsInput | $Enums.Accreditation
   majorAccesses?: Prisma.MajorAccessUpdateManyWithoutMajorsNestedInput
 }
 
 export type MajorsUncheckedUpdateWithoutCriteriaInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   majorName?: Prisma.StringFieldUpdateOperationsInput | string
+  accreditation?: Prisma.EnumAccreditationFieldUpdateOperationsInput | $Enums.Accreditation
   majorAccesses?: Prisma.MajorAccessUncheckedUpdateManyWithoutMajorsNestedInput
 }
 
@@ -423,6 +457,7 @@ export type MajorsCountOutputTypeCountMajorAccessesArgs<ExtArgs extends runtime.
 export type MajorsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   majorName?: boolean
+  accreditation?: boolean
   criteria?: boolean | Prisma.Majors$criteriaArgs<ExtArgs>
   majorAccesses?: boolean | Prisma.Majors$majorAccessesArgs<ExtArgs>
   _count?: boolean | Prisma.MajorsCountOutputTypeDefaultArgs<ExtArgs>
@@ -433,9 +468,10 @@ export type MajorsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
 export type MajorsSelectScalar = {
   id?: boolean
   majorName?: boolean
+  accreditation?: boolean
 }
 
-export type MajorsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "majorName", ExtArgs["result"]["majors"]>
+export type MajorsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "majorName" | "accreditation", ExtArgs["result"]["majors"]>
 export type MajorsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   criteria?: boolean | Prisma.Majors$criteriaArgs<ExtArgs>
   majorAccesses?: boolean | Prisma.Majors$majorAccessesArgs<ExtArgs>
@@ -451,6 +487,7 @@ export type $MajorsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     majorName: string
+    accreditation: $Enums.Accreditation
   }, ExtArgs["result"]["majors"]>
   composites: {}
 }
@@ -824,6 +861,7 @@ export interface Prisma__MajorsClient<T, Null = never, ExtArgs extends runtime.T
 export interface MajorsFieldRefs {
   readonly id: Prisma.FieldRef<"Majors", 'String'>
   readonly majorName: Prisma.FieldRef<"Majors", 'String'>
+  readonly accreditation: Prisma.FieldRef<"Majors", 'Accreditation'>
 }
     
 

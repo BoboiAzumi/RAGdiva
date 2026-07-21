@@ -55,6 +55,7 @@ export const ModelName = {
   MajorAccess: 'MajorAccess',
   Majors: 'Majors',
   Criteria: 'Criteria',
+  FileLink: 'FileLink',
   Files: 'Files',
   ActivityLogs: 'ActivityLogs'
 } as const
@@ -97,7 +98,8 @@ export type MajorAccessScalarFieldEnum = (typeof MajorAccessScalarFieldEnum)[key
 
 export const MajorsScalarFieldEnum = {
   id: 'id',
-  majorName: 'majorName'
+  majorName: 'majorName',
+  accreditation: 'accreditation'
 } as const
 
 export type MajorsScalarFieldEnum = (typeof MajorsScalarFieldEnum)[keyof typeof MajorsScalarFieldEnum]
@@ -115,9 +117,18 @@ export const CriteriaScalarFieldEnum = {
 export type CriteriaScalarFieldEnum = (typeof CriteriaScalarFieldEnum)[keyof typeof CriteriaScalarFieldEnum]
 
 
-export const FilesScalarFieldEnum = {
+export const FileLinkScalarFieldEnum = {
   id: 'id',
   criteriaId: 'criteriaId',
+  fileId: 'fileId',
+  criteriaLink: 'criteriaLink'
+} as const
+
+export type FileLinkScalarFieldEnum = (typeof FileLinkScalarFieldEnum)[keyof typeof FileLinkScalarFieldEnum]
+
+
+export const FilesScalarFieldEnum = {
+  id: 'id',
   title: 'title',
   fileName: 'fileName',
   fileHash: 'fileHash',
@@ -196,9 +207,18 @@ export const CriteriaOrderByRelevanceFieldEnum = {
 export type CriteriaOrderByRelevanceFieldEnum = (typeof CriteriaOrderByRelevanceFieldEnum)[keyof typeof CriteriaOrderByRelevanceFieldEnum]
 
 
-export const FilesOrderByRelevanceFieldEnum = {
+export const FileLinkOrderByRelevanceFieldEnum = {
   id: 'id',
   criteriaId: 'criteriaId',
+  fileId: 'fileId',
+  criteriaLink: 'criteriaLink'
+} as const
+
+export type FileLinkOrderByRelevanceFieldEnum = (typeof FileLinkOrderByRelevanceFieldEnum)[keyof typeof FileLinkOrderByRelevanceFieldEnum]
+
+
+export const FilesOrderByRelevanceFieldEnum = {
+  id: 'id',
   title: 'title',
   fileName: 'fileName',
   fileHash: 'fileHash',

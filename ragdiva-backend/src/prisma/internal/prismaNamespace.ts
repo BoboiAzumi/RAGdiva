@@ -388,6 +388,7 @@ export const ModelName = {
   MajorAccess: 'MajorAccess',
   Majors: 'Majors',
   Criteria: 'Criteria',
+  FileLink: 'FileLink',
   Files: 'Files',
   ActivityLogs: 'ActivityLogs'
 } as const
@@ -405,7 +406,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "users" | "majorAccess" | "majors" | "criteria" | "files" | "activityLogs"
+    modelProps: "users" | "majorAccess" | "majors" | "criteria" | "fileLink" | "files" | "activityLogs"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -673,6 +674,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    FileLink: {
+      payload: Prisma.$FileLinkPayload<ExtArgs>
+      fields: Prisma.FileLinkFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FileLinkFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FileLinkPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FileLinkFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FileLinkPayload>
+        }
+        findFirst: {
+          args: Prisma.FileLinkFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FileLinkPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FileLinkFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FileLinkPayload>
+        }
+        findMany: {
+          args: Prisma.FileLinkFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FileLinkPayload>[]
+        }
+        create: {
+          args: Prisma.FileLinkCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FileLinkPayload>
+        }
+        createMany: {
+          args: Prisma.FileLinkCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.FileLinkDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FileLinkPayload>
+        }
+        update: {
+          args: Prisma.FileLinkUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FileLinkPayload>
+        }
+        deleteMany: {
+          args: Prisma.FileLinkDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FileLinkUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.FileLinkUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FileLinkPayload>
+        }
+        aggregate: {
+          args: Prisma.FileLinkAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFileLink>
+        }
+        groupBy: {
+          args: Prisma.FileLinkGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FileLinkGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FileLinkCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FileLinkCountAggregateOutputType> | number
+        }
+      }
+    }
     Files: {
       payload: Prisma.$FilesPayload<ExtArgs>
       fields: Prisma.FilesFieldRefs
@@ -866,7 +933,8 @@ export type MajorAccessScalarFieldEnum = (typeof MajorAccessScalarFieldEnum)[key
 
 export const MajorsScalarFieldEnum = {
   id: 'id',
-  majorName: 'majorName'
+  majorName: 'majorName',
+  accreditation: 'accreditation'
 } as const
 
 export type MajorsScalarFieldEnum = (typeof MajorsScalarFieldEnum)[keyof typeof MajorsScalarFieldEnum]
@@ -884,9 +952,18 @@ export const CriteriaScalarFieldEnum = {
 export type CriteriaScalarFieldEnum = (typeof CriteriaScalarFieldEnum)[keyof typeof CriteriaScalarFieldEnum]
 
 
-export const FilesScalarFieldEnum = {
+export const FileLinkScalarFieldEnum = {
   id: 'id',
   criteriaId: 'criteriaId',
+  fileId: 'fileId',
+  criteriaLink: 'criteriaLink'
+} as const
+
+export type FileLinkScalarFieldEnum = (typeof FileLinkScalarFieldEnum)[keyof typeof FileLinkScalarFieldEnum]
+
+
+export const FilesScalarFieldEnum = {
+  id: 'id',
   title: 'title',
   fileName: 'fileName',
   fileHash: 'fileHash',
@@ -965,9 +1042,18 @@ export const CriteriaOrderByRelevanceFieldEnum = {
 export type CriteriaOrderByRelevanceFieldEnum = (typeof CriteriaOrderByRelevanceFieldEnum)[keyof typeof CriteriaOrderByRelevanceFieldEnum]
 
 
-export const FilesOrderByRelevanceFieldEnum = {
+export const FileLinkOrderByRelevanceFieldEnum = {
   id: 'id',
   criteriaId: 'criteriaId',
+  fileId: 'fileId',
+  criteriaLink: 'criteriaLink'
+} as const
+
+export type FileLinkOrderByRelevanceFieldEnum = (typeof FileLinkOrderByRelevanceFieldEnum)[keyof typeof FileLinkOrderByRelevanceFieldEnum]
+
+
+export const FilesOrderByRelevanceFieldEnum = {
+  id: 'id',
   title: 'title',
   fileName: 'fileName',
   fileHash: 'fileHash',
@@ -1003,6 +1089,13 @@ export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 
  * Reference to a field of type 'Level'
  */
 export type EnumLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Level'>
+    
+
+
+/**
+ * Reference to a field of type 'Accreditation'
+ */
+export type EnumAccreditationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Accreditation'>
     
 
 
@@ -1147,6 +1240,7 @@ export type GlobalOmitConfig = {
   majorAccess?: Prisma.MajorAccessOmit
   majors?: Prisma.MajorsOmit
   criteria?: Prisma.CriteriaOmit
+  fileLink?: Prisma.FileLinkOmit
   files?: Prisma.FilesOmit
   activityLogs?: Prisma.ActivityLogsOmit
 }

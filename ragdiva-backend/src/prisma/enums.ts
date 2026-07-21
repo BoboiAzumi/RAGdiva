@@ -37,3 +37,13 @@ export const Status = {
 } as const
 
 export type Status = (typeof Status)[keyof typeof Status]
+
+
+export const Accreditation = {
+  Unggul: 'Unggul',
+  Baik_Sekali: 'Baik_Sekali',
+  Baik: 'Baik',
+  Tidak_Terakreditasi: 'Tidak_Terakreditasi'
+} as const
+
+export type Accreditation = (typeof Accreditation)[keyof typeof Accreditation]

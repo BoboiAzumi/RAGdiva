@@ -7,6 +7,7 @@ import { HTTPException } from "hono/http-exception";
 import { SSEStreamingApi, streamSSE } from "hono/streaming";
 import { v4 } from "uuid";
 import { broadcastPool } from "./lib/broadcast.js";
+import { criteriaRoute } from "./routes/criteria-route.js";
 
 const app = new Hono();
 
@@ -15,6 +16,7 @@ app.get("/", (c) => {
 });
 
 app.route("/auth", authRoute);
+app.route("/criteria", criteriaRoute)
 
 app.get("/stream", async (c: Context) => {
     return streamSSE(c, async (stream: SSEStreamingApi) => {
@@ -26,17 +28,16 @@ app.get("/stream", async (c: Context) => {
 			})
 		}
 
-		broadcastPool.add({id, write})
+		const client = { id, write }
+
+		broadcastPool.add(client)
 
 		stream.onAbort(() => {
-			broadcastPool.delete({ 
-				id, 
-				write 
-			})
+			broadcastPool.delete(client)
 		})
 
-		while(!stream.abort) {
-			await stream.sleep(3000)
+		while(!stream.aborted) {
+			await stream.sleep(10000)
 			await stream.writeSSE({
 				event: "ping",
 				data: "keep-alive"

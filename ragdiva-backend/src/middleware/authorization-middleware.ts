@@ -17,6 +17,10 @@ export function AuthorizationMiddleware(role: Level[]) {
             throw new HTTPException(403, { message: "access forbidden" })
         }
 
+        c.set("level", verify?.level)
+        c.set("userid", verify?.id)
+        c.set("fullName", verify?.fullName)
+
         await next()
     };
 }

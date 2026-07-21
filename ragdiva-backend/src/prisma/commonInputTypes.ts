@@ -64,6 +64,23 @@ export type EnumLevelWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumLevelFilter<$PrismaModel>
 }
 
+export type EnumAccreditationFilter<$PrismaModel = never> = {
+  equals?: $Enums.Accreditation | Prisma.EnumAccreditationFieldRefInput<$PrismaModel>
+  in?: $Enums.Accreditation[]
+  notIn?: $Enums.Accreditation[]
+  not?: Prisma.NestedEnumAccreditationFilter<$PrismaModel> | $Enums.Accreditation
+}
+
+export type EnumAccreditationWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.Accreditation | Prisma.EnumAccreditationFieldRefInput<$PrismaModel>
+  in?: $Enums.Accreditation[]
+  notIn?: $Enums.Accreditation[]
+  not?: Prisma.NestedEnumAccreditationWithAggregatesFilter<$PrismaModel> | $Enums.Accreditation
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAccreditationFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAccreditationFilter<$PrismaModel>
+}
+
 export type StringNullableFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
   in?: string[] | null
@@ -220,6 +237,23 @@ export type NestedEnumLevelWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumLevelFilter<$PrismaModel>
   _max?: Prisma.NestedEnumLevelFilter<$PrismaModel>
+}
+
+export type NestedEnumAccreditationFilter<$PrismaModel = never> = {
+  equals?: $Enums.Accreditation | Prisma.EnumAccreditationFieldRefInput<$PrismaModel>
+  in?: $Enums.Accreditation[]
+  notIn?: $Enums.Accreditation[]
+  not?: Prisma.NestedEnumAccreditationFilter<$PrismaModel> | $Enums.Accreditation
+}
+
+export type NestedEnumAccreditationWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.Accreditation | Prisma.EnumAccreditationFieldRefInput<$PrismaModel>
+  in?: $Enums.Accreditation[]
+  notIn?: $Enums.Accreditation[]
+  not?: Prisma.NestedEnumAccreditationWithAggregatesFilter<$PrismaModel> | $Enums.Accreditation
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAccreditationFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAccreditationFilter<$PrismaModel>
 }
 
 export type NestedStringNullableFilter<$PrismaModel = never> = {

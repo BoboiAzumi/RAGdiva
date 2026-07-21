@@ -13,7 +13,7 @@ export function Navbar() {
     const { setTheme } = useThemeProvider();
 
     return (
-        <nav className="border-b border-b-border py-2 bg-background z-10 sticky top-0">
+        <nav className="border-b border-b-border py-2 bg-background z-100 sticky top-0">
             <div className="max-w-280 m-auto px-6 flex justify-between">
                 <div className="flex items-center gap-2">
                     <img
@@ -27,7 +27,7 @@ export function Navbar() {
                 </div>
                 <div className="md:flex items-center gap-7 hidden">
                     <a
-                        href="#"
+                        href="#home"
                         className="text-text-light-800 dark:text-text-dark-300 hover:text-text-light-900 hover:dark:text-text-dark-200
                                     relative inline-block after:absolute after:left-0 after:bottom-0
                                     after:h-0.5 after:w-full after:origin-center after:scale-x-0
@@ -45,7 +45,7 @@ export function Navbar() {
                         Profil
                     </a>
                     <a
-                        href="#"
+                        href="#prodi"
                         className="text-text-light-800 dark:text-text-dark-300 hover:text-text-light-900 hover:dark:text-text-dark-200
                                     relative inline-block after:absolute after:left-0 after:bottom-0
                                     after:h-0.5 after:w-full after:origin-center after:scale-x-0
@@ -54,7 +54,7 @@ export function Navbar() {
                         Program Studi
                     </a>
                     <a
-                        href="#"
+                        href="#kontak"
                         className="text-text-light-800 dark:text-text-dark-300 hover:text-text-light-900 hover:dark:text-text-dark-200
                                     relative inline-block after:absolute after:left-0 after:bottom-0
                                     after:h-0.5 after:w-full after:origin-center after:scale-x-0
@@ -103,7 +103,7 @@ export function Navbar() {
                         <DropdownMenuContent align="center">
                             <DropdownMenuItem>
                                 <a
-                                    href="#"
+                                    href="#home"
                                     className="text-text-light-800 dark:text-text-dark-300 hover:text-text-light-900 hover:dark:text-text-dark-200"
                                 >
                                     Home
@@ -119,7 +119,7 @@ export function Navbar() {
                             </DropdownMenuItem>
                             <DropdownMenuItem>
                                 <a
-                                    href="#"
+                                    href="#prodi"
                                     className="text-text-light-800 dark:text-text-dark-300 hover:text-text-light-900 hover:dark:text-text-dark-200"
                                 >
                                     Program Studi
@@ -127,7 +127,7 @@ export function Navbar() {
                             </DropdownMenuItem>
                             <DropdownMenuItem>
                                 <a
-                                    href="#"
+                                    href="#kontak"
                                     className="text-text-light-800 dark:text-text-dark-300 hover:text-text-light-900 hover:dark:text-text-dark-200"
                                 >
                                     Kontak

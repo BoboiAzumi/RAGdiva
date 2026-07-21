@@ -19,8 +19,8 @@ model Users {
   fullName String @map("full_name")
   level    Level
 
-  activityLogs  ActivityLogs[]
-  majorAccess MajorAccess[]
+  activityLogs ActivityLogs[]
+  majorAccess  MajorAccess[]
 
   @@map("users")
 }
@@ -32,11 +32,14 @@ model MajorAccess {
 
   majors Majors @relation(fields: [majorId], references: [id])
   users  Users  @relation(fields: [userId], references: [id])
+
+  @@map("major_access")
 }
 
 model Majors {
-  id        String @id @unique
-  majorName String @map("major_name")
+  id            String        @id @unique
+  majorName     String        @map("major_name")
+  accreditation Accreditation
 
   criteria      Criteria[]
   majorAccesses MajorAccess[]
@@ -55,24 +58,33 @@ model Criteria {
   major          Majors?    @relation(fields: [access], references: [id])
   parentCriteria Criteria?  @relation("CriteriaHierarchy", fields: [parent], references: [id])
   childCriteria  Criteria[] @relation("CriteriaHierarchy")
-  files          Files[]
+  fileLinks      FileLink[]
 
   @@map("criteria")
 }
 
-model Files {
-  id         String   @id @default(uuid())
-  criteriaId String   @map("criteria_id")
-  title      String
-  fileName   String   @map("file_name")
-  fileHash   String   @map("file_hash")
-  mimeType   String   @map("mime_type")
-  createdAt  DateTime @default(now()) @map("created_at")
-  updateAt   DateTime @updatedAt @map("update_at")
-  status     Status
+model FileLink {
+  id           String @id @default(uuid())
+  criteriaId   String @map("criteria_id")
+  fileId       String @map("file_id")
+  criteriaLink String @map("criteria_link")
 
-  criteria     Criteria       @relation(fields: [criteriaId], references: [id])
+  files    Files    @relation(fields: [fileId], references: [id])
+  criteria Criteria @relation(fields: [criteriaId], references: [id])
+}
+
+model Files {
+  id        String   @id @default(uuid())
+  title     String
+  fileName  String   @map("file_name")
+  fileHash  String   @map("file_hash")
+  mimeType  String   @map("mime_type")
+  createdAt DateTime @default(now()) @map("created_at")
+  updateAt  DateTime @updatedAt @map("update_at")
+  status    Status
+
   activityLogs ActivityLogs[]
+  fileLinks    FileLink[]
 
   @@map("files")
 }
@@ -111,4 +123,11 @@ enum Status {
   Completed
   Reprocessing
   Failed
+}
+
+enum Accreditation {
+  Unggul
+  Baik_Sekali         @map("Baik Sekali")
+  Baik
+  Tidak_Terakreditasi @map("Tidak Terakreditasi")
 }

@@ -9,7 +9,14 @@ export async function AuthenticationMiddleware(c: Context, next: Next) {
         throw new HTTPException(403, { message: "unauthenticated" });
     }
 
-    if (await verifyToken(token.replaceAll("Bearer", "").trim())) {
+    const verify = await verifyToken(token.replaceAll("Bearer", "").trim())
+
+    if (verify) {
+        c.set("userid", verify.id)
+        c.set("fullName", verify.fullName)
         await next();
+    }
+    else {
+        throw new HTTPException(403, { message: "invalid credential" })
     }
 }

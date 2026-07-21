@@ -193,7 +193,7 @@ export type CriteriaWhereInput = {
   major?: Prisma.XOR<Prisma.MajorsNullableScalarRelationFilter, Prisma.MajorsWhereInput> | null
   parentCriteria?: Prisma.XOR<Prisma.CriteriaNullableScalarRelationFilter, Prisma.CriteriaWhereInput> | null
   childCriteria?: Prisma.CriteriaListRelationFilter
-  files?: Prisma.FilesListRelationFilter
+  fileLinks?: Prisma.FileLinkListRelationFilter
 }
 
 export type CriteriaOrderByWithRelationInput = {
@@ -206,7 +206,7 @@ export type CriteriaOrderByWithRelationInput = {
   major?: Prisma.MajorsOrderByWithRelationInput
   parentCriteria?: Prisma.CriteriaOrderByWithRelationInput
   childCriteria?: Prisma.CriteriaOrderByRelationAggregateInput
-  files?: Prisma.FilesOrderByRelationAggregateInput
+  fileLinks?: Prisma.FileLinkOrderByRelationAggregateInput
   _relevance?: Prisma.CriteriaOrderByRelevanceInput
 }
 
@@ -223,7 +223,7 @@ export type CriteriaWhereUniqueInput = Prisma.AtLeast<{
   major?: Prisma.XOR<Prisma.MajorsNullableScalarRelationFilter, Prisma.MajorsWhereInput> | null
   parentCriteria?: Prisma.XOR<Prisma.CriteriaNullableScalarRelationFilter, Prisma.CriteriaWhereInput> | null
   childCriteria?: Prisma.CriteriaListRelationFilter
-  files?: Prisma.FilesListRelationFilter
+  fileLinks?: Prisma.FileLinkListRelationFilter
 }, "id">
 
 export type CriteriaOrderByWithAggregationInput = {
@@ -258,7 +258,7 @@ export type CriteriaCreateInput = {
   major?: Prisma.MajorsCreateNestedOneWithoutCriteriaInput
   parentCriteria?: Prisma.CriteriaCreateNestedOneWithoutChildCriteriaInput
   childCriteria?: Prisma.CriteriaCreateNestedManyWithoutParentCriteriaInput
-  files?: Prisma.FilesCreateNestedManyWithoutCriteriaInput
+  fileLinks?: Prisma.FileLinkCreateNestedManyWithoutCriteriaInput
 }
 
 export type CriteriaUncheckedCreateInput = {
@@ -269,7 +269,7 @@ export type CriteriaUncheckedCreateInput = {
   description?: string
   access?: string | null
   childCriteria?: Prisma.CriteriaUncheckedCreateNestedManyWithoutParentCriteriaInput
-  files?: Prisma.FilesUncheckedCreateNestedManyWithoutCriteriaInput
+  fileLinks?: Prisma.FileLinkUncheckedCreateNestedManyWithoutCriteriaInput
 }
 
 export type CriteriaUpdateInput = {
@@ -280,7 +280,7 @@ export type CriteriaUpdateInput = {
   major?: Prisma.MajorsUpdateOneWithoutCriteriaNestedInput
   parentCriteria?: Prisma.CriteriaUpdateOneWithoutChildCriteriaNestedInput
   childCriteria?: Prisma.CriteriaUpdateManyWithoutParentCriteriaNestedInput
-  files?: Prisma.FilesUpdateManyWithoutCriteriaNestedInput
+  fileLinks?: Prisma.FileLinkUpdateManyWithoutCriteriaNestedInput
 }
 
 export type CriteriaUncheckedUpdateInput = {
@@ -291,7 +291,7 @@ export type CriteriaUncheckedUpdateInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   access?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   childCriteria?: Prisma.CriteriaUncheckedUpdateManyWithoutParentCriteriaNestedInput
-  files?: Prisma.FilesUncheckedUpdateManyWithoutCriteriaNestedInput
+  fileLinks?: Prisma.FileLinkUncheckedUpdateManyWithoutCriteriaNestedInput
 }
 
 export type CriteriaCreateManyInput = {
@@ -476,18 +476,18 @@ export type CriteriaUncheckedUpdateManyWithoutParentCriteriaNestedInput = {
   deleteMany?: Prisma.CriteriaScalarWhereInput | Prisma.CriteriaScalarWhereInput[]
 }
 
-export type CriteriaCreateNestedOneWithoutFilesInput = {
-  create?: Prisma.XOR<Prisma.CriteriaCreateWithoutFilesInput, Prisma.CriteriaUncheckedCreateWithoutFilesInput>
-  connectOrCreate?: Prisma.CriteriaCreateOrConnectWithoutFilesInput
+export type CriteriaCreateNestedOneWithoutFileLinksInput = {
+  create?: Prisma.XOR<Prisma.CriteriaCreateWithoutFileLinksInput, Prisma.CriteriaUncheckedCreateWithoutFileLinksInput>
+  connectOrCreate?: Prisma.CriteriaCreateOrConnectWithoutFileLinksInput
   connect?: Prisma.CriteriaWhereUniqueInput
 }
 
-export type CriteriaUpdateOneRequiredWithoutFilesNestedInput = {
-  create?: Prisma.XOR<Prisma.CriteriaCreateWithoutFilesInput, Prisma.CriteriaUncheckedCreateWithoutFilesInput>
-  connectOrCreate?: Prisma.CriteriaCreateOrConnectWithoutFilesInput
-  upsert?: Prisma.CriteriaUpsertWithoutFilesInput
+export type CriteriaUpdateOneRequiredWithoutFileLinksNestedInput = {
+  create?: Prisma.XOR<Prisma.CriteriaCreateWithoutFileLinksInput, Prisma.CriteriaUncheckedCreateWithoutFileLinksInput>
+  connectOrCreate?: Prisma.CriteriaCreateOrConnectWithoutFileLinksInput
+  upsert?: Prisma.CriteriaUpsertWithoutFileLinksInput
   connect?: Prisma.CriteriaWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.CriteriaUpdateToOneWithWhereWithoutFilesInput, Prisma.CriteriaUpdateWithoutFilesInput>, Prisma.CriteriaUncheckedUpdateWithoutFilesInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CriteriaUpdateToOneWithWhereWithoutFileLinksInput, Prisma.CriteriaUpdateWithoutFileLinksInput>, Prisma.CriteriaUncheckedUpdateWithoutFileLinksInput>
 }
 
 export type CriteriaCreateWithoutMajorInput = {
@@ -497,7 +497,7 @@ export type CriteriaCreateWithoutMajorInput = {
   description?: string
   parentCriteria?: Prisma.CriteriaCreateNestedOneWithoutChildCriteriaInput
   childCriteria?: Prisma.CriteriaCreateNestedManyWithoutParentCriteriaInput
-  files?: Prisma.FilesCreateNestedManyWithoutCriteriaInput
+  fileLinks?: Prisma.FileLinkCreateNestedManyWithoutCriteriaInput
 }
 
 export type CriteriaUncheckedCreateWithoutMajorInput = {
@@ -507,7 +507,7 @@ export type CriteriaUncheckedCreateWithoutMajorInput = {
   name?: string
   description?: string
   childCriteria?: Prisma.CriteriaUncheckedCreateNestedManyWithoutParentCriteriaInput
-  files?: Prisma.FilesUncheckedCreateNestedManyWithoutCriteriaInput
+  fileLinks?: Prisma.FileLinkUncheckedCreateNestedManyWithoutCriteriaInput
 }
 
 export type CriteriaCreateOrConnectWithoutMajorInput = {
@@ -555,7 +555,7 @@ export type CriteriaCreateWithoutChildCriteriaInput = {
   description?: string
   major?: Prisma.MajorsCreateNestedOneWithoutCriteriaInput
   parentCriteria?: Prisma.CriteriaCreateNestedOneWithoutChildCriteriaInput
-  files?: Prisma.FilesCreateNestedManyWithoutCriteriaInput
+  fileLinks?: Prisma.FileLinkCreateNestedManyWithoutCriteriaInput
 }
 
 export type CriteriaUncheckedCreateWithoutChildCriteriaInput = {
@@ -565,7 +565,7 @@ export type CriteriaUncheckedCreateWithoutChildCriteriaInput = {
   name?: string
   description?: string
   access?: string | null
-  files?: Prisma.FilesUncheckedCreateNestedManyWithoutCriteriaInput
+  fileLinks?: Prisma.FileLinkUncheckedCreateNestedManyWithoutCriteriaInput
 }
 
 export type CriteriaCreateOrConnectWithoutChildCriteriaInput = {
@@ -580,7 +580,7 @@ export type CriteriaCreateWithoutParentCriteriaInput = {
   description?: string
   major?: Prisma.MajorsCreateNestedOneWithoutCriteriaInput
   childCriteria?: Prisma.CriteriaCreateNestedManyWithoutParentCriteriaInput
-  files?: Prisma.FilesCreateNestedManyWithoutCriteriaInput
+  fileLinks?: Prisma.FileLinkCreateNestedManyWithoutCriteriaInput
 }
 
 export type CriteriaUncheckedCreateWithoutParentCriteriaInput = {
@@ -590,7 +590,7 @@ export type CriteriaUncheckedCreateWithoutParentCriteriaInput = {
   description?: string
   access?: string | null
   childCriteria?: Prisma.CriteriaUncheckedCreateNestedManyWithoutParentCriteriaInput
-  files?: Prisma.FilesUncheckedCreateNestedManyWithoutCriteriaInput
+  fileLinks?: Prisma.FileLinkUncheckedCreateNestedManyWithoutCriteriaInput
 }
 
 export type CriteriaCreateOrConnectWithoutParentCriteriaInput = {
@@ -621,7 +621,7 @@ export type CriteriaUpdateWithoutChildCriteriaInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   major?: Prisma.MajorsUpdateOneWithoutCriteriaNestedInput
   parentCriteria?: Prisma.CriteriaUpdateOneWithoutChildCriteriaNestedInput
-  files?: Prisma.FilesUpdateManyWithoutCriteriaNestedInput
+  fileLinks?: Prisma.FileLinkUpdateManyWithoutCriteriaNestedInput
 }
 
 export type CriteriaUncheckedUpdateWithoutChildCriteriaInput = {
@@ -631,7 +631,7 @@ export type CriteriaUncheckedUpdateWithoutChildCriteriaInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   access?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  files?: Prisma.FilesUncheckedUpdateManyWithoutCriteriaNestedInput
+  fileLinks?: Prisma.FileLinkUncheckedUpdateManyWithoutCriteriaNestedInput
 }
 
 export type CriteriaUpsertWithWhereUniqueWithoutParentCriteriaInput = {
@@ -650,7 +650,7 @@ export type CriteriaUpdateManyWithWhereWithoutParentCriteriaInput = {
   data: Prisma.XOR<Prisma.CriteriaUpdateManyMutationInput, Prisma.CriteriaUncheckedUpdateManyWithoutParentCriteriaInput>
 }
 
-export type CriteriaCreateWithoutFilesInput = {
+export type CriteriaCreateWithoutFileLinksInput = {
   id?: string
   code?: string
   name?: string
@@ -660,7 +660,7 @@ export type CriteriaCreateWithoutFilesInput = {
   childCriteria?: Prisma.CriteriaCreateNestedManyWithoutParentCriteriaInput
 }
 
-export type CriteriaUncheckedCreateWithoutFilesInput = {
+export type CriteriaUncheckedCreateWithoutFileLinksInput = {
   id?: string
   parent?: string | null
   code?: string
@@ -670,23 +670,23 @@ export type CriteriaUncheckedCreateWithoutFilesInput = {
   childCriteria?: Prisma.CriteriaUncheckedCreateNestedManyWithoutParentCriteriaInput
 }
 
-export type CriteriaCreateOrConnectWithoutFilesInput = {
+export type CriteriaCreateOrConnectWithoutFileLinksInput = {
   where: Prisma.CriteriaWhereUniqueInput
-  create: Prisma.XOR<Prisma.CriteriaCreateWithoutFilesInput, Prisma.CriteriaUncheckedCreateWithoutFilesInput>
+  create: Prisma.XOR<Prisma.CriteriaCreateWithoutFileLinksInput, Prisma.CriteriaUncheckedCreateWithoutFileLinksInput>
 }
 
-export type CriteriaUpsertWithoutFilesInput = {
-  update: Prisma.XOR<Prisma.CriteriaUpdateWithoutFilesInput, Prisma.CriteriaUncheckedUpdateWithoutFilesInput>
-  create: Prisma.XOR<Prisma.CriteriaCreateWithoutFilesInput, Prisma.CriteriaUncheckedCreateWithoutFilesInput>
+export type CriteriaUpsertWithoutFileLinksInput = {
+  update: Prisma.XOR<Prisma.CriteriaUpdateWithoutFileLinksInput, Prisma.CriteriaUncheckedUpdateWithoutFileLinksInput>
+  create: Prisma.XOR<Prisma.CriteriaCreateWithoutFileLinksInput, Prisma.CriteriaUncheckedCreateWithoutFileLinksInput>
   where?: Prisma.CriteriaWhereInput
 }
 
-export type CriteriaUpdateToOneWithWhereWithoutFilesInput = {
+export type CriteriaUpdateToOneWithWhereWithoutFileLinksInput = {
   where?: Prisma.CriteriaWhereInput
-  data: Prisma.XOR<Prisma.CriteriaUpdateWithoutFilesInput, Prisma.CriteriaUncheckedUpdateWithoutFilesInput>
+  data: Prisma.XOR<Prisma.CriteriaUpdateWithoutFileLinksInput, Prisma.CriteriaUncheckedUpdateWithoutFileLinksInput>
 }
 
-export type CriteriaUpdateWithoutFilesInput = {
+export type CriteriaUpdateWithoutFileLinksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -696,7 +696,7 @@ export type CriteriaUpdateWithoutFilesInput = {
   childCriteria?: Prisma.CriteriaUpdateManyWithoutParentCriteriaNestedInput
 }
 
-export type CriteriaUncheckedUpdateWithoutFilesInput = {
+export type CriteriaUncheckedUpdateWithoutFileLinksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   parent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -721,7 +721,7 @@ export type CriteriaUpdateWithoutMajorInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   parentCriteria?: Prisma.CriteriaUpdateOneWithoutChildCriteriaNestedInput
   childCriteria?: Prisma.CriteriaUpdateManyWithoutParentCriteriaNestedInput
-  files?: Prisma.FilesUpdateManyWithoutCriteriaNestedInput
+  fileLinks?: Prisma.FileLinkUpdateManyWithoutCriteriaNestedInput
 }
 
 export type CriteriaUncheckedUpdateWithoutMajorInput = {
@@ -731,7 +731,7 @@ export type CriteriaUncheckedUpdateWithoutMajorInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   childCriteria?: Prisma.CriteriaUncheckedUpdateManyWithoutParentCriteriaNestedInput
-  files?: Prisma.FilesUncheckedUpdateManyWithoutCriteriaNestedInput
+  fileLinks?: Prisma.FileLinkUncheckedUpdateManyWithoutCriteriaNestedInput
 }
 
 export type CriteriaUncheckedUpdateManyWithoutMajorInput = {
@@ -757,7 +757,7 @@ export type CriteriaUpdateWithoutParentCriteriaInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   major?: Prisma.MajorsUpdateOneWithoutCriteriaNestedInput
   childCriteria?: Prisma.CriteriaUpdateManyWithoutParentCriteriaNestedInput
-  files?: Prisma.FilesUpdateManyWithoutCriteriaNestedInput
+  fileLinks?: Prisma.FileLinkUpdateManyWithoutCriteriaNestedInput
 }
 
 export type CriteriaUncheckedUpdateWithoutParentCriteriaInput = {
@@ -767,7 +767,7 @@ export type CriteriaUncheckedUpdateWithoutParentCriteriaInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   access?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   childCriteria?: Prisma.CriteriaUncheckedUpdateManyWithoutParentCriteriaNestedInput
-  files?: Prisma.FilesUncheckedUpdateManyWithoutCriteriaNestedInput
+  fileLinks?: Prisma.FileLinkUncheckedUpdateManyWithoutCriteriaNestedInput
 }
 
 export type CriteriaUncheckedUpdateManyWithoutParentCriteriaInput = {
@@ -785,12 +785,12 @@ export type CriteriaUncheckedUpdateManyWithoutParentCriteriaInput = {
 
 export type CriteriaCountOutputType = {
   childCriteria: number
-  files: number
+  fileLinks: number
 }
 
 export type CriteriaCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   childCriteria?: boolean | CriteriaCountOutputTypeCountChildCriteriaArgs
-  files?: boolean | CriteriaCountOutputTypeCountFilesArgs
+  fileLinks?: boolean | CriteriaCountOutputTypeCountFileLinksArgs
 }
 
 /**
@@ -813,8 +813,8 @@ export type CriteriaCountOutputTypeCountChildCriteriaArgs<ExtArgs extends runtim
 /**
  * CriteriaCountOutputType without action
  */
-export type CriteriaCountOutputTypeCountFilesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.FilesWhereInput
+export type CriteriaCountOutputTypeCountFileLinksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FileLinkWhereInput
 }
 
 
@@ -828,7 +828,7 @@ export type CriteriaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   major?: boolean | Prisma.Criteria$majorArgs<ExtArgs>
   parentCriteria?: boolean | Prisma.Criteria$parentCriteriaArgs<ExtArgs>
   childCriteria?: boolean | Prisma.Criteria$childCriteriaArgs<ExtArgs>
-  files?: boolean | Prisma.Criteria$filesArgs<ExtArgs>
+  fileLinks?: boolean | Prisma.Criteria$fileLinksArgs<ExtArgs>
   _count?: boolean | Prisma.CriteriaCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["criteria"]>
 
@@ -848,7 +848,7 @@ export type CriteriaInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   major?: boolean | Prisma.Criteria$majorArgs<ExtArgs>
   parentCriteria?: boolean | Prisma.Criteria$parentCriteriaArgs<ExtArgs>
   childCriteria?: boolean | Prisma.Criteria$childCriteriaArgs<ExtArgs>
-  files?: boolean | Prisma.Criteria$filesArgs<ExtArgs>
+  fileLinks?: boolean | Prisma.Criteria$fileLinksArgs<ExtArgs>
   _count?: boolean | Prisma.CriteriaCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -858,7 +858,7 @@ export type $CriteriaPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     major: Prisma.$MajorsPayload<ExtArgs> | null
     parentCriteria: Prisma.$CriteriaPayload<ExtArgs> | null
     childCriteria: Prisma.$CriteriaPayload<ExtArgs>[]
-    files: Prisma.$FilesPayload<ExtArgs>[]
+    fileLinks: Prisma.$FileLinkPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1210,7 +1210,7 @@ export interface Prisma__CriteriaClient<T, Null = never, ExtArgs extends runtime
   major<T extends Prisma.Criteria$majorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Criteria$majorArgs<ExtArgs>>): Prisma.Prisma__MajorsClient<runtime.Types.Result.GetResult<Prisma.$MajorsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   parentCriteria<T extends Prisma.Criteria$parentCriteriaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Criteria$parentCriteriaArgs<ExtArgs>>): Prisma.Prisma__CriteriaClient<runtime.Types.Result.GetResult<Prisma.$CriteriaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   childCriteria<T extends Prisma.Criteria$childCriteriaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Criteria$childCriteriaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CriteriaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  files<T extends Prisma.Criteria$filesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Criteria$filesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FilesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  fileLinks<T extends Prisma.Criteria$fileLinksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Criteria$fileLinksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FileLinkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1656,27 +1656,27 @@ export type Criteria$childCriteriaArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 /**
- * Criteria.files
+ * Criteria.fileLinks
  */
-export type Criteria$filesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Criteria$fileLinksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Files
+   * Select specific fields to fetch from the FileLink
    */
-  select?: Prisma.FilesSelect<ExtArgs> | null
+  select?: Prisma.FileLinkSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Files
+   * Omit specific fields from the FileLink
    */
-  omit?: Prisma.FilesOmit<ExtArgs> | null
+  omit?: Prisma.FileLinkOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.FilesInclude<ExtArgs> | null
-  where?: Prisma.FilesWhereInput
-  orderBy?: Prisma.FilesOrderByWithRelationInput | Prisma.FilesOrderByWithRelationInput[]
-  cursor?: Prisma.FilesWhereUniqueInput
+  include?: Prisma.FileLinkInclude<ExtArgs> | null
+  where?: Prisma.FileLinkWhereInput
+  orderBy?: Prisma.FileLinkOrderByWithRelationInput | Prisma.FileLinkOrderByWithRelationInput[]
+  cursor?: Prisma.FileLinkWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.FilesScalarFieldEnum | Prisma.FilesScalarFieldEnum[]
+  distinct?: Prisma.FileLinkScalarFieldEnum | Prisma.FileLinkScalarFieldEnum[]
 }
 
 /**
