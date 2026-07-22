@@ -16,7 +16,14 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as publicLoginRouteImport } from './routes/(public)/login'
 import { Route as authUserDashboardRouteImport } from './routes/(auth)/user/dashboard'
 import { Route as authAsesorDashboardRouteImport } from './routes/(auth)/asesor/dashboard'
+import { Route as authAdminSettingsRouteImport } from './routes/(auth)/admin/settings'
+import { Route as authAdminProdiRouteImport } from './routes/(auth)/admin/prodi'
+import { Route as authAdminPenggunaRouteImport } from './routes/(auth)/admin/pengguna'
+import { Route as authAdminKriteriaFileRouteImport } from './routes/(auth)/admin/kriteria-file'
+import { Route as authAdminDokumenBorangRouteImport } from './routes/(auth)/admin/dokumen-borang'
 import { Route as authAdminDashboardRouteImport } from './routes/(auth)/admin/dashboard'
+import { Route as authAdminBerkasRouteImport } from './routes/(auth)/admin/berkas'
+import { Route as authAdminAichatRouteImport } from './routes/(auth)/admin/aichat'
 
 const LogoutRoute = LogoutRouteImport.update({
   id: '/logout',
@@ -51,9 +58,44 @@ const authAsesorDashboardRoute = authAsesorDashboardRouteImport.update({
   path: '/asesor/dashboard',
   getParentRoute: () => authRouteRoute,
 } as any)
+const authAdminSettingsRoute = authAdminSettingsRouteImport.update({
+  id: '/admin/settings',
+  path: '/admin/settings',
+  getParentRoute: () => authRouteRoute,
+} as any)
+const authAdminProdiRoute = authAdminProdiRouteImport.update({
+  id: '/admin/prodi',
+  path: '/admin/prodi',
+  getParentRoute: () => authRouteRoute,
+} as any)
+const authAdminPenggunaRoute = authAdminPenggunaRouteImport.update({
+  id: '/admin/pengguna',
+  path: '/admin/pengguna',
+  getParentRoute: () => authRouteRoute,
+} as any)
+const authAdminKriteriaFileRoute = authAdminKriteriaFileRouteImport.update({
+  id: '/admin/kriteria-file',
+  path: '/admin/kriteria-file',
+  getParentRoute: () => authRouteRoute,
+} as any)
+const authAdminDokumenBorangRoute = authAdminDokumenBorangRouteImport.update({
+  id: '/admin/dokumen-borang',
+  path: '/admin/dokumen-borang',
+  getParentRoute: () => authRouteRoute,
+} as any)
 const authAdminDashboardRoute = authAdminDashboardRouteImport.update({
   id: '/admin/dashboard',
   path: '/admin/dashboard',
+  getParentRoute: () => authRouteRoute,
+} as any)
+const authAdminBerkasRoute = authAdminBerkasRouteImport.update({
+  id: '/admin/berkas',
+  path: '/admin/berkas',
+  getParentRoute: () => authRouteRoute,
+} as any)
+const authAdminAichatRoute = authAdminAichatRouteImport.update({
+  id: '/admin/aichat',
+  path: '/admin/aichat',
   getParentRoute: () => authRouteRoute,
 } as any)
 
@@ -61,7 +103,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/logout': typeof LogoutRoute
   '/login': typeof publicLoginRoute
+  '/admin/aichat': typeof authAdminAichatRoute
+  '/admin/berkas': typeof authAdminBerkasRoute
   '/admin/dashboard': typeof authAdminDashboardRoute
+  '/admin/dokumen-borang': typeof authAdminDokumenBorangRoute
+  '/admin/kriteria-file': typeof authAdminKriteriaFileRoute
+  '/admin/pengguna': typeof authAdminPenggunaRoute
+  '/admin/prodi': typeof authAdminProdiRoute
+  '/admin/settings': typeof authAdminSettingsRoute
   '/asesor/dashboard': typeof authAsesorDashboardRoute
   '/user/dashboard': typeof authUserDashboardRoute
 }
@@ -69,7 +118,14 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/logout': typeof LogoutRoute
   '/login': typeof publicLoginRoute
+  '/admin/aichat': typeof authAdminAichatRoute
+  '/admin/berkas': typeof authAdminBerkasRoute
   '/admin/dashboard': typeof authAdminDashboardRoute
+  '/admin/dokumen-borang': typeof authAdminDokumenBorangRoute
+  '/admin/kriteria-file': typeof authAdminKriteriaFileRoute
+  '/admin/pengguna': typeof authAdminPenggunaRoute
+  '/admin/prodi': typeof authAdminProdiRoute
+  '/admin/settings': typeof authAdminSettingsRoute
   '/asesor/dashboard': typeof authAsesorDashboardRoute
   '/user/dashboard': typeof authUserDashboardRoute
 }
@@ -80,7 +136,14 @@ export interface FileRoutesById {
   '/(public)': typeof publicRouteRouteWithChildren
   '/logout': typeof LogoutRoute
   '/(public)/login': typeof publicLoginRoute
+  '/(auth)/admin/aichat': typeof authAdminAichatRoute
+  '/(auth)/admin/berkas': typeof authAdminBerkasRoute
   '/(auth)/admin/dashboard': typeof authAdminDashboardRoute
+  '/(auth)/admin/dokumen-borang': typeof authAdminDokumenBorangRoute
+  '/(auth)/admin/kriteria-file': typeof authAdminKriteriaFileRoute
+  '/(auth)/admin/pengguna': typeof authAdminPenggunaRoute
+  '/(auth)/admin/prodi': typeof authAdminProdiRoute
+  '/(auth)/admin/settings': typeof authAdminSettingsRoute
   '/(auth)/asesor/dashboard': typeof authAsesorDashboardRoute
   '/(auth)/user/dashboard': typeof authUserDashboardRoute
 }
@@ -90,7 +153,14 @@ export interface FileRouteTypes {
     | '/'
     | '/logout'
     | '/login'
+    | '/admin/aichat'
+    | '/admin/berkas'
     | '/admin/dashboard'
+    | '/admin/dokumen-borang'
+    | '/admin/kriteria-file'
+    | '/admin/pengguna'
+    | '/admin/prodi'
+    | '/admin/settings'
     | '/asesor/dashboard'
     | '/user/dashboard'
   fileRoutesByTo: FileRoutesByTo
@@ -98,7 +168,14 @@ export interface FileRouteTypes {
     | '/'
     | '/logout'
     | '/login'
+    | '/admin/aichat'
+    | '/admin/berkas'
     | '/admin/dashboard'
+    | '/admin/dokumen-borang'
+    | '/admin/kriteria-file'
+    | '/admin/pengguna'
+    | '/admin/prodi'
+    | '/admin/settings'
     | '/asesor/dashboard'
     | '/user/dashboard'
   id:
@@ -108,7 +185,14 @@ export interface FileRouteTypes {
     | '/(public)'
     | '/logout'
     | '/(public)/login'
+    | '/(auth)/admin/aichat'
+    | '/(auth)/admin/berkas'
     | '/(auth)/admin/dashboard'
+    | '/(auth)/admin/dokumen-borang'
+    | '/(auth)/admin/kriteria-file'
+    | '/(auth)/admin/pengguna'
+    | '/(auth)/admin/prodi'
+    | '/(auth)/admin/settings'
     | '/(auth)/asesor/dashboard'
     | '/(auth)/user/dashboard'
   fileRoutesById: FileRoutesById
@@ -171,6 +255,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authAsesorDashboardRouteImport
       parentRoute: typeof authRouteRoute
     }
+    '/(auth)/admin/settings': {
+      id: '/(auth)/admin/settings'
+      path: '/admin/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof authAdminSettingsRouteImport
+      parentRoute: typeof authRouteRoute
+    }
+    '/(auth)/admin/prodi': {
+      id: '/(auth)/admin/prodi'
+      path: '/admin/prodi'
+      fullPath: '/admin/prodi'
+      preLoaderRoute: typeof authAdminProdiRouteImport
+      parentRoute: typeof authRouteRoute
+    }
+    '/(auth)/admin/pengguna': {
+      id: '/(auth)/admin/pengguna'
+      path: '/admin/pengguna'
+      fullPath: '/admin/pengguna'
+      preLoaderRoute: typeof authAdminPenggunaRouteImport
+      parentRoute: typeof authRouteRoute
+    }
+    '/(auth)/admin/kriteria-file': {
+      id: '/(auth)/admin/kriteria-file'
+      path: '/admin/kriteria-file'
+      fullPath: '/admin/kriteria-file'
+      preLoaderRoute: typeof authAdminKriteriaFileRouteImport
+      parentRoute: typeof authRouteRoute
+    }
+    '/(auth)/admin/dokumen-borang': {
+      id: '/(auth)/admin/dokumen-borang'
+      path: '/admin/dokumen-borang'
+      fullPath: '/admin/dokumen-borang'
+      preLoaderRoute: typeof authAdminDokumenBorangRouteImport
+      parentRoute: typeof authRouteRoute
+    }
     '/(auth)/admin/dashboard': {
       id: '/(auth)/admin/dashboard'
       path: '/admin/dashboard'
@@ -178,17 +297,45 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authAdminDashboardRouteImport
       parentRoute: typeof authRouteRoute
     }
+    '/(auth)/admin/berkas': {
+      id: '/(auth)/admin/berkas'
+      path: '/admin/berkas'
+      fullPath: '/admin/berkas'
+      preLoaderRoute: typeof authAdminBerkasRouteImport
+      parentRoute: typeof authRouteRoute
+    }
+    '/(auth)/admin/aichat': {
+      id: '/(auth)/admin/aichat'
+      path: '/admin/aichat'
+      fullPath: '/admin/aichat'
+      preLoaderRoute: typeof authAdminAichatRouteImport
+      parentRoute: typeof authRouteRoute
+    }
   }
 }
 
 interface authRouteRouteChildren {
+  authAdminAichatRoute: typeof authAdminAichatRoute
+  authAdminBerkasRoute: typeof authAdminBerkasRoute
   authAdminDashboardRoute: typeof authAdminDashboardRoute
+  authAdminDokumenBorangRoute: typeof authAdminDokumenBorangRoute
+  authAdminKriteriaFileRoute: typeof authAdminKriteriaFileRoute
+  authAdminPenggunaRoute: typeof authAdminPenggunaRoute
+  authAdminProdiRoute: typeof authAdminProdiRoute
+  authAdminSettingsRoute: typeof authAdminSettingsRoute
   authAsesorDashboardRoute: typeof authAsesorDashboardRoute
   authUserDashboardRoute: typeof authUserDashboardRoute
 }
 
 const authRouteRouteChildren: authRouteRouteChildren = {
+  authAdminAichatRoute: authAdminAichatRoute,
+  authAdminBerkasRoute: authAdminBerkasRoute,
   authAdminDashboardRoute: authAdminDashboardRoute,
+  authAdminDokumenBorangRoute: authAdminDokumenBorangRoute,
+  authAdminKriteriaFileRoute: authAdminKriteriaFileRoute,
+  authAdminPenggunaRoute: authAdminPenggunaRoute,
+  authAdminProdiRoute: authAdminProdiRoute,
+  authAdminSettingsRoute: authAdminSettingsRoute,
   authAsesorDashboardRoute: authAsesorDashboardRoute,
   authUserDashboardRoute: authUserDashboardRoute,
 }

@@ -52,11 +52,11 @@ export function DashboardNavbar() {
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
-                        <DropdownMenuItem>
+                        <DropdownMenuItem disabled>
                             <p>{userInfo?.fullName}</p>
                         </DropdownMenuItem>
                         <DropdownMenuSeparator/>
-                        <DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => navigate({ to: `/${userInfo?.level}/settings` })}>
                             Pengaturan
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => navigate({ to: "/logout" })}>

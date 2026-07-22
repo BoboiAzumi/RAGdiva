@@ -1,4 +1,12 @@
-import { FileText, LayoutDashboard, School, Settings, TableProperties, User } from "lucide-react";
+import {
+    FileText,
+    Form,
+    LayoutDashboard,
+    School,
+    Settings,
+    Sparkle,
+    User,
+} from "lucide-react";
 import {
     Sidebar,
     SidebarContent,
@@ -18,10 +26,19 @@ import {
 import type { MenuGroupType } from "@/types/menu-types";
 import { useContext } from "react";
 import { AuthProviderContext } from "@/context/auth-context";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { usePathName } from "@/hooks/use-pathname";
 
 export function SidebarLayout() {
     const { userInfo } = useContext(AuthProviderContext);
+    const locationState = usePathName();
+    const navigate = useNavigate();
+    const isActive = (menuPath: string) => {
+        return (
+            locationState.pathname === menuPath ||
+            locationState.pathname.startsWith(`${menuPath}/`)
+        );
+    };
 
     const menu: MenuGroupType[] = [
         {
@@ -36,8 +53,13 @@ export function SidebarLayout() {
                 {
                     name: "Pengaturan",
                     icon: Settings,
-                    path: `/${userInfo?.level}/settings`
-                }
+                    path: `/${userInfo?.level}/settings`,
+                },
+                {
+                    name: "AI Chat",
+                    icon: Sparkle,
+                    path: `/${userInfo?.level}/aichat`,
+                },
             ],
         },
         {
@@ -47,30 +69,30 @@ export function SidebarLayout() {
                 {
                     name: "Program Studi",
                     icon: School,
-                    path: `/${userInfo?.level}/prodi`
+                    path: `/${userInfo?.level}/prodi`,
                 },
                 {
                     name: "Pengguna",
                     icon: User,
-                    path: `/${userInfo?.level}/pengguna`
-                }
-            ]
+                    path: `/${userInfo?.level}/pengguna`,
+                },
+            ],
         },
         {
             role: ["user"],
             name: "Pengguna",
             menu: [
                 {
-                    name: "Berkas",
-                    icon: TableProperties,
-                    path: `/${userInfo?.level}/berkas`
+                    name: "Dokumen Borang",
+                    icon: Form,
+                    path: `/${userInfo?.level}/dokumen-borang`,
                 },
                 {
                     name: "Kriteria dan File",
                     icon: FileText,
-                    path: `/${userInfo?.level}/pengguna`
-                }
-            ]
+                    path: `/${userInfo?.level}/kriteria-file`,
+                },
+            ],
         },
         {
             role: ["asesor"],
@@ -84,15 +106,19 @@ export function SidebarLayout() {
                 {
                     name: "Dokumen B",
                     icon: FileText,
-                    path: `/${userInfo?.level}/berkas/dokumena`,
+                    path: `/${userInfo?.level}/berkas/dokumenb`,
                     sub: [
                         {
                             name: "C.1. ABC",
-                            path: `/${userInfo?.level}/berkas/dokumena/c.1`
-                        }
-                    ]
-                }
-            ]
+                            path: `/${userInfo?.level}/berkas/dokumenb/c.1`,
+                        },
+                        {
+                            name: "C.2. ABC",
+                            path: `/${userInfo?.level}/berkas/dokumenb/c.2`,
+                        },
+                    ],
+                },
+            ],
         },
     ];
 
@@ -116,7 +142,7 @@ export function SidebarLayout() {
                                     Ardiva
                                 </span>
                                 <span className="truncate text-xs text-muted-foreground">
-                                    berbasis AI
+                                    With AI
                                 </span>
                             </div>
                         </SidebarMenuButton>
@@ -125,10 +151,11 @@ export function SidebarLayout() {
             </SidebarHeader>
             <SidebarSeparator />
             <SidebarContent>
-                {menu.map((v) => (
+                {menu.map((v, i) => (
                     <>
-                        {v.role.includes(userInfo?.level as string) || userInfo?.level === "admin" ? (
-                            <SidebarGroup>
+                        {v.role.includes(userInfo?.level as string) ||
+                        userInfo?.level === "admin" ? (
+                            <SidebarGroup key={i}>
                                 <SidebarGroupLabel>{v.name}</SidebarGroupLabel>
                                 <SidebarGroupContent>
                                     <SidebarMenu>
@@ -136,36 +163,32 @@ export function SidebarLayout() {
                                             <SidebarMenuItem>
                                                 <SidebarMenuButton
                                                     className="cursor-pointer"
-                                                    isActive={
-                                                        w.path.startsWith(
-                                                            location.pathname,
-                                                        )
-                                                            ? true
-                                                            : false
-                                                    }
+                                                    isActive={isActive(w.path)}
+                                                    onClick={() => {
+                                                        {!w.sub ? (
+                                                            navigate({
+                                                                to: w.path,
+                                                            })
+                                                        ) : {}}
+                                                    }}
                                                 >
                                                     <w.icon />
-                                                    {w.path ? (
-                                                        <Link to={w.path}>
-                                                            {w.name}
-                                                        </Link>
-                                                    ) : (
-                                                        <span>w.name</span>
-                                                    )}
+                                                    <span>{w.name}</span>
                                                 </SidebarMenuButton>
                                                 {w.sub ? (
                                                     <SidebarMenuSub>
-                                                        {w.sub.map((x) => (
-                                                            <SidebarMenuSubItem>
+                                                        {w.sub.map((x, i) => (
+                                                            <SidebarMenuSubItem key={i}>
                                                                 <SidebarMenuSubButton
                                                                     className="cursor-pointer"
-                                                                    isActive={
-                                                                        w.path.startsWith(
-                                                                            location.pathname,
-                                                                        )
-                                                                            ? true
-                                                                            : false
-                                                                    }
+                                                                    isActive={isActive(x.path)}
+                                                                    onClick={() => {
+                                                                        navigate(
+                                                                            {
+                                                                                to: x.path,
+                                                                            },
+                                                                        );
+                                                                    }}
                                                                 >
                                                                     <Link
                                                                         to={
