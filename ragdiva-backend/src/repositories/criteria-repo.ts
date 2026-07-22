@@ -9,6 +9,11 @@ export async function findCriteria(by?: CriteriaFindType) {
                   where: {
                       id: by.id ?? undefined,
                       parent: by.parent,
+                      ...(by.name ? {
+                        name: {
+                            contains: by.name
+                        }
+                      } : {}),
                       OR: [
                           {
                               access: {

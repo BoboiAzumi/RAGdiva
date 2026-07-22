@@ -1,7 +1,8 @@
 export type CriteriaFindType = {
     id?: string,
     parent?: string | null,
-    access?: string[]
+    access?: string[],
+    name?: string
 }
 
 export type CriteriaType = {

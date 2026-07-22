@@ -13,9 +13,11 @@ import { findFilesByCriteriaIdService } from "../services/file-service.js";
 
 export async function getRootCriteria(c: Context) {
     const access = await getUserAccessService(c.get("userid"));
+    const query = c.req.query()["q"] ?? ""
     const criteria = await findCriteriaService({
         access,
         parent: null,
+        name: query
     });
     
     return c.json(
