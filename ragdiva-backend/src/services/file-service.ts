@@ -1,6 +1,7 @@
 import { readFileSync, unlinkSync, writeFileSync } from "fs";
 import {
     deleteFile,
+    findFileByCriteriaId,
     findFileByHash,
     findFileById,
     insertFile,
@@ -120,9 +121,8 @@ export async function updateFileService(file: File, fid: string) {
     }
 
     try {
-        unlinkSync(`./files/${fileInDB.fileName}`)
-    }
-    catch {}
+        unlinkSync(`./files/${fileInDB.fileName}`);
+    } catch {}
 
     const fileNameSplit = file.name.split(".");
     const ext = fileNameSplit[fileNameSplit.length - 1];
@@ -142,6 +142,14 @@ export async function updateFileService(file: File, fid: string) {
     });
 }
 
-export async function updatePageService(fid: string, cid: string, page: number){
-    return await updatePage(fid, cid, page)
+export async function updatePageService(
+    fid: string,
+    cid: string,
+    page: number,
+) {
+    return await updatePage(fid, cid, page);
+}
+
+export async function findFilesByCriteriaIdService(cid: string) {
+    return await findFileByCriteriaId(cid);
 }

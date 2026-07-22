@@ -9,6 +9,7 @@ import { getUserAccessService } from "../services/user-access-service.js";
 import type { CriteriaType } from "../types/criteria-type.js";
 import { broadcasting } from "../lib/broadcast.js";
 import { HTTPException } from "hono/http-exception";
+import { findFilesByCriteriaIdService } from "../services/file-service.js";
 
 export async function getRootCriteria(c: Context) {
     const access = await getUserAccessService(c.get("userid"));
@@ -61,12 +62,16 @@ export async function getCriteria(c: Context) {
         parent: parent["id"],
     });
 
-    // Todo File
+    const files = await findFilesByCriteriaIdService(parent["id"]);
 
     return c.json(
         {
-            criteria: criteria.length != 0 ? criteria[0] : {},
-            children: children.length != 0 ? children : [],
+            message: "Successfully fetch data",
+            data: {
+                criteria: criteria.length != 0 ? criteria[0] : {},
+                children: children.length != 0 ? children : [],
+                files,
+            },
         },
         200,
     );
@@ -99,10 +104,10 @@ export async function patchCriteria(c: Context) {
 
 export async function deleteCriteria(c: Context) {
     const id = c.req.param()["id"];
-    const criteria = await findCriteriaService({id})
+    const criteria = await findCriteriaService({ id });
 
-    if(criteria.length === 0){
-        throw new HTTPException(404, { message: "Criteria not found" })
+    if (criteria.length === 0) {
+        throw new HTTPException(404, { message: "Criteria not found" });
     }
 
     await deleteCriteriaService(id);

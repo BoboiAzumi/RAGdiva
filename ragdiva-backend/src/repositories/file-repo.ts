@@ -67,3 +67,15 @@ export async function findFileByCriteriaIdList(ids: string[]){
 export async function countFile(){
     return await prisma.files.count()
 }
+
+export async function findFileByCriteriaId(cid: string){
+    return await prisma.files.findMany({
+        where: {
+            fileLinks: {
+                some: {
+                    criteriaId: cid
+                }
+            }
+        }
+    })
+}
