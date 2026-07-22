@@ -8,3 +8,10 @@ export function criteriaQueryOptions(q: string){
         queryKey: criteriaKeys.search(q)
     })
 }
+
+export function criteriaGetQueryOptions(id: string, q: string){
+    return queryOptions({
+        queryFn: () => criteriaApi.get(id, q),
+        queryKey: criteriaKeys.get(id, q)
+    })
+}

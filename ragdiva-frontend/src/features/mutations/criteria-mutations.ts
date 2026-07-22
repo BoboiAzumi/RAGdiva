@@ -32,3 +32,13 @@ export function useCriteriaDelete(){
         }
     })
 }
+
+export function useCriteriaPost(){
+    return useMutation({
+        mutationKey: criteriaKeys.all,
+        mutationFn: criteriaApi.post,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: criteriaKeys.all })
+        }
+    })
+}

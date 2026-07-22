@@ -1,3 +1,5 @@
+import type { FileType } from "./file-types";
+
 export type CriteriaType = {
     id: string;
     parent: string | null;
@@ -8,8 +10,19 @@ export type CriteriaType = {
 };
 
 export type CriteriaResponseType = {
-    message: string,
-    data: CriteriaType[]
-}
+    message: string;
+    data: CriteriaType[];
+};
 
-export type CriteriaPostType = Omit<CriteriaType, "id" | "parent">
+export type CriteriaDetailData = {
+    criteria: CriteriaType;
+    children: CriteriaType[];
+    files: FileType[];
+};
+
+export type CriteriaGetResponseType = {
+    message: string;
+    data: CriteriaDetailData;
+};
+
+export type CriteriaPostType = Omit<CriteriaType, "id" | "parent">;
