@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import { Bar, BarChart, XAxis, YAxis } from "recharts";
 
-export function AdminDashboardPage() {
+export function DashboardPage() {
     useTitle("Dashboard - Admin");
     const dashboardHook = useDashboard();
     const chartConfig = {
