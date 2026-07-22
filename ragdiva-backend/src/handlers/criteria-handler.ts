@@ -17,7 +17,7 @@ export async function getRootCriteria(c: Context) {
         access,
         parent: null,
     });
-
+    
     return c.json(
         {
             message: "Successfully fetch criteria",
@@ -36,7 +36,7 @@ export async function postCriteria(c: Context) {
         code: body.code ?? "",
         name: body.name,
         description: body.description ?? "",
-        access: body.access ?? null,
+        access: body.access ? body.access : body.access === "" ? null : null,
     };
 
     await newCriteriaService(data);

@@ -9,7 +9,7 @@ export function ValidatorMiddleware(schema: ZodObject) {
         const parser = schema.safeParse(await data)
 
         if (!parser.success) {
-            throw new HTTPException(401, { message: `Bad Request:${JSON.parse(parser.error.message).map((v: any) => ` ${v.message}`)}` })
+            throw new HTTPException(400, { message: `Bad Request:${JSON.parse(parser.error.message).map((v: any) => ` ${v.message}`)}` })
         }
 
         await next();

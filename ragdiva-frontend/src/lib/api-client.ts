@@ -7,6 +7,7 @@ export async function request<T>(path: string, options: RequestInit = {}): Promi
     const res = await fetch(`${BASE_URL}${path}`, {
         ...options,
         credentials: 'include',
+        cache: 'no-store',
         headers: { 
             'Content-Type': 'application/json',
             'Authorization': getSession() === "" ? '' : `Bearer ${getSession()}`,
@@ -32,6 +33,6 @@ export const apiClient = {
     post: <T>(path: string, body?:unknown) => request<T>(path, { method: 'POST', body: JSON.stringify(body) }),
     put: <T>(path: string, body?:unknown) => request<T>(path, { method: 'PUT', body: JSON.stringify(body) }),
     patch: <T>(path: string, body?:unknown) => request<T>(path, { method: 'PATCH', body: JSON.stringify(body) }),
-    delete: <T>(path: string, body?:unknown) => request<T>(path, { method: 'DELETE', body: JSON.stringify(body) }),
+    delete: <T>(path: string, body?:unknown) => request<T>(path, { method: 'DELETE', body: body ? JSON.stringify(body) : undefined }),
     multipart: <T>(path: string, body: FormData) => request<T>(path, { method: "POST", body })
 }
