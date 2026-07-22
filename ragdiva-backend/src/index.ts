@@ -9,11 +9,17 @@ import { v4 } from "uuid";
 import { broadcastPool } from "./lib/broadcast.js";
 import { criteriaRoute } from "./routes/criteria-route.js";
 import { fileRoute } from "./routes/file-route.js";
+import { dashboardService } from "./services/dashboard-service.js";
+import { AuthenticationMiddleware } from "./middleware/authentication-middleware.js";
 
 const app = new Hono();
 
-app.get("/", (c) => {
-    return c.text("Hello Hono!");
+app.get("/", AuthenticationMiddleware, async (c: Context) => {
+    const dashboardData = await dashboardService()
+    return c.json({
+        message: 'Successfully fetch dashboard',
+        data: dashboardData,
+    });
 });
 
 app.route("/auth", authRoute);

@@ -63,3 +63,7 @@ export async function findFileByCriteriaIdList(ids: string[]){
         },
     })
 }
+
+export async function countFile(){
+    return await prisma.files.count()
+}
