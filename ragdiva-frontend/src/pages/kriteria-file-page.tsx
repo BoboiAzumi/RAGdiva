@@ -291,7 +291,7 @@ export function KriteriaFilePage() {
                                                                 className="w-10 h-10"
                                                                 onClick={() => {
                                                                     window.open(
-                                                                        `/api/file/download/${v.id}`,
+                                                                        `/api/file/${v.id}`,
                                                                     );
                                                                 }}
                                                             >
