@@ -47,3 +47,15 @@ export const Accreditation = {
 } as const
 
 export type Accreditation = (typeof Accreditation)[keyof typeof Accreditation]
+
+
+export const Provider = {
+  OpenAI: 'OpenAI',
+  GoogleGenAI: 'GoogleGenAI',
+  OpenRouter: 'OpenRouter',
+  Nvidia: 'Nvidia',
+  Ollama: 'Ollama',
+  ZenOpenCode: 'ZenOpenCode'
+} as const
+
+export type Provider = (typeof Provider)[keyof typeof Provider]

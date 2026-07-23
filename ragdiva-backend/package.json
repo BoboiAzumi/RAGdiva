@@ -5,10 +5,16 @@
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "setup-admin": "tsx src/setup-admin.ts"
+    "setup-admin": "tsx src/setup-admin.ts",
+    "test-agent": "tsx src/test-agent.ts"
   },
   "dependencies": {
     "@hono/node-server": "^2.0.6",
+    "@langchain/core": "^1.2.3",
+    "@langchain/google-genai": "^2.2.0",
+    "@langchain/openai": "^1.5.5",
+    "@langchain/openrouter": "^0.4.5",
+    "@langchain/tavily": "^1.2.0",
     "@prisma/adapter-mariadb": "^7.8.0",
     "@prisma/client": "^7.8.0",
     "@types/amqplib": "^0.10.8",
@@ -19,6 +25,8 @@
     "dotenv": "^17.4.2",
     "hono": "^4.12.27",
     "jsonwebtoken": "^9.0.3",
+    "langchain": "^1.5.3",
+    "openai": "^6.48.0",
     "prisma": "^7.8.0",
     "uuid": "^14.0.1",
     "zod": "^4.4.3"

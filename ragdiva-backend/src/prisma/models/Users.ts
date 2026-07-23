@@ -184,6 +184,7 @@ export type UsersWhereInput = {
   level?: Prisma.EnumLevelFilter<"Users"> | $Enums.Level
   activityLogs?: Prisma.ActivityLogsListRelationFilter
   majorAccess?: Prisma.MajorAccessListRelationFilter
+  aisessions?: Prisma.AISessionListRelationFilter
 }
 
 export type UsersOrderByWithRelationInput = {
@@ -194,6 +195,7 @@ export type UsersOrderByWithRelationInput = {
   level?: Prisma.SortOrder
   activityLogs?: Prisma.ActivityLogsOrderByRelationAggregateInput
   majorAccess?: Prisma.MajorAccessOrderByRelationAggregateInput
+  aisessions?: Prisma.AISessionOrderByRelationAggregateInput
   _relevance?: Prisma.UsersOrderByRelevanceInput
 }
 
@@ -208,6 +210,7 @@ export type UsersWhereUniqueInput = Prisma.AtLeast<{
   level?: Prisma.EnumLevelFilter<"Users"> | $Enums.Level
   activityLogs?: Prisma.ActivityLogsListRelationFilter
   majorAccess?: Prisma.MajorAccessListRelationFilter
+  aisessions?: Prisma.AISessionListRelationFilter
 }, "id" | "username">
 
 export type UsersOrderByWithAggregationInput = {
@@ -240,6 +243,7 @@ export type UsersCreateInput = {
   level: $Enums.Level
   activityLogs?: Prisma.ActivityLogsCreateNestedManyWithoutUsersInput
   majorAccess?: Prisma.MajorAccessCreateNestedManyWithoutUsersInput
+  aisessions?: Prisma.AISessionCreateNestedManyWithoutUsersInput
 }
 
 export type UsersUncheckedCreateInput = {
@@ -250,6 +254,7 @@ export type UsersUncheckedCreateInput = {
   level: $Enums.Level
   activityLogs?: Prisma.ActivityLogsUncheckedCreateNestedManyWithoutUsersInput
   majorAccess?: Prisma.MajorAccessUncheckedCreateNestedManyWithoutUsersInput
+  aisessions?: Prisma.AISessionUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UsersUpdateInput = {
@@ -260,6 +265,7 @@ export type UsersUpdateInput = {
   level?: Prisma.EnumLevelFieldUpdateOperationsInput | $Enums.Level
   activityLogs?: Prisma.ActivityLogsUpdateManyWithoutUsersNestedInput
   majorAccess?: Prisma.MajorAccessUpdateManyWithoutUsersNestedInput
+  aisessions?: Prisma.AISessionUpdateManyWithoutUsersNestedInput
 }
 
 export type UsersUncheckedUpdateInput = {
@@ -270,6 +276,7 @@ export type UsersUncheckedUpdateInput = {
   level?: Prisma.EnumLevelFieldUpdateOperationsInput | $Enums.Level
   activityLogs?: Prisma.ActivityLogsUncheckedUpdateManyWithoutUsersNestedInput
   majorAccess?: Prisma.MajorAccessUncheckedUpdateManyWithoutUsersNestedInput
+  aisessions?: Prisma.AISessionUncheckedUpdateManyWithoutUsersNestedInput
 }
 
 export type UsersCreateManyInput = {
@@ -367,6 +374,20 @@ export type UsersUpdateOneRequiredWithoutActivityLogsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UsersUpdateToOneWithWhereWithoutActivityLogsInput, Prisma.UsersUpdateWithoutActivityLogsInput>, Prisma.UsersUncheckedUpdateWithoutActivityLogsInput>
 }
 
+export type UsersCreateNestedOneWithoutAisessionsInput = {
+  create?: Prisma.XOR<Prisma.UsersCreateWithoutAisessionsInput, Prisma.UsersUncheckedCreateWithoutAisessionsInput>
+  connectOrCreate?: Prisma.UsersCreateOrConnectWithoutAisessionsInput
+  connect?: Prisma.UsersWhereUniqueInput
+}
+
+export type UsersUpdateOneRequiredWithoutAisessionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UsersCreateWithoutAisessionsInput, Prisma.UsersUncheckedCreateWithoutAisessionsInput>
+  connectOrCreate?: Prisma.UsersCreateOrConnectWithoutAisessionsInput
+  upsert?: Prisma.UsersUpsertWithoutAisessionsInput
+  connect?: Prisma.UsersWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UsersUpdateToOneWithWhereWithoutAisessionsInput, Prisma.UsersUpdateWithoutAisessionsInput>, Prisma.UsersUncheckedUpdateWithoutAisessionsInput>
+}
+
 export type UsersCreateWithoutMajorAccessInput = {
   id?: string
   username: string
@@ -374,6 +395,7 @@ export type UsersCreateWithoutMajorAccessInput = {
   fullName: string
   level: $Enums.Level
   activityLogs?: Prisma.ActivityLogsCreateNestedManyWithoutUsersInput
+  aisessions?: Prisma.AISessionCreateNestedManyWithoutUsersInput
 }
 
 export type UsersUncheckedCreateWithoutMajorAccessInput = {
@@ -383,6 +405,7 @@ export type UsersUncheckedCreateWithoutMajorAccessInput = {
   fullName: string
   level: $Enums.Level
   activityLogs?: Prisma.ActivityLogsUncheckedCreateNestedManyWithoutUsersInput
+  aisessions?: Prisma.AISessionUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UsersCreateOrConnectWithoutMajorAccessInput = {
@@ -408,6 +431,7 @@ export type UsersUpdateWithoutMajorAccessInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   level?: Prisma.EnumLevelFieldUpdateOperationsInput | $Enums.Level
   activityLogs?: Prisma.ActivityLogsUpdateManyWithoutUsersNestedInput
+  aisessions?: Prisma.AISessionUpdateManyWithoutUsersNestedInput
 }
 
 export type UsersUncheckedUpdateWithoutMajorAccessInput = {
@@ -417,6 +441,7 @@ export type UsersUncheckedUpdateWithoutMajorAccessInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   level?: Prisma.EnumLevelFieldUpdateOperationsInput | $Enums.Level
   activityLogs?: Prisma.ActivityLogsUncheckedUpdateManyWithoutUsersNestedInput
+  aisessions?: Prisma.AISessionUncheckedUpdateManyWithoutUsersNestedInput
 }
 
 export type UsersCreateWithoutActivityLogsInput = {
@@ -426,6 +451,7 @@ export type UsersCreateWithoutActivityLogsInput = {
   fullName: string
   level: $Enums.Level
   majorAccess?: Prisma.MajorAccessCreateNestedManyWithoutUsersInput
+  aisessions?: Prisma.AISessionCreateNestedManyWithoutUsersInput
 }
 
 export type UsersUncheckedCreateWithoutActivityLogsInput = {
@@ -435,6 +461,7 @@ export type UsersUncheckedCreateWithoutActivityLogsInput = {
   fullName: string
   level: $Enums.Level
   majorAccess?: Prisma.MajorAccessUncheckedCreateNestedManyWithoutUsersInput
+  aisessions?: Prisma.AISessionUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UsersCreateOrConnectWithoutActivityLogsInput = {
@@ -460,6 +487,7 @@ export type UsersUpdateWithoutActivityLogsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   level?: Prisma.EnumLevelFieldUpdateOperationsInput | $Enums.Level
   majorAccess?: Prisma.MajorAccessUpdateManyWithoutUsersNestedInput
+  aisessions?: Prisma.AISessionUpdateManyWithoutUsersNestedInput
 }
 
 export type UsersUncheckedUpdateWithoutActivityLogsInput = {
@@ -468,6 +496,63 @@ export type UsersUncheckedUpdateWithoutActivityLogsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   level?: Prisma.EnumLevelFieldUpdateOperationsInput | $Enums.Level
+  majorAccess?: Prisma.MajorAccessUncheckedUpdateManyWithoutUsersNestedInput
+  aisessions?: Prisma.AISessionUncheckedUpdateManyWithoutUsersNestedInput
+}
+
+export type UsersCreateWithoutAisessionsInput = {
+  id?: string
+  username: string
+  password: string
+  fullName: string
+  level: $Enums.Level
+  activityLogs?: Prisma.ActivityLogsCreateNestedManyWithoutUsersInput
+  majorAccess?: Prisma.MajorAccessCreateNestedManyWithoutUsersInput
+}
+
+export type UsersUncheckedCreateWithoutAisessionsInput = {
+  id?: string
+  username: string
+  password: string
+  fullName: string
+  level: $Enums.Level
+  activityLogs?: Prisma.ActivityLogsUncheckedCreateNestedManyWithoutUsersInput
+  majorAccess?: Prisma.MajorAccessUncheckedCreateNestedManyWithoutUsersInput
+}
+
+export type UsersCreateOrConnectWithoutAisessionsInput = {
+  where: Prisma.UsersWhereUniqueInput
+  create: Prisma.XOR<Prisma.UsersCreateWithoutAisessionsInput, Prisma.UsersUncheckedCreateWithoutAisessionsInput>
+}
+
+export type UsersUpsertWithoutAisessionsInput = {
+  update: Prisma.XOR<Prisma.UsersUpdateWithoutAisessionsInput, Prisma.UsersUncheckedUpdateWithoutAisessionsInput>
+  create: Prisma.XOR<Prisma.UsersCreateWithoutAisessionsInput, Prisma.UsersUncheckedCreateWithoutAisessionsInput>
+  where?: Prisma.UsersWhereInput
+}
+
+export type UsersUpdateToOneWithWhereWithoutAisessionsInput = {
+  where?: Prisma.UsersWhereInput
+  data: Prisma.XOR<Prisma.UsersUpdateWithoutAisessionsInput, Prisma.UsersUncheckedUpdateWithoutAisessionsInput>
+}
+
+export type UsersUpdateWithoutAisessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  level?: Prisma.EnumLevelFieldUpdateOperationsInput | $Enums.Level
+  activityLogs?: Prisma.ActivityLogsUpdateManyWithoutUsersNestedInput
+  majorAccess?: Prisma.MajorAccessUpdateManyWithoutUsersNestedInput
+}
+
+export type UsersUncheckedUpdateWithoutAisessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  level?: Prisma.EnumLevelFieldUpdateOperationsInput | $Enums.Level
+  activityLogs?: Prisma.ActivityLogsUncheckedUpdateManyWithoutUsersNestedInput
   majorAccess?: Prisma.MajorAccessUncheckedUpdateManyWithoutUsersNestedInput
 }
 
@@ -479,11 +564,13 @@ export type UsersUncheckedUpdateWithoutActivityLogsInput = {
 export type UsersCountOutputType = {
   activityLogs: number
   majorAccess: number
+  aisessions: number
 }
 
 export type UsersCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   activityLogs?: boolean | UsersCountOutputTypeCountActivityLogsArgs
   majorAccess?: boolean | UsersCountOutputTypeCountMajorAccessArgs
+  aisessions?: boolean | UsersCountOutputTypeCountAisessionsArgs
 }
 
 /**
@@ -510,6 +597,13 @@ export type UsersCountOutputTypeCountMajorAccessArgs<ExtArgs extends runtime.Typ
   where?: Prisma.MajorAccessWhereInput
 }
 
+/**
+ * UsersCountOutputType without action
+ */
+export type UsersCountOutputTypeCountAisessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AISessionWhereInput
+}
+
 
 export type UsersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -519,6 +613,7 @@ export type UsersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   level?: boolean
   activityLogs?: boolean | Prisma.Users$activityLogsArgs<ExtArgs>
   majorAccess?: boolean | Prisma.Users$majorAccessArgs<ExtArgs>
+  aisessions?: boolean | Prisma.Users$aisessionsArgs<ExtArgs>
   _count?: boolean | Prisma.UsersCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["users"]>
 
@@ -536,6 +631,7 @@ export type UsersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
 export type UsersInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   activityLogs?: boolean | Prisma.Users$activityLogsArgs<ExtArgs>
   majorAccess?: boolean | Prisma.Users$majorAccessArgs<ExtArgs>
+  aisessions?: boolean | Prisma.Users$aisessionsArgs<ExtArgs>
   _count?: boolean | Prisma.UsersCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -544,6 +640,7 @@ export type $UsersPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   objects: {
     activityLogs: Prisma.$ActivityLogsPayload<ExtArgs>[]
     majorAccess: Prisma.$MajorAccessPayload<ExtArgs>[]
+    aisessions: Prisma.$AISessionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -893,6 +990,7 @@ export interface Prisma__UsersClient<T, Null = never, ExtArgs extends runtime.Ty
   readonly [Symbol.toStringTag]: "PrismaPromise"
   activityLogs<T extends Prisma.Users$activityLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Users$activityLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActivityLogsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   majorAccess<T extends Prisma.Users$majorAccessArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Users$majorAccessArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MajorAccessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  aisessions<T extends Prisma.Users$aisessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Users$aisessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AISessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1320,6 +1418,30 @@ export type Users$majorAccessArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.MajorAccessScalarFieldEnum | Prisma.MajorAccessScalarFieldEnum[]
+}
+
+/**
+ * Users.aisessions
+ */
+export type Users$aisessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AISession
+   */
+  select?: Prisma.AISessionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AISession
+   */
+  omit?: Prisma.AISessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AISessionInclude<ExtArgs> | null
+  where?: Prisma.AISessionWhereInput
+  orderBy?: Prisma.AISessionOrderByWithRelationInput | Prisma.AISessionOrderByWithRelationInput[]
+  cursor?: Prisma.AISessionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AISessionScalarFieldEnum | Prisma.AISessionScalarFieldEnum[]
 }
 
 /**

@@ -391,7 +391,10 @@ export const ModelName = {
   FileLink: 'FileLink',
   Files: 'Files',
   ActivityLogs: 'ActivityLogs',
-  AIChatHistory: 'AIChatHistory'
+  AISession: 'AISession',
+  AIChatHistory: 'AIChatHistory',
+  AIModel: 'AIModel',
+  AIConfig: 'AIConfig'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -407,7 +410,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "users" | "majorAccess" | "majors" | "criteria" | "fileLink" | "files" | "activityLogs" | "aIChatHistory"
+    modelProps: "users" | "majorAccess" | "majors" | "criteria" | "fileLink" | "files" | "activityLogs" | "aISession" | "aIChatHistory" | "aIModel" | "aIConfig"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -873,6 +876,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    AISession: {
+      payload: Prisma.$AISessionPayload<ExtArgs>
+      fields: Prisma.AISessionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AISessionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AISessionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AISessionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AISessionPayload>
+        }
+        findFirst: {
+          args: Prisma.AISessionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AISessionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AISessionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AISessionPayload>
+        }
+        findMany: {
+          args: Prisma.AISessionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AISessionPayload>[]
+        }
+        create: {
+          args: Prisma.AISessionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AISessionPayload>
+        }
+        createMany: {
+          args: Prisma.AISessionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.AISessionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AISessionPayload>
+        }
+        update: {
+          args: Prisma.AISessionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AISessionPayload>
+        }
+        deleteMany: {
+          args: Prisma.AISessionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AISessionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.AISessionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AISessionPayload>
+        }
+        aggregate: {
+          args: Prisma.AISessionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAISession>
+        }
+        groupBy: {
+          args: Prisma.AISessionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AISessionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AISessionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AISessionCountAggregateOutputType> | number
+        }
+      }
+    }
     AIChatHistory: {
       payload: Prisma.$AIChatHistoryPayload<ExtArgs>
       fields: Prisma.AIChatHistoryFieldRefs
@@ -936,6 +1005,138 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.AIChatHistoryCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.AIChatHistoryCountAggregateOutputType> | number
+        }
+      }
+    }
+    AIModel: {
+      payload: Prisma.$AIModelPayload<ExtArgs>
+      fields: Prisma.AIModelFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AIModelFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIModelPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AIModelFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIModelPayload>
+        }
+        findFirst: {
+          args: Prisma.AIModelFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIModelPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AIModelFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIModelPayload>
+        }
+        findMany: {
+          args: Prisma.AIModelFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIModelPayload>[]
+        }
+        create: {
+          args: Prisma.AIModelCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIModelPayload>
+        }
+        createMany: {
+          args: Prisma.AIModelCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.AIModelDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIModelPayload>
+        }
+        update: {
+          args: Prisma.AIModelUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIModelPayload>
+        }
+        deleteMany: {
+          args: Prisma.AIModelDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AIModelUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.AIModelUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIModelPayload>
+        }
+        aggregate: {
+          args: Prisma.AIModelAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAIModel>
+        }
+        groupBy: {
+          args: Prisma.AIModelGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AIModelGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AIModelCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AIModelCountAggregateOutputType> | number
+        }
+      }
+    }
+    AIConfig: {
+      payload: Prisma.$AIConfigPayload<ExtArgs>
+      fields: Prisma.AIConfigFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AIConfigFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIConfigPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AIConfigFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIConfigPayload>
+        }
+        findFirst: {
+          args: Prisma.AIConfigFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIConfigPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AIConfigFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIConfigPayload>
+        }
+        findMany: {
+          args: Prisma.AIConfigFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIConfigPayload>[]
+        }
+        create: {
+          args: Prisma.AIConfigCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIConfigPayload>
+        }
+        createMany: {
+          args: Prisma.AIConfigCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.AIConfigDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIConfigPayload>
+        }
+        update: {
+          args: Prisma.AIConfigUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIConfigPayload>
+        }
+        deleteMany: {
+          args: Prisma.AIConfigDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AIConfigUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.AIConfigUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AIConfigPayload>
+        }
+        aggregate: {
+          args: Prisma.AIConfigAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAIConfig>
+        }
+        groupBy: {
+          args: Prisma.AIConfigGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AIConfigGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AIConfigCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AIConfigCountAggregateOutputType> | number
         }
       }
     }
@@ -1055,14 +1256,42 @@ export const ActivityLogsScalarFieldEnum = {
 export type ActivityLogsScalarFieldEnum = (typeof ActivityLogsScalarFieldEnum)[keyof typeof ActivityLogsScalarFieldEnum]
 
 
+export const AISessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  topic: 'topic',
+  createdAt: 'createdAt'
+} as const
+
+export type AISessionScalarFieldEnum = (typeof AISessionScalarFieldEnum)[keyof typeof AISessionScalarFieldEnum]
+
+
 export const AIChatHistoryScalarFieldEnum = {
   id: 'id',
   sessionId: 'sessionId',
   role: 'role',
-  content: 'content'
+  content: 'content',
+  createdAt: 'createdAt'
 } as const
 
 export type AIChatHistoryScalarFieldEnum = (typeof AIChatHistoryScalarFieldEnum)[keyof typeof AIChatHistoryScalarFieldEnum]
+
+
+export const AIModelScalarFieldEnum = {
+  id: 'id',
+  provider: 'provider',
+  modelName: 'modelName'
+} as const
+
+export type AIModelScalarFieldEnum = (typeof AIModelScalarFieldEnum)[keyof typeof AIModelScalarFieldEnum]
+
+
+export const AIConfigScalarFieldEnum = {
+  key: 'key',
+  value: 'value'
+} as const
+
+export type AIConfigScalarFieldEnum = (typeof AIConfigScalarFieldEnum)[keyof typeof AIConfigScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1150,6 +1379,15 @@ export const ActivityLogsOrderByRelevanceFieldEnum = {
 export type ActivityLogsOrderByRelevanceFieldEnum = (typeof ActivityLogsOrderByRelevanceFieldEnum)[keyof typeof ActivityLogsOrderByRelevanceFieldEnum]
 
 
+export const AISessionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  topic: 'topic'
+} as const
+
+export type AISessionOrderByRelevanceFieldEnum = (typeof AISessionOrderByRelevanceFieldEnum)[keyof typeof AISessionOrderByRelevanceFieldEnum]
+
+
 export const AIChatHistoryOrderByRelevanceFieldEnum = {
   id: 'id',
   sessionId: 'sessionId',
@@ -1158,6 +1396,22 @@ export const AIChatHistoryOrderByRelevanceFieldEnum = {
 } as const
 
 export type AIChatHistoryOrderByRelevanceFieldEnum = (typeof AIChatHistoryOrderByRelevanceFieldEnum)[keyof typeof AIChatHistoryOrderByRelevanceFieldEnum]
+
+
+export const AIModelOrderByRelevanceFieldEnum = {
+  id: 'id',
+  modelName: 'modelName'
+} as const
+
+export type AIModelOrderByRelevanceFieldEnum = (typeof AIModelOrderByRelevanceFieldEnum)[keyof typeof AIModelOrderByRelevanceFieldEnum]
+
+
+export const AIConfigOrderByRelevanceFieldEnum = {
+  key: 'key',
+  value: 'value'
+} as const
+
+export type AIConfigOrderByRelevanceFieldEnum = (typeof AIConfigOrderByRelevanceFieldEnum)[keyof typeof AIConfigOrderByRelevanceFieldEnum]
 
 
 
@@ -1212,6 +1466,13 @@ export type EnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
  * Reference to a field of type 'Action'
  */
 export type EnumActionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Action'>
+    
+
+
+/**
+ * Reference to a field of type 'Provider'
+ */
+export type EnumProviderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Provider'>
     
 
 
@@ -1338,7 +1599,10 @@ export type GlobalOmitConfig = {
   fileLink?: Prisma.FileLinkOmit
   files?: Prisma.FilesOmit
   activityLogs?: Prisma.ActivityLogsOmit
+  aISession?: Prisma.AISessionOmit
   aIChatHistory?: Prisma.AIChatHistoryOmit
+  aIModel?: Prisma.AIModelOmit
+  aIConfig?: Prisma.AIConfigOmit
 }
 
 /* Types for Logging */

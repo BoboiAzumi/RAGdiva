@@ -21,6 +21,7 @@ model Users {
 
   activityLogs ActivityLogs[]
   majorAccess  MajorAccess[]
+  aisessions   AISession[]
 
   @@map("users")
 }
@@ -72,6 +73,8 @@ model FileLink {
 
   files    Files    @relation(fields: [fileId], references: [id])
   criteria Criteria @relation(fields: [criteriaId], references: [id])
+
+  @@map("file_links")
 }
 
 model Files {
@@ -103,13 +106,43 @@ model ActivityLogs {
   @@map("activity_logs")
 }
 
+model AISession {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  topic     String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  Users           Users           @relation(fields: [userId], references: [id])
+  aichatHistories AIChatHistory[]
+
+  @@map("ai_session")
+}
+
 model AIChatHistory {
-  id        String @id @default(uuid())
-  sessionId String @map("session_id")
+  id        String   @id @default(uuid())
+  sessionId String   @map("session_id")
   role      String
-  content   String @db.LongText
+  content   String   @db.LongText
+  createdAt DateTime @default(now()) @map("created_at")
+
+  AISession AISession @relation(fields: [sessionId], references: [id])
 
   @@map("ai_chat_history")
+}
+
+model AIModel {
+  id        String   @id @default(uuid())
+  provider  Provider
+  modelName String   @map("model_name")
+
+  @@map("ai_model")
+}
+
+model AIConfig {
+  key   String @id
+  value String
+
+  @@map("ai_config")
 }
 
 enum Action {
@@ -140,4 +173,13 @@ enum Accreditation {
   Baik_Sekali         @map("Baik Sekali")
   Baik
   Tidak_Terakreditasi @map("Tidak Terakreditasi")
+}
+
+enum Provider {
+  OpenAI
+  GoogleGenAI
+  OpenRouter
+  Nvidia
+  Ollama
+  ZenOpenCode
 }

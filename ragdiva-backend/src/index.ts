@@ -11,47 +11,49 @@ import { criteriaRoute } from "./routes/criteria-route.js";
 import { fileRoute } from "./routes/file-route.js";
 import { dashboardService } from "./services/dashboard-service.js";
 import { AuthenticationMiddleware } from "./middleware/authentication-middleware.js";
+import { aichatRoute } from "./routes/aichat-route.js";
 
 const app = new Hono();
 
 app.get("/", AuthenticationMiddleware, async (c: Context) => {
-    const dashboardData = await dashboardService()
+    const dashboardData = await dashboardService();
     return c.json({
-        message: 'Successfully fetch dashboard',
+        message: "Successfully fetch dashboard",
         data: dashboardData,
     });
 });
 
 app.route("/auth", authRoute);
-app.route("/criteria", criteriaRoute)
-app.route("/file", fileRoute)
+app.route("/criteria", criteriaRoute);
+app.route("/file", fileRoute);
+app.route("/aichat", aichatRoute);
 
 app.get("/stream", async (c: Context) => {
     return streamSSE(c, async (stream: SSEStreamingApi) => {
-		const id = v4()
-		const write = async (event: string, data: string) => {
-			await stream.writeSSE({
-				event,
-				data
-			})
-		}
+        const id = v4();
+        const write = async (event: string, data: string) => {
+            await stream.writeSSE({
+                event,
+                data,
+            });
+        };
 
-		const client = { id, write }
+        const client = { id, write };
 
-		broadcastPool.add(client)
+        broadcastPool.add(client);
 
-		stream.onAbort(() => {
-			broadcastPool.delete(client)
-		})
+        stream.onAbort(() => {
+            broadcastPool.delete(client);
+        });
 
-		while(!stream.aborted) {
-			await stream.sleep(10000)
-			await stream.writeSSE({
-				event: "ping",
-				data: "keep-alive"
-			})
-		}
-	});
+        while (!stream.aborted) {
+            await stream.sleep(10000);
+            await stream.writeSSE({
+                event: "ping",
+                data: "keep-alive",
+            });
+        }
+    });
 });
 
 app.onError(

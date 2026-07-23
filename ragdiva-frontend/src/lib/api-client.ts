@@ -14,7 +14,7 @@ export async function request<T>(
         headers: {
             ...(options.body instanceof FormData
                 ? {}
-                : { "Content-Type": "application/json" }),
+                : { "Content-Type": "application/json; charset=utf-8" }),
             Authorization: getSession() === "" ? "" : `Bearer ${getSession()}`,
             ...options.headers,
         },

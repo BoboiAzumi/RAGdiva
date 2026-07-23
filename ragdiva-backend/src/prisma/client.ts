@@ -77,7 +77,22 @@ export type Files = Prisma.FilesModel
  */
 export type ActivityLogs = Prisma.ActivityLogsModel
 /**
+ * Model AISession
+ * 
+ */
+export type AISession = Prisma.AISessionModel
+/**
  * Model AIChatHistory
  * 
  */
 export type AIChatHistory = Prisma.AIChatHistoryModel
+/**
+ * Model AIModel
+ * 
+ */
+export type AIModel = Prisma.AIModelModel
+/**
+ * Model AIConfig
+ * 
+ */
+export type AIConfig = Prisma.AIConfigModel

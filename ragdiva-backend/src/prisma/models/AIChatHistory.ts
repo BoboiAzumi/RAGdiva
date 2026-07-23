@@ -29,6 +29,7 @@ export type AIChatHistoryMinAggregateOutputType = {
   sessionId: string | null
   role: string | null
   content: string | null
+  createdAt: Date | null
 }
 
 export type AIChatHistoryMaxAggregateOutputType = {
@@ -36,6 +37,7 @@ export type AIChatHistoryMaxAggregateOutputType = {
   sessionId: string | null
   role: string | null
   content: string | null
+  createdAt: Date | null
 }
 
 export type AIChatHistoryCountAggregateOutputType = {
@@ -43,6 +45,7 @@ export type AIChatHistoryCountAggregateOutputType = {
   sessionId: number
   role: number
   content: number
+  createdAt: number
   _all: number
 }
 
@@ -52,6 +55,7 @@ export type AIChatHistoryMinAggregateInputType = {
   sessionId?: true
   role?: true
   content?: true
+  createdAt?: true
 }
 
 export type AIChatHistoryMaxAggregateInputType = {
@@ -59,6 +63,7 @@ export type AIChatHistoryMaxAggregateInputType = {
   sessionId?: true
   role?: true
   content?: true
+  createdAt?: true
 }
 
 export type AIChatHistoryCountAggregateInputType = {
@@ -66,6 +71,7 @@ export type AIChatHistoryCountAggregateInputType = {
   sessionId?: true
   role?: true
   content?: true
+  createdAt?: true
   _all?: true
 }
 
@@ -146,6 +152,7 @@ export type AIChatHistoryGroupByOutputType = {
   sessionId: string
   role: string
   content: string
+  createdAt: Date
   _count: AIChatHistoryCountAggregateOutputType | null
   _min: AIChatHistoryMinAggregateOutputType | null
   _max: AIChatHistoryMaxAggregateOutputType | null
@@ -174,6 +181,8 @@ export type AIChatHistoryWhereInput = {
   sessionId?: Prisma.StringFilter<"AIChatHistory"> | string
   role?: Prisma.StringFilter<"AIChatHistory"> | string
   content?: Prisma.StringFilter<"AIChatHistory"> | string
+  createdAt?: Prisma.DateTimeFilter<"AIChatHistory"> | Date | string
+  AISession?: Prisma.XOR<Prisma.AISessionScalarRelationFilter, Prisma.AISessionWhereInput>
 }
 
 export type AIChatHistoryOrderByWithRelationInput = {
@@ -181,6 +190,8 @@ export type AIChatHistoryOrderByWithRelationInput = {
   sessionId?: Prisma.SortOrder
   role?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  AISession?: Prisma.AISessionOrderByWithRelationInput
   _relevance?: Prisma.AIChatHistoryOrderByRelevanceInput
 }
 
@@ -192,6 +203,8 @@ export type AIChatHistoryWhereUniqueInput = Prisma.AtLeast<{
   sessionId?: Prisma.StringFilter<"AIChatHistory"> | string
   role?: Prisma.StringFilter<"AIChatHistory"> | string
   content?: Prisma.StringFilter<"AIChatHistory"> | string
+  createdAt?: Prisma.DateTimeFilter<"AIChatHistory"> | Date | string
+  AISession?: Prisma.XOR<Prisma.AISessionScalarRelationFilter, Prisma.AISessionWhereInput>
 }, "id">
 
 export type AIChatHistoryOrderByWithAggregationInput = {
@@ -199,6 +212,7 @@ export type AIChatHistoryOrderByWithAggregationInput = {
   sessionId?: Prisma.SortOrder
   role?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   _count?: Prisma.AIChatHistoryCountOrderByAggregateInput
   _max?: Prisma.AIChatHistoryMaxOrderByAggregateInput
   _min?: Prisma.AIChatHistoryMinOrderByAggregateInput
@@ -212,13 +226,15 @@ export type AIChatHistoryScalarWhereWithAggregatesInput = {
   sessionId?: Prisma.StringWithAggregatesFilter<"AIChatHistory"> | string
   role?: Prisma.StringWithAggregatesFilter<"AIChatHistory"> | string
   content?: Prisma.StringWithAggregatesFilter<"AIChatHistory"> | string
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"AIChatHistory"> | Date | string
 }
 
 export type AIChatHistoryCreateInput = {
   id?: string
-  sessionId: string
   role: string
   content: string
+  createdAt?: Date | string
+  AISession: Prisma.AISessionCreateNestedOneWithoutAichatHistoriesInput
 }
 
 export type AIChatHistoryUncheckedCreateInput = {
@@ -226,13 +242,15 @@ export type AIChatHistoryUncheckedCreateInput = {
   sessionId: string
   role: string
   content: string
+  createdAt?: Date | string
 }
 
 export type AIChatHistoryUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  sessionId?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  AISession?: Prisma.AISessionUpdateOneRequiredWithoutAichatHistoriesNestedInput
 }
 
 export type AIChatHistoryUncheckedUpdateInput = {
@@ -240,6 +258,7 @@ export type AIChatHistoryUncheckedUpdateInput = {
   sessionId?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type AIChatHistoryCreateManyInput = {
@@ -247,13 +266,14 @@ export type AIChatHistoryCreateManyInput = {
   sessionId: string
   role: string
   content: string
+  createdAt?: Date | string
 }
 
 export type AIChatHistoryUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  sessionId?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type AIChatHistoryUncheckedUpdateManyInput = {
@@ -261,6 +281,17 @@ export type AIChatHistoryUncheckedUpdateManyInput = {
   sessionId?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type AIChatHistoryListRelationFilter = {
+  every?: Prisma.AIChatHistoryWhereInput
+  some?: Prisma.AIChatHistoryWhereInput
+  none?: Prisma.AIChatHistoryWhereInput
+}
+
+export type AIChatHistoryOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type AIChatHistoryOrderByRelevanceInput = {
@@ -274,6 +305,7 @@ export type AIChatHistoryCountOrderByAggregateInput = {
   sessionId?: Prisma.SortOrder
   role?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type AIChatHistoryMaxOrderByAggregateInput = {
@@ -281,6 +313,7 @@ export type AIChatHistoryMaxOrderByAggregateInput = {
   sessionId?: Prisma.SortOrder
   role?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type AIChatHistoryMinOrderByAggregateInput = {
@@ -288,6 +321,128 @@ export type AIChatHistoryMinOrderByAggregateInput = {
   sessionId?: Prisma.SortOrder
   role?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+}
+
+export type AIChatHistoryCreateNestedManyWithoutAISessionInput = {
+  create?: Prisma.XOR<Prisma.AIChatHistoryCreateWithoutAISessionInput, Prisma.AIChatHistoryUncheckedCreateWithoutAISessionInput> | Prisma.AIChatHistoryCreateWithoutAISessionInput[] | Prisma.AIChatHistoryUncheckedCreateWithoutAISessionInput[]
+  connectOrCreate?: Prisma.AIChatHistoryCreateOrConnectWithoutAISessionInput | Prisma.AIChatHistoryCreateOrConnectWithoutAISessionInput[]
+  createMany?: Prisma.AIChatHistoryCreateManyAISessionInputEnvelope
+  connect?: Prisma.AIChatHistoryWhereUniqueInput | Prisma.AIChatHistoryWhereUniqueInput[]
+}
+
+export type AIChatHistoryUncheckedCreateNestedManyWithoutAISessionInput = {
+  create?: Prisma.XOR<Prisma.AIChatHistoryCreateWithoutAISessionInput, Prisma.AIChatHistoryUncheckedCreateWithoutAISessionInput> | Prisma.AIChatHistoryCreateWithoutAISessionInput[] | Prisma.AIChatHistoryUncheckedCreateWithoutAISessionInput[]
+  connectOrCreate?: Prisma.AIChatHistoryCreateOrConnectWithoutAISessionInput | Prisma.AIChatHistoryCreateOrConnectWithoutAISessionInput[]
+  createMany?: Prisma.AIChatHistoryCreateManyAISessionInputEnvelope
+  connect?: Prisma.AIChatHistoryWhereUniqueInput | Prisma.AIChatHistoryWhereUniqueInput[]
+}
+
+export type AIChatHistoryUpdateManyWithoutAISessionNestedInput = {
+  create?: Prisma.XOR<Prisma.AIChatHistoryCreateWithoutAISessionInput, Prisma.AIChatHistoryUncheckedCreateWithoutAISessionInput> | Prisma.AIChatHistoryCreateWithoutAISessionInput[] | Prisma.AIChatHistoryUncheckedCreateWithoutAISessionInput[]
+  connectOrCreate?: Prisma.AIChatHistoryCreateOrConnectWithoutAISessionInput | Prisma.AIChatHistoryCreateOrConnectWithoutAISessionInput[]
+  upsert?: Prisma.AIChatHistoryUpsertWithWhereUniqueWithoutAISessionInput | Prisma.AIChatHistoryUpsertWithWhereUniqueWithoutAISessionInput[]
+  createMany?: Prisma.AIChatHistoryCreateManyAISessionInputEnvelope
+  set?: Prisma.AIChatHistoryWhereUniqueInput | Prisma.AIChatHistoryWhereUniqueInput[]
+  disconnect?: Prisma.AIChatHistoryWhereUniqueInput | Prisma.AIChatHistoryWhereUniqueInput[]
+  delete?: Prisma.AIChatHistoryWhereUniqueInput | Prisma.AIChatHistoryWhereUniqueInput[]
+  connect?: Prisma.AIChatHistoryWhereUniqueInput | Prisma.AIChatHistoryWhereUniqueInput[]
+  update?: Prisma.AIChatHistoryUpdateWithWhereUniqueWithoutAISessionInput | Prisma.AIChatHistoryUpdateWithWhereUniqueWithoutAISessionInput[]
+  updateMany?: Prisma.AIChatHistoryUpdateManyWithWhereWithoutAISessionInput | Prisma.AIChatHistoryUpdateManyWithWhereWithoutAISessionInput[]
+  deleteMany?: Prisma.AIChatHistoryScalarWhereInput | Prisma.AIChatHistoryScalarWhereInput[]
+}
+
+export type AIChatHistoryUncheckedUpdateManyWithoutAISessionNestedInput = {
+  create?: Prisma.XOR<Prisma.AIChatHistoryCreateWithoutAISessionInput, Prisma.AIChatHistoryUncheckedCreateWithoutAISessionInput> | Prisma.AIChatHistoryCreateWithoutAISessionInput[] | Prisma.AIChatHistoryUncheckedCreateWithoutAISessionInput[]
+  connectOrCreate?: Prisma.AIChatHistoryCreateOrConnectWithoutAISessionInput | Prisma.AIChatHistoryCreateOrConnectWithoutAISessionInput[]
+  upsert?: Prisma.AIChatHistoryUpsertWithWhereUniqueWithoutAISessionInput | Prisma.AIChatHistoryUpsertWithWhereUniqueWithoutAISessionInput[]
+  createMany?: Prisma.AIChatHistoryCreateManyAISessionInputEnvelope
+  set?: Prisma.AIChatHistoryWhereUniqueInput | Prisma.AIChatHistoryWhereUniqueInput[]
+  disconnect?: Prisma.AIChatHistoryWhereUniqueInput | Prisma.AIChatHistoryWhereUniqueInput[]
+  delete?: Prisma.AIChatHistoryWhereUniqueInput | Prisma.AIChatHistoryWhereUniqueInput[]
+  connect?: Prisma.AIChatHistoryWhereUniqueInput | Prisma.AIChatHistoryWhereUniqueInput[]
+  update?: Prisma.AIChatHistoryUpdateWithWhereUniqueWithoutAISessionInput | Prisma.AIChatHistoryUpdateWithWhereUniqueWithoutAISessionInput[]
+  updateMany?: Prisma.AIChatHistoryUpdateManyWithWhereWithoutAISessionInput | Prisma.AIChatHistoryUpdateManyWithWhereWithoutAISessionInput[]
+  deleteMany?: Prisma.AIChatHistoryScalarWhereInput | Prisma.AIChatHistoryScalarWhereInput[]
+}
+
+export type AIChatHistoryCreateWithoutAISessionInput = {
+  id?: string
+  role: string
+  content: string
+  createdAt?: Date | string
+}
+
+export type AIChatHistoryUncheckedCreateWithoutAISessionInput = {
+  id?: string
+  role: string
+  content: string
+  createdAt?: Date | string
+}
+
+export type AIChatHistoryCreateOrConnectWithoutAISessionInput = {
+  where: Prisma.AIChatHistoryWhereUniqueInput
+  create: Prisma.XOR<Prisma.AIChatHistoryCreateWithoutAISessionInput, Prisma.AIChatHistoryUncheckedCreateWithoutAISessionInput>
+}
+
+export type AIChatHistoryCreateManyAISessionInputEnvelope = {
+  data: Prisma.AIChatHistoryCreateManyAISessionInput | Prisma.AIChatHistoryCreateManyAISessionInput[]
+  skipDuplicates?: boolean
+}
+
+export type AIChatHistoryUpsertWithWhereUniqueWithoutAISessionInput = {
+  where: Prisma.AIChatHistoryWhereUniqueInput
+  update: Prisma.XOR<Prisma.AIChatHistoryUpdateWithoutAISessionInput, Prisma.AIChatHistoryUncheckedUpdateWithoutAISessionInput>
+  create: Prisma.XOR<Prisma.AIChatHistoryCreateWithoutAISessionInput, Prisma.AIChatHistoryUncheckedCreateWithoutAISessionInput>
+}
+
+export type AIChatHistoryUpdateWithWhereUniqueWithoutAISessionInput = {
+  where: Prisma.AIChatHistoryWhereUniqueInput
+  data: Prisma.XOR<Prisma.AIChatHistoryUpdateWithoutAISessionInput, Prisma.AIChatHistoryUncheckedUpdateWithoutAISessionInput>
+}
+
+export type AIChatHistoryUpdateManyWithWhereWithoutAISessionInput = {
+  where: Prisma.AIChatHistoryScalarWhereInput
+  data: Prisma.XOR<Prisma.AIChatHistoryUpdateManyMutationInput, Prisma.AIChatHistoryUncheckedUpdateManyWithoutAISessionInput>
+}
+
+export type AIChatHistoryScalarWhereInput = {
+  AND?: Prisma.AIChatHistoryScalarWhereInput | Prisma.AIChatHistoryScalarWhereInput[]
+  OR?: Prisma.AIChatHistoryScalarWhereInput[]
+  NOT?: Prisma.AIChatHistoryScalarWhereInput | Prisma.AIChatHistoryScalarWhereInput[]
+  id?: Prisma.StringFilter<"AIChatHistory"> | string
+  sessionId?: Prisma.StringFilter<"AIChatHistory"> | string
+  role?: Prisma.StringFilter<"AIChatHistory"> | string
+  content?: Prisma.StringFilter<"AIChatHistory"> | string
+  createdAt?: Prisma.DateTimeFilter<"AIChatHistory"> | Date | string
+}
+
+export type AIChatHistoryCreateManyAISessionInput = {
+  id?: string
+  role: string
+  content: string
+  createdAt?: Date | string
+}
+
+export type AIChatHistoryUpdateWithoutAISessionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type AIChatHistoryUncheckedUpdateWithoutAISessionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type AIChatHistoryUncheckedUpdateManyWithoutAISessionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -297,6 +452,8 @@ export type AIChatHistorySelect<ExtArgs extends runtime.Types.Extensions.Interna
   sessionId?: boolean
   role?: boolean
   content?: boolean
+  createdAt?: boolean
+  AISession?: boolean | Prisma.AISessionDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["aIChatHistory"]>
 
 
@@ -306,18 +463,25 @@ export type AIChatHistorySelectScalar = {
   sessionId?: boolean
   role?: boolean
   content?: boolean
+  createdAt?: boolean
 }
 
-export type AIChatHistoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sessionId" | "role" | "content", ExtArgs["result"]["aIChatHistory"]>
+export type AIChatHistoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sessionId" | "role" | "content" | "createdAt", ExtArgs["result"]["aIChatHistory"]>
+export type AIChatHistoryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  AISession?: boolean | Prisma.AISessionDefaultArgs<ExtArgs>
+}
 
 export type $AIChatHistoryPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "AIChatHistory"
-  objects: {}
+  objects: {
+    AISession: Prisma.$AISessionPayload<ExtArgs>
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     sessionId: string
     role: string
     content: string
+    createdAt: Date
   }, ExtArgs["result"]["aIChatHistory"]>
   composites: {}
 }
@@ -658,6 +822,7 @@ readonly fields: AIChatHistoryFieldRefs;
  */
 export interface Prisma__AIChatHistoryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  AISession<T extends Prisma.AISessionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AISessionDefaultArgs<ExtArgs>>): Prisma.Prisma__AISessionClient<runtime.Types.Result.GetResult<Prisma.$AISessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -691,6 +856,7 @@ export interface AIChatHistoryFieldRefs {
   readonly sessionId: Prisma.FieldRef<"AIChatHistory", 'String'>
   readonly role: Prisma.FieldRef<"AIChatHistory", 'String'>
   readonly content: Prisma.FieldRef<"AIChatHistory", 'String'>
+  readonly createdAt: Prisma.FieldRef<"AIChatHistory", 'DateTime'>
 }
     
 
@@ -707,6 +873,10 @@ export type AIChatHistoryFindUniqueArgs<ExtArgs extends runtime.Types.Extensions
    * Omit specific fields from the AIChatHistory
    */
   omit?: Prisma.AIChatHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AIChatHistoryInclude<ExtArgs> | null
   /**
    * Filter, which AIChatHistory to fetch.
    */
@@ -726,6 +896,10 @@ export type AIChatHistoryFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Ext
    */
   omit?: Prisma.AIChatHistoryOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AIChatHistoryInclude<ExtArgs> | null
+  /**
    * Filter, which AIChatHistory to fetch.
    */
   where: Prisma.AIChatHistoryWhereUniqueInput
@@ -743,6 +917,10 @@ export type AIChatHistoryFindFirstArgs<ExtArgs extends runtime.Types.Extensions.
    * Omit specific fields from the AIChatHistory
    */
   omit?: Prisma.AIChatHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AIChatHistoryInclude<ExtArgs> | null
   /**
    * Filter, which AIChatHistory to fetch.
    */
@@ -792,6 +970,10 @@ export type AIChatHistoryFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Exte
    */
   omit?: Prisma.AIChatHistoryOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AIChatHistoryInclude<ExtArgs> | null
+  /**
    * Filter, which AIChatHistory to fetch.
    */
   where?: Prisma.AIChatHistoryWhereInput
@@ -839,6 +1021,10 @@ export type AIChatHistoryFindManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Omit specific fields from the AIChatHistory
    */
   omit?: Prisma.AIChatHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AIChatHistoryInclude<ExtArgs> | null
   /**
    * Filter, which AIChatHistories to fetch.
    */
@@ -888,6 +1074,10 @@ export type AIChatHistoryCreateArgs<ExtArgs extends runtime.Types.Extensions.Int
    */
   omit?: Prisma.AIChatHistoryOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AIChatHistoryInclude<ExtArgs> | null
+  /**
    * The data needed to create a AIChatHistory.
    */
   data: Prisma.XOR<Prisma.AIChatHistoryCreateInput, Prisma.AIChatHistoryUncheckedCreateInput>
@@ -916,6 +1106,10 @@ export type AIChatHistoryUpdateArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Omit specific fields from the AIChatHistory
    */
   omit?: Prisma.AIChatHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AIChatHistoryInclude<ExtArgs> | null
   /**
    * The data needed to update a AIChatHistory.
    */
@@ -957,6 +1151,10 @@ export type AIChatHistoryUpsertArgs<ExtArgs extends runtime.Types.Extensions.Int
    */
   omit?: Prisma.AIChatHistoryOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AIChatHistoryInclude<ExtArgs> | null
+  /**
    * The filter to search for the AIChatHistory to update in case it exists.
    */
   where: Prisma.AIChatHistoryWhereUniqueInput
@@ -982,6 +1180,10 @@ export type AIChatHistoryDeleteArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Omit specific fields from the AIChatHistory
    */
   omit?: Prisma.AIChatHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AIChatHistoryInclude<ExtArgs> | null
   /**
    * Filter which AIChatHistory to delete.
    */
@@ -1014,4 +1216,8 @@ export type AIChatHistoryDefaultArgs<ExtArgs extends runtime.Types.Extensions.In
    * Omit specific fields from the AIChatHistory
    */
   omit?: Prisma.AIChatHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AIChatHistoryInclude<ExtArgs> | null
 }

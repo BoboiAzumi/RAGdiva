@@ -116,7 +116,7 @@ export async function deleteCriteria(c: Context) {
 
     broadcasting("criteria", {
         message: "Dokumen Dihapus",
-        data: `${c.get("fullName")} telah memperbarui "${criteria[0].code ? `${criteria[0].code}. ` : ""}${criteria[0].name}"`,
+        data: `${c.get("fullName")} telah menghapus "${criteria[0].code ? `${criteria[0].code}. ` : ""}${criteria[0].name}"`,
     }).catch((e) => console.log(`ERROR: ${e.message}`));
 
     return c.json({

@@ -24,7 +24,18 @@ export async function postFile(c: Context) {
         throw new HTTPException(403, { message: "File not attached" });
     }
 
-    await insertFileService(files, cid, parseInt(body["page"] as string ?? '1'));
+    await insertFileService(
+        files,
+        cid,
+        parseInt((body["page"] as string) ?? "1"),
+    );
+
+    for (const file of files) {
+        broadcasting("file", {
+            message: "File Ditambahkan",
+            data: `${c.get("fullName")} telah mengupload ${file.name}`,
+        }).catch((e) => console.log(`ERROR: ${e.message}`));
+    }
 
     return c.json({
         message: "File inserted",
@@ -85,7 +96,12 @@ export async function updateFile(c: Context) {
         await updatePageService(fid, cid, parseInt(page));
     }
 
+    broadcasting("file", {
+        message: "File Diperbarui",
+        data: `${c.get("fullName")} telah memperbarui ${file.name}`,
+    }).catch((e) => console.log(`ERROR: ${e.message}`));
+
     return c.json({
-        message: "File updated"
-    })
+        message: "File updated",
+    });
 }
