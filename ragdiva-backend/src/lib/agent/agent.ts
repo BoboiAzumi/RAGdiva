@@ -4,22 +4,23 @@ import {
     HumanMessage,
     type ReactAgent,
 } from "langchain";
-import { getAiModel } from "../repositories/ai-model-repo.js";
+import { getAiModel } from "../../repositories/ai-model-repo.js";
 import { ChatOpenAI } from "@langchain/openai";
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { ChatOpenRouter } from "@langchain/openrouter";
-import { getAiConfig } from "../repositories/ai-config-repo.js";
+import { ChatOllama } from "@langchain/ollama"
+import { getAiConfig } from "../../repositories/ai-config-repo.js";
 import {
     getAiChatHistory,
     insertAiChatHistory,
-} from "../repositories/ai-chat-history-repo.js";
+} from "../../repositories/ai-chat-history-repo.js";
 import type { BaseMessage } from "@langchain/core/messages";
-import { prompt } from "../utils/prompt.js";
-import { ragSearch } from "../tools/rag-search.js";
-import { dbSearch } from "../tools/db-search.js";
-import { tavilyTool } from "../tools/tavily.js";
-import { dbMap } from "../tools/db-map.js";
-import { semaphore } from "./semaphore.js";
+import { prompt } from "../../utils/prompt.js";
+import { ragSearch } from "../../tools/rag-search.js";
+import { dbSearch } from "../../tools/db-search.js";
+import { tavilyTool } from "../../tools/tavily.js";
+import { dbMap } from "../../tools/db-map.js";
+import { semaphore } from "../semaphore/semaphore.js";
 
 export class AIAgent {
     agents: Map<string, ReactAgent<any>>;
@@ -70,6 +71,29 @@ export class AIAgent {
                             model: modelProfile.modelName,
                         });
                         break;
+                    case "OpenAI":
+                        model = new ChatOpenAI({
+                            apiKey: aiConfig.get("openai_api_key"),
+                            model: modelProfile.modelName
+                        })
+                        break;
+                    case "ZenOpenCode":
+                        model = new ChatOpenAI({
+                            apiKey: aiConfig.get("zen_opencode_api_key"),
+                            model: modelProfile.modelName,
+                            configuration: {
+                                baseURL: aiConfig.get("zen_opencode_base_url")
+                            }
+                        })
+                        break;
+                    case "Ollama":
+                        model = new ChatOllama({
+                            model: modelProfile.modelName,
+                            baseUrl: aiConfig.get("ollama_base_url"),
+                            headers: {
+                                Authorization: `Bearer ${aiConfig.get("ollama_api_key")}`
+                            }
+                        })
                     default:
                         continue;
                 }

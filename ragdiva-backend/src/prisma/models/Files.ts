@@ -31,7 +31,7 @@ export type FilesMinAggregateOutputType = {
   fileHash: string | null
   mimeType: string | null
   createdAt: Date | null
-  updateAt: Date | null
+  updatedAt: Date | null
   status: $Enums.Status | null
 }
 
@@ -42,7 +42,7 @@ export type FilesMaxAggregateOutputType = {
   fileHash: string | null
   mimeType: string | null
   createdAt: Date | null
-  updateAt: Date | null
+  updatedAt: Date | null
   status: $Enums.Status | null
 }
 
@@ -53,7 +53,7 @@ export type FilesCountAggregateOutputType = {
   fileHash: number
   mimeType: number
   createdAt: number
-  updateAt: number
+  updatedAt: number
   status: number
   _all: number
 }
@@ -66,7 +66,7 @@ export type FilesMinAggregateInputType = {
   fileHash?: true
   mimeType?: true
   createdAt?: true
-  updateAt?: true
+  updatedAt?: true
   status?: true
 }
 
@@ -77,7 +77,7 @@ export type FilesMaxAggregateInputType = {
   fileHash?: true
   mimeType?: true
   createdAt?: true
-  updateAt?: true
+  updatedAt?: true
   status?: true
 }
 
@@ -88,7 +88,7 @@ export type FilesCountAggregateInputType = {
   fileHash?: true
   mimeType?: true
   createdAt?: true
-  updateAt?: true
+  updatedAt?: true
   status?: true
   _all?: true
 }
@@ -172,7 +172,7 @@ export type FilesGroupByOutputType = {
   fileHash: string
   mimeType: string
   createdAt: Date
-  updateAt: Date
+  updatedAt: Date
   status: $Enums.Status
   _count: FilesCountAggregateOutputType | null
   _min: FilesMinAggregateOutputType | null
@@ -204,7 +204,7 @@ export type FilesWhereInput = {
   fileHash?: Prisma.StringFilter<"Files"> | string
   mimeType?: Prisma.StringFilter<"Files"> | string
   createdAt?: Prisma.DateTimeFilter<"Files"> | Date | string
-  updateAt?: Prisma.DateTimeFilter<"Files"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Files"> | Date | string
   status?: Prisma.EnumStatusFilter<"Files"> | $Enums.Status
   activityLogs?: Prisma.ActivityLogsListRelationFilter
   fileLinks?: Prisma.FileLinkListRelationFilter
@@ -217,7 +217,7 @@ export type FilesOrderByWithRelationInput = {
   fileHash?: Prisma.SortOrder
   mimeType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updateAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   status?: Prisma.SortOrder
   activityLogs?: Prisma.ActivityLogsOrderByRelationAggregateInput
   fileLinks?: Prisma.FileLinkOrderByRelationAggregateInput
@@ -234,7 +234,7 @@ export type FilesWhereUniqueInput = Prisma.AtLeast<{
   fileName?: Prisma.StringFilter<"Files"> | string
   mimeType?: Prisma.StringFilter<"Files"> | string
   createdAt?: Prisma.DateTimeFilter<"Files"> | Date | string
-  updateAt?: Prisma.DateTimeFilter<"Files"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Files"> | Date | string
   status?: Prisma.EnumStatusFilter<"Files"> | $Enums.Status
   activityLogs?: Prisma.ActivityLogsListRelationFilter
   fileLinks?: Prisma.FileLinkListRelationFilter
@@ -247,7 +247,7 @@ export type FilesOrderByWithAggregationInput = {
   fileHash?: Prisma.SortOrder
   mimeType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updateAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   status?: Prisma.SortOrder
   _count?: Prisma.FilesCountOrderByAggregateInput
   _max?: Prisma.FilesMaxOrderByAggregateInput
@@ -264,7 +264,7 @@ export type FilesScalarWhereWithAggregatesInput = {
   fileHash?: Prisma.StringWithAggregatesFilter<"Files"> | string
   mimeType?: Prisma.StringWithAggregatesFilter<"Files"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Files"> | Date | string
-  updateAt?: Prisma.DateTimeWithAggregatesFilter<"Files"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Files"> | Date | string
   status?: Prisma.EnumStatusWithAggregatesFilter<"Files"> | $Enums.Status
 }
 
@@ -275,7 +275,7 @@ export type FilesCreateInput = {
   fileHash: string
   mimeType: string
   createdAt?: Date | string
-  updateAt?: Date | string
+  updatedAt?: Date | string
   status: $Enums.Status
   activityLogs?: Prisma.ActivityLogsCreateNestedManyWithoutFilesInput
   fileLinks?: Prisma.FileLinkCreateNestedManyWithoutFilesInput
@@ -288,7 +288,7 @@ export type FilesUncheckedCreateInput = {
   fileHash: string
   mimeType: string
   createdAt?: Date | string
-  updateAt?: Date | string
+  updatedAt?: Date | string
   status: $Enums.Status
   activityLogs?: Prisma.ActivityLogsUncheckedCreateNestedManyWithoutFilesInput
   fileLinks?: Prisma.FileLinkUncheckedCreateNestedManyWithoutFilesInput
@@ -301,7 +301,7 @@ export type FilesUpdateInput = {
   fileHash?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   activityLogs?: Prisma.ActivityLogsUpdateManyWithoutFilesNestedInput
   fileLinks?: Prisma.FileLinkUpdateManyWithoutFilesNestedInput
@@ -314,7 +314,7 @@ export type FilesUncheckedUpdateInput = {
   fileHash?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   activityLogs?: Prisma.ActivityLogsUncheckedUpdateManyWithoutFilesNestedInput
   fileLinks?: Prisma.FileLinkUncheckedUpdateManyWithoutFilesNestedInput
@@ -327,7 +327,7 @@ export type FilesCreateManyInput = {
   fileHash: string
   mimeType: string
   createdAt?: Date | string
-  updateAt?: Date | string
+  updatedAt?: Date | string
   status: $Enums.Status
 }
 
@@ -338,7 +338,7 @@ export type FilesUpdateManyMutationInput = {
   fileHash?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
 }
 
@@ -349,7 +349,7 @@ export type FilesUncheckedUpdateManyInput = {
   fileHash?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
 }
 
@@ -371,7 +371,7 @@ export type FilesCountOrderByAggregateInput = {
   fileHash?: Prisma.SortOrder
   mimeType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updateAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   status?: Prisma.SortOrder
 }
 
@@ -382,7 +382,7 @@ export type FilesMaxOrderByAggregateInput = {
   fileHash?: Prisma.SortOrder
   mimeType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updateAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   status?: Prisma.SortOrder
 }
 
@@ -393,7 +393,7 @@ export type FilesMinOrderByAggregateInput = {
   fileHash?: Prisma.SortOrder
   mimeType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updateAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   status?: Prisma.SortOrder
 }
 
@@ -440,7 +440,7 @@ export type FilesCreateWithoutFileLinksInput = {
   fileHash: string
   mimeType: string
   createdAt?: Date | string
-  updateAt?: Date | string
+  updatedAt?: Date | string
   status: $Enums.Status
   activityLogs?: Prisma.ActivityLogsCreateNestedManyWithoutFilesInput
 }
@@ -452,7 +452,7 @@ export type FilesUncheckedCreateWithoutFileLinksInput = {
   fileHash: string
   mimeType: string
   createdAt?: Date | string
-  updateAt?: Date | string
+  updatedAt?: Date | string
   status: $Enums.Status
   activityLogs?: Prisma.ActivityLogsUncheckedCreateNestedManyWithoutFilesInput
 }
@@ -480,7 +480,7 @@ export type FilesUpdateWithoutFileLinksInput = {
   fileHash?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   activityLogs?: Prisma.ActivityLogsUpdateManyWithoutFilesNestedInput
 }
@@ -492,7 +492,7 @@ export type FilesUncheckedUpdateWithoutFileLinksInput = {
   fileHash?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   activityLogs?: Prisma.ActivityLogsUncheckedUpdateManyWithoutFilesNestedInput
 }
@@ -504,7 +504,7 @@ export type FilesCreateWithoutActivityLogsInput = {
   fileHash: string
   mimeType: string
   createdAt?: Date | string
-  updateAt?: Date | string
+  updatedAt?: Date | string
   status: $Enums.Status
   fileLinks?: Prisma.FileLinkCreateNestedManyWithoutFilesInput
 }
@@ -516,7 +516,7 @@ export type FilesUncheckedCreateWithoutActivityLogsInput = {
   fileHash: string
   mimeType: string
   createdAt?: Date | string
-  updateAt?: Date | string
+  updatedAt?: Date | string
   status: $Enums.Status
   fileLinks?: Prisma.FileLinkUncheckedCreateNestedManyWithoutFilesInput
 }
@@ -544,7 +544,7 @@ export type FilesUpdateWithoutActivityLogsInput = {
   fileHash?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   fileLinks?: Prisma.FileLinkUpdateManyWithoutFilesNestedInput
 }
@@ -556,7 +556,7 @@ export type FilesUncheckedUpdateWithoutActivityLogsInput = {
   fileHash?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   fileLinks?: Prisma.FileLinkUncheckedUpdateManyWithoutFilesNestedInput
 }
@@ -608,7 +608,7 @@ export type FilesSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   fileHash?: boolean
   mimeType?: boolean
   createdAt?: boolean
-  updateAt?: boolean
+  updatedAt?: boolean
   status?: boolean
   activityLogs?: boolean | Prisma.Files$activityLogsArgs<ExtArgs>
   fileLinks?: boolean | Prisma.Files$fileLinksArgs<ExtArgs>
@@ -624,11 +624,11 @@ export type FilesSelectScalar = {
   fileHash?: boolean
   mimeType?: boolean
   createdAt?: boolean
-  updateAt?: boolean
+  updatedAt?: boolean
   status?: boolean
 }
 
-export type FilesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "fileName" | "fileHash" | "mimeType" | "createdAt" | "updateAt" | "status", ExtArgs["result"]["files"]>
+export type FilesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "fileName" | "fileHash" | "mimeType" | "createdAt" | "updatedAt" | "status", ExtArgs["result"]["files"]>
 export type FilesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   activityLogs?: boolean | Prisma.Files$activityLogsArgs<ExtArgs>
   fileLinks?: boolean | Prisma.Files$fileLinksArgs<ExtArgs>
@@ -648,7 +648,7 @@ export type $FilesPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     fileHash: string
     mimeType: string
     createdAt: Date
-    updateAt: Date
+    updatedAt: Date
     status: $Enums.Status
   }, ExtArgs["result"]["files"]>
   composites: {}
@@ -1027,7 +1027,7 @@ export interface FilesFieldRefs {
   readonly fileHash: Prisma.FieldRef<"Files", 'String'>
   readonly mimeType: Prisma.FieldRef<"Files", 'String'>
   readonly createdAt: Prisma.FieldRef<"Files", 'DateTime'>
-  readonly updateAt: Prisma.FieldRef<"Files", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"Files", 'DateTime'>
   readonly status: Prisma.FieldRef<"Files", 'Status'>
 }
     

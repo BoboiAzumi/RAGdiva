@@ -84,7 +84,7 @@ model Files {
   fileHash  String   @unique @map("file_hash")
   mimeType  String   @map("mime_type")
   createdAt DateTime @default(now()) @map("created_at")
-  updateAt  DateTime @updatedAt @map("update_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
   status    Status
 
   activityLogs ActivityLogs[]

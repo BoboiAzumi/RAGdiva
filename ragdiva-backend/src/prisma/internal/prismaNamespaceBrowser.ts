@@ -139,7 +139,7 @@ export const FilesScalarFieldEnum = {
   fileHash: 'fileHash',
   mimeType: 'mimeType',
   createdAt: 'createdAt',
-  updateAt: 'updateAt',
+  updatedAt: 'updatedAt',
   status: 'status'
 } as const
 

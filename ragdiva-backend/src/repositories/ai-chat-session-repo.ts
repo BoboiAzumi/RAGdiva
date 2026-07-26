@@ -1,4 +1,4 @@
-import { prisma } from "../lib/database.js";
+import { prisma } from "../lib/database/database.js";
 
 export async function createAiChatSession(topic: string, userId: string) {
     return await prisma.aISession.create({

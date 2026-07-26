@@ -7,7 +7,7 @@ import {
 } from "../services/criteria-service.js";
 import { getUserAccessService } from "../services/user-access-service.js";
 import type { CriteriaType } from "../types/criteria-type.js";
-import { broadcasting } from "../lib/broadcast.js";
+import { broadcasting } from "../lib/broadcast/broadcast.js";
 import { HTTPException } from "hono/http-exception";
 import { findFilesByCriteriaIdService } from "../services/file-service.js";
 

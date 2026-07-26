@@ -2,7 +2,7 @@ import type { Context } from "hono";
 import { createNewAIChatSessionService, deleteAIChatHistoryService, findAIChatHistoryService, findAISessionService } from "../services/aichat-service.js";
 import { getAiModel } from "../repositories/ai-model-repo.js";
 import { streamSSE } from "hono/streaming";
-import { agent } from "../lib/agent.js";
+import { agent } from "../lib/agent/agent.js";
 
 export async function createSession(c: Context){
     const userid = c.get("userid")

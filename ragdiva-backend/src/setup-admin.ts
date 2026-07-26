@@ -31,7 +31,6 @@ async function setupAdmin(){
             password: hashPassword(`${defaultAdminUsername}123`),
             fullName: defaultAdminUsername,
             level: "Admin",
-            majorId: null
         }
     })
 

@@ -261,6 +261,6 @@ WHERE id = ?;
     },
     {
         name: "db_map",
-        description: "Untuk mencari informasi dari database langsung",
+        description: "Untuk mencari informasi dari skema database",
     },
 );

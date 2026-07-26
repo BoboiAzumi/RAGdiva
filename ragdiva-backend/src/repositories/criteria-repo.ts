@@ -1,4 +1,4 @@
-import { prisma } from "../lib/database.js";
+import { prisma } from "../lib/database/database.js";
 import type { CriteriaModel } from "../prisma/models.js";
 import type { CriteriaFindType, CriteriaType } from "../types/criteria-type.js";
 

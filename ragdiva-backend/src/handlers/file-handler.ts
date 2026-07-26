@@ -7,7 +7,7 @@ import {
     updateFileService,
     updatePageService,
 } from "../services/file-service.js";
-import { broadcasting } from "../lib/broadcast.js";
+import { broadcasting } from "../lib/broadcast/broadcast.js";
 
 export async function postFile(c: Context) {
     const cid = c.req.param()["cid"];
@@ -61,12 +61,13 @@ export async function deleteFile(c: Context) {
 
 export async function getFile(c: Context) {
     const fileId = c.req.param()["id"];
+    const isDownload = c.req.query()["download"];
 
     const { file, fileInDB } = await getFileService(fileId);
 
     return c.body(file, 200, {
         "Content-Type": fileInDB.mimeType,
-        //"Content-Disposition": `attachment; filename="${fileInDB.title}"`,
+        ... isDownload ? { "Content-Disposition": `attachment; filename="${fileInDB.title}"` } : {},
     });
 }
 

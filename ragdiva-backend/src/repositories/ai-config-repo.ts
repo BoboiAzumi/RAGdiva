@@ -1,4 +1,4 @@
-import { prisma } from "../lib/database.js";
+import { prisma } from "../lib/database/database.js";
 
 export async function getAiConfig() {
     const configDB = await prisma.aIConfig.findMany();

@@ -1,4 +1,4 @@
-import { prisma } from "../lib/database.js";
+import { prisma } from "../lib/database/database.js";
 import type { FileType } from "../types/file-type.js";
 
 export async function insertFile(files: FileType[]){
@@ -46,7 +46,10 @@ export async function updateFile(id: string, file: FileType){
         where: {
             id
         },
-        data: file
+        data: {
+            ...file,
+            updatedAt: new Date()
+        }
     })
 }
 

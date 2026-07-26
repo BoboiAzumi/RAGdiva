@@ -1,5 +1,5 @@
 import z from "zod";
-import { prisma } from "../lib/database.js";
+import { prisma } from "../lib/database/database.js";
 import { tool } from "langchain";
 
 export const dbSearch = tool(
