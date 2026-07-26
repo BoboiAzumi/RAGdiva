@@ -1,9 +1,10 @@
 import { tool } from "langchain";
 import z from "zod";
+import { retrievalService } from "../services/rag-service.js";
 
 export const ragSearch = tool(
-    ({query}) => {
-        return 'Info: RAG belum dibuat !'
+    async ({query}) => {
+        return await retrievalService(query)
     },
     {
         name: "rag_search",

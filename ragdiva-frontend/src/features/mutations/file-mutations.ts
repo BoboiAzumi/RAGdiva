@@ -32,3 +32,13 @@ export function useFileDelete(){
         }
     })
 }
+
+export function useFileIngestion(){
+    return useMutation({
+        mutationKey: fileKeys.all,
+        mutationFn: fileApi.ingestion,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: fileKeys.all })
+        }
+    })
+}

@@ -33,6 +33,13 @@ export const Route = createFileRoute("/(auth)")({
                 toast(sse.message, { description: sse.data, position: "top-center" })
             })
 
+            es.addEventListener('rag', (e) => {
+                console.log(e)
+                const sse = JSON.parse(e.data)
+                queryClient.invalidateQueries({ queryKey: fileKeys.all })
+                toast(sse.message, { description: sse.data, position: "top-center" })
+            })
+
         }, [])
 
         authContext.setUserInfo(data.data);

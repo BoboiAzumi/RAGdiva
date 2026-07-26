@@ -6,6 +6,7 @@ import {
     findFileById,
     insertFile,
     updateFile,
+    updateFileStatus,
 } from "../repositories/file-repo.js";
 import type { FileWithHashType } from "../types/file-type.js";
 import { fileHash } from "../utils/file-hash.js";
@@ -20,6 +21,9 @@ import {
     updatePage,
 } from "../repositories/file-link-repo.js";
 import { HTTPException } from "hono/http-exception";
+import type { BatchPayload } from "../prisma/internal/prismaNamespace.js";
+import type { Status } from "../prisma/enums.js";
+import { client } from "../lib/milvus/milvus.js";
 
 export async function insertFileService(
     files: File[],
@@ -43,32 +47,43 @@ export async function insertFileService(
         }),
     );
 
-    await Promise.all(
+    return await Promise.all(
         fileWithExist.map(async (v) => {
             const fileNameSplit = v.file.name.split(".");
             const ext = fileNameSplit[fileNameSplit.length - 1];
             const newFileName = `${v4()}.${ext}`;
+            let file: {
+                id: string;
+                title: string;
+                fileName: string;
+                fileHash: string;
+                mimeType: string;
+                createdAt: Date;
+                updatedAt: Date;
+                status: Status;
+            } | null = null;
 
             if (!v.isExist) {
                 writeFileSync(
                     `./files/${newFileName}`,
                     Buffer.from(await v.file.arrayBuffer()),
                 );
-                await insertFile([
-                    {
-                        title: v.file.name,
-                        fileName: newFileName,
-                        fileHash: v.hash,
-                        mimeType: v.file.type,
-                        status: "Processing",
-                    },
-                ]);
+
+                file = await insertFile({
+                    title: v.file.name,
+                    fileName: newFileName,
+                    fileHash: v.hash,
+                    mimeType: v.file.type,
+                    status: "Processing",
+                });
             }
 
             const existingLink = await findLinkByHashCriteria(cid, v.hash);
             if (!existingLink) {
                 await setLinkByHash(cid, v.hash, clink, page);
             }
+
+            return file;
         }),
     );
 }
@@ -91,6 +106,11 @@ export async function deleteFileService(criteriaId: string, fileId: string) {
     await deleteFile(file.id);
 
     unlinkSync(`./files/${file.fileName}`);
+
+    client.delete({
+        collection_name: "ragdiva_rag_collection",
+        filter: `metadata["id"] == "${fileId}"`
+    }).catch((e) => console.log(e))
 
     return file;
 }
@@ -152,4 +172,8 @@ export async function updatePageService(
 
 export async function findFilesByCriteriaIdService(cid: string) {
     return await findFileByCriteriaId(cid);
+}
+
+export async function updateFileStatusService(fid: string, status: Status){
+    return await updateFileStatus(fid, status)
 }

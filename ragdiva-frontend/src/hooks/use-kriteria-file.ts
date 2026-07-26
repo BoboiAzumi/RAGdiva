@@ -1,5 +1,5 @@
 import { useCriteriaDelete, useCriteriaPatch, useCriteriaPost } from "@/features/mutations/criteria-mutations";
-import { useFileDelete, useFilePatch, useFilePost } from "@/features/mutations/file-mutations";
+import { useFileDelete, useFileIngestion, useFilePatch, useFilePost } from "@/features/mutations/file-mutations";
 import { criteriaGetQueryOptions, criteriaQueryOptions } from "@/features/queries/criteria-queries";
 import type { CriteriaPostType, CriteriaType } from "@/types/criteria-types";
 import type { FileType } from "@/types/file-types";
@@ -50,6 +50,7 @@ export function useKriteriaFile() {
     const filePostMutation = useFilePost();
     const filePatchMutation = useFilePatch();
     const fileDeleteMutation = useFileDelete();
+    const fileIngestionMutation = useFileIngestion();
 
     const refetch = async () => {
         if (id) {
@@ -107,5 +108,6 @@ export function useKriteriaFile() {
         deleteFileDialog, setDeleteFileDialog,
         deleteFileData, setDeleteFileData,
         fileDeleteMutation,
+        fileIngestionMutation,
     };
 }

@@ -29,6 +29,7 @@ export function useAichat() {
     const [input, setInput] = useState("");
     const [streamStatus, setStreamStatus] = useState<StreamStatus>("idle");
     const [streamingContent, setStreamingContent] = useState("");
+    const [streamingReasoning, setStreamingReasoning] = useState("");
     const [selectedModel, setSelectedModel] = useState(
         () => localStorage.getItem("ragdiva-ai-model") ?? "",
     );
@@ -109,6 +110,7 @@ export function useAichat() {
         async (sessionId: string, message: string) => {
             setStreamStatus("streaming");
             setStreamingContent("");
+            setStreamingReasoning("");
 
             const controller = new AbortController();
             abortRef.current = controller;
@@ -139,6 +141,7 @@ export function useAichat() {
                 const decoder = new TextDecoder();
                 let buffer = "";
                 let accumulatedText = "";
+                let accumulatedReasoning = "";
 
                 while (true) {
                     const { done, value } = await reader.read();
@@ -167,12 +170,40 @@ export function useAichat() {
 
                                 if (chunk.type === "reasoning") {
                                     setStreamStatus("reasoning");
+                                    if (chunk.content) {
+                                        if (
+                                            accumulatedReasoning &&
+                                            chunk.content.startsWith(
+                                                accumulatedReasoning,
+                                            )
+                                        ) {
+                                            accumulatedReasoning =
+                                                chunk.content;
+                                        } else {
+                                            accumulatedReasoning +=
+                                                chunk.content;
+                                        }
+                                        setStreamingReasoning(
+                                            accumulatedReasoning,
+                                        );
+                                    }
                                 } else if (chunk.type === "tool_call") {
                                     setStreamStatus("tool_call");
                                 } else if (chunk.type === "text") {
                                     setStreamStatus("streaming");
-                                    accumulatedText = chunk.content;
-                                    setStreamingContent(accumulatedText);
+                                    if (chunk.content) {
+                                        if (
+                                            accumulatedText &&
+                                            chunk.content.startsWith(
+                                                accumulatedText,
+                                            )
+                                        ) {
+                                            accumulatedText = chunk.content;
+                                        } else {
+                                            accumulatedText += chunk.content;
+                                        }
+                                        setStreamingContent(accumulatedText);
+                                    }
                                 }
                             } catch {
                                 /* ignore parse errors */
@@ -200,6 +231,7 @@ export function useAichat() {
                 }
             } finally {
                 setStreamingContent("");
+                setStreamingReasoning("");
                 setStreamStatus("idle");
                 abortRef.current = null;
             }
@@ -212,6 +244,7 @@ export function useAichat() {
         if (!text || streamStatus !== "idle") return;
 
         setInput("");
+        setStreamStatus("reasoning");
 
         let currentSid = sid;
 
@@ -225,6 +258,7 @@ export function useAichat() {
                     params: { sid: currentSid },
                 });
             } catch {
+                setStreamStatus("idle");
                 return;
             }
         }
@@ -271,6 +305,7 @@ export function useAichat() {
         setInput,
         streamStatus,
         streamingContent,
+        streamingReasoning,
         selectedModel,
         setSelectedModel: handleSelectModel,
         sessions,

@@ -2,6 +2,7 @@ export type AIChatSessionType = {
     id: string;
     userId: string;
     topic: string;
+    createdAt: string;
 };
 
 export type AIChatHistoryType = {

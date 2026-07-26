@@ -20,3 +20,4 @@ class Semaphore {
 }
 
 export const semaphore = new Semaphore(8)
+export const embeddingSemaphore = new Semaphore(1)

@@ -19,7 +19,7 @@ export function DashboardNavbar() {
     const navigate = useNavigate()
 
     return (
-        <nav className="bg-card border-b flex items-center justify-between p-2">
+        <nav className="bg-card border-b flex items-center justify-between p-2 sticky top-0">
             <div className="flex items-center gap-1">
                 <SidebarTrigger size={"lg"} />
                 <h6 className="font-semibold">RAGDiva</h6>

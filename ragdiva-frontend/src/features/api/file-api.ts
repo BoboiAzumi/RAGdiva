@@ -6,4 +6,5 @@ export const fileApi = {
     post: (data: { criteriaId: string, data: FormData }): Promise<{ message: string }> => apiClient.multipart(`/file/${data.criteriaId}`, data.data),
     patch: (data: { id: string, criteriaId: string, data: FormData }): Promise<{ message: string }> => apiClient.multipart(`/file/${data.criteriaId}/${data.id}`, data.data),
     delete: (data: { id: string, criteriaId: string }): Promise<{ message: string }> => apiClient.delete(`/file/${data.criteriaId}/${data.id}`),
+    ingestion: (data: {id: string}): Promise<{ message: string }> => apiClient.post('/file/ingestion', { fileId: data.id })
 }

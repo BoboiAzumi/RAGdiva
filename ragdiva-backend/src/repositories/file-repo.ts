@@ -1,8 +1,9 @@
 import { prisma } from "../lib/database/database.js";
+import type { Status } from "../prisma/enums.js";
 import type { FileType } from "../types/file-type.js";
 
-export async function insertFile(files: FileType[]){
-    return prisma.files.createMany({
+export async function insertFile(files: FileType){
+    return prisma.files.create({
         data: files
     })
 }
@@ -19,6 +20,27 @@ export async function findFileById(id: string){
     return await prisma.files.findFirst({
         where: {
             id
+        }
+    })
+}
+
+export async function findFileByIdList(id: string[]){
+    return await prisma.files.findMany({
+        where: {
+            id: {
+                in: id
+            }
+        }
+    })
+}
+
+export async function updateFileStatus(id: string, status: Status){
+    return await prisma.files.update({
+        where: {
+            id
+        },
+        data: {
+            status
         }
     })
 }

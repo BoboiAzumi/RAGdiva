@@ -15,12 +15,15 @@ import { aichatRoute } from "./routes/aichat-route.js";
 import { rabbitmq } from "./lib/rabbitmq/rabbitmq.js";
 import { prisma } from "./lib/database/database.js";
 import { findFileById } from "./repositories/file-repo.js";
-import { milvusSetup } from "./lib/milvus/milvus.js";
+import { clearCollection, milvusSetup } from "./lib/milvus/milvus.js";
+import { getAiConfig } from "./repositories/ai-config-repo.js";
+import { retrievalService } from "./services/rag-service.js";
 
 async function main() {
     const app = new Hono();
+    const aiConfig = await getAiConfig();
     await rabbitmq.connect();
-    await milvusSetup()
+    await milvusSetup(2048)
 
     app.get("/", AuthenticationMiddleware, async (c: Context) => {
         const dashboardData = await dashboardService();
@@ -51,7 +54,14 @@ async function main() {
             "node-python",
             file,
         );
+
         return c.json(feedBack);
+    });
+
+    app.get("/query", async (c: Context) => {
+        const result = await retrievalService(c.req.query()["q"] || "");
+
+        return c.json(result);
     });
 
     app.get("/stream", async (c: Context) => {
@@ -124,4 +134,4 @@ async function main() {
     });
 }
 
-main().catch((e) => console.log(e))
+main().catch((e) => console.log(e));

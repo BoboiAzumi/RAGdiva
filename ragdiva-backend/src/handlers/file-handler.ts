@@ -5,9 +5,11 @@ import {
     getFileService,
     insertFileService,
     updateFileService,
+    updateFileStatusService,
     updatePageService,
 } from "../services/file-service.js";
 import { broadcasting } from "../lib/broadcast/broadcast.js";
+import { dataInsertService } from "../services/rag-service.js";
 
 export async function postFile(c: Context) {
     const cid = c.req.param()["cid"];
@@ -24,11 +26,18 @@ export async function postFile(c: Context) {
         throw new HTTPException(403, { message: "File not attached" });
     }
 
-    await insertFileService(
+    const inserted = await insertFileService(
         files,
         cid,
         parseInt((body["page"] as string) ?? "1"),
     );
+
+    const fileList = inserted.filter((v) => v != null)
+
+    if(fileList.length != 0){
+        dataInsertService(fileList.map((v) => v.id))
+            .catch((e) => console.log(e))   
+    }
 
     for (const file of files) {
         broadcasting("file", {
@@ -104,5 +113,18 @@ export async function updateFile(c: Context) {
 
     return c.json({
         message: "File updated",
+    });
+}
+
+export async function reIngestion(c: Context){
+    const { fileId } = await c.req.json()
+
+    await updateFileStatusService(fileId, "Reprocessing")
+
+    dataInsertService([fileId])
+        .catch((e) => console.log(e))
+
+    return c.json({
+        message: "File re ingestions, please wait",
     });
 }

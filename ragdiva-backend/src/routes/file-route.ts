@@ -6,10 +6,17 @@ import {
     deleteFile,
     getFile,
     postFile,
+    reIngestion,
     updateFile,
 } from "../handlers/file-handler.js";
 
 export const fileRoute = new Hono();
+
+fileRoute.post(
+    "/ingestion",
+    AuthorizationMiddleware(["Admin", "User"]),
+    reIngestion
+)
 
 fileRoute.post(
     "/:cid",

@@ -37,6 +37,7 @@ import {
     FileText,
     Folder,
     Form,
+    RotateCcw,
     Search,
     SquarePlus,
     Trash,
@@ -279,6 +280,21 @@ export function KriteriaFilePage() {
                                                             <h5 className="text-lg font-semibold truncate" title={v.title}>
                                                                 {v.title}
                                                             </h5>
+                                                            <h6 className="flex gap-1 items-center">
+                                                                Ingestion:
+                                                                <Badge variant={"outline"}>
+                                                                    {v.status}
+                                                                </Badge>
+                                                                {v.status == "Failed" ? (
+                                                                    <Button variant={"secondary"} onClick={() => {
+                                                                        hook.fileIngestionMutation.mutate({ id: v.id })
+                                                                        hook.refetch()
+                                                                    }}>
+                                                                        <RotateCcw />
+                                                                    </Button>
+                                                                ) : (<></>)}
+                                                            </h6>
+                                                            
                                                             {v.page && (
                                                                 <h6 className="text-md text-muted-foreground truncate">
                                                                     Halaman: {v.page}

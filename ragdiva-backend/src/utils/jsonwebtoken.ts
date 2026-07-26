@@ -4,7 +4,7 @@ export function jwtSign(obj: object){
     return jwt.sign(
         obj as object, 
         process.env.JWT_PRIVATE_KEY as string, 
-        { algorithm: "HS256", expiresIn: '24h' }
+        { algorithm: "HS256", expiresIn: '7d' }
     )
 }
 
