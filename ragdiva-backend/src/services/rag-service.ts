@@ -99,7 +99,7 @@ export async function dataIndexing(
 
     try {
         await client.insert({
-            collection_name: "ragdiva_rag_collection",
+            collection_name: process.env.MILVUS_COLLECTION || "ragdiva_rag_collection",
             data: milvusPayload,
         });
     } catch {
@@ -159,7 +159,7 @@ export async function retrievalService(query: string) {
     const embedQuery = await embedding.queryEmbed([query]);
 
     const result = await client.hybridSearch({
-        collection_name: "ragdiva_rag_collection",
+        collection_name: process.env.MILVUS_COLLECTION || "ragdiva_rag_collection",
         data: [
             {
                 data: [embedQuery[0]],

@@ -107,7 +107,7 @@ export async function ensureCollection(
 }
 
 export async function clearCollection(
-    collectionName: string = "ragdiva_rag_collection",
+    collectionName: string = process.env.MILVUS_COLLECTION || "ragdiva_rag_collection",
 ) {
     await client.useDatabase({ db_name: process.env.MILVUS_DB! });
     try {
@@ -119,7 +119,7 @@ export async function clearCollection(
 export async function milvusSetup(embeddingDim: number = 1024) {
     await ensureDatabase(process.env.MILVUS_DB!);
     await client.useDatabase({ db_name: process.env.MILVUS_DB! });
-    await ensureCollection("ragdiva_rag_collection", embeddingDim);
+    await ensureCollection(process.env.MILVUS_COLLECTION || "ragdiva_rag_collection", embeddingDim);
 }
 
 export const weightedRanker = {
