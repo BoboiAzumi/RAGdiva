@@ -16,8 +16,8 @@ FROM nginx:1.31.3
 WORKDIR /app
 
 COPY nginx.conf /etc/nginx/nginx.conf
-
-COPY ./dist ./var/www/html
+RUN mkdir /var/www/html
+COPY ./dist /var/www/html
 
 EXPOSE 80
 
