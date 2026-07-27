@@ -11,7 +11,7 @@ import {
 import type { DocumentParserType } from "../types/document-parser-type.js";
 import { Document } from "@langchain/core/documents";
 import { broadcasting } from "../lib/broadcast/broadcast.js";
-import { FunctionType, MetricType } from "@zilliz/milvus2-sdk-node";
+import { MetricType } from "@zilliz/milvus2-sdk-node";
 
 export async function dataIngestion(fileIds: string[]) {
     const files = await findFileByIdList(fileIds);
@@ -31,7 +31,10 @@ export async function dataIngestion(fileIds: string[]) {
                 }
 
                 return feedback.data;
-            } catch {
+            } catch (error: any) {
+                broadcasting("rag", { message: "Data Ingestion", data: error.message }).catch(
+                    (e) => console.log(e),
+                );
                 await updateFileStatus(v.id, "Failed");
                 return null;
             }
