@@ -12,8 +12,7 @@ COPY . .
 
 RUN npm run build
 RUN npm run migrate-deploy
-RUN npm run setup-admin-prod
 
 EXPOSE 3000
 
-CMD ["npm", "run", "start"]
+CMD ["sh", "-c", "npm run setup-admin-prod && npm run start"]
