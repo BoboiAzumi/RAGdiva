@@ -81,7 +81,7 @@ services:
       dockerfile: Dockerfile
     restart: always
     ports:
-      - "8000:80"
+      - "8008:80"
     depends_on:
       - ragdiva-frontend
       - ragdiva-backend
