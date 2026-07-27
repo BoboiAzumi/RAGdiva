@@ -111,7 +111,7 @@ export async function dataIndexing(
                 await updateFileStatus(v.document_id, "Failed");
             }),
         );
-        throw e; // re-throw so dataInsertService catch block handles it
+        throw e;
     }
 }
 
