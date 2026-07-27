@@ -48,10 +48,10 @@ services:
         ipv4_address: 10.10.24.4
 
   ragdiva-backend:
+    container_name: ragdiva-backend
     build:
       context: ./ragdiva-backend
       dockerfile: Dockerfile
-    container_name: ragdiva-backend
     restart: always
     depends_on:
       - rabbitmq
@@ -64,10 +64,10 @@ services:
       - ./files:/app/files
 
   ragdiva-frontend:
+    container_name: ragdiva-frontend
     build:
       context: ./ragdiva-frontend
       dockerfile: Dockerfile
-    container_name: ragdiva-frontend
     restart: always
     depends_on:
       - ragdiva-backend
@@ -76,6 +76,7 @@ services:
         ipv4_address: 10.10.24.6
   
   ragdiva-reverse-proxy:
+    container_name: ragdiva-reverse-proxy
     build:
       context: ./ragdiva-reverse-proxy
       dockerfile: Dockerfile
@@ -90,7 +91,7 @@ services:
         ipv4_address: 10.10.24.7
 
   etcd:
-    container_name: milvus-etcd-ragdiva
+    container_name: ragdiva-milvus-etcd
     image: quay.io/coreos/etcd:v3.5.25
     environment:
       - ETCD_AUTO_COMPACTION_MODE=revision
@@ -110,7 +111,7 @@ services:
         ipv4_address: 10.10.24.8
 
   minio:
-    container_name: milvus-minio-ragdiva
+    container_name: ragdiva-milvus-minio
     image: minio/minio:RELEASE.2024-12-18T13-15-44Z
     environment:
       MINIO_ACCESS_KEY: minioadmin
@@ -128,7 +129,7 @@ services:
         ipv4_address: 10.10.24.9
 
   milvus:
-    container_name: milvus-standalone-ragdiva
+    container_name: ragdiva-milvus-standalone
     image: milvusdb/milvus:v2.6.20
     command: ["milvus", "run", "standalone"]
     security_opt:
