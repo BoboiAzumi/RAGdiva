@@ -1,4 +1,3 @@
-import { type ChartConfig } from "@/components/ui/chart";
 import { dashboardQueryOptions } from "@/features/queries/dashboard-queries";
 import type { DashboardType } from "@/types/dashboard-types";
 import { useQuery } from "@tanstack/react-query";
