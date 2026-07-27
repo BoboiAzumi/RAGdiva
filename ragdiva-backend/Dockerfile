@@ -11,6 +11,7 @@ RUN npm install
 COPY . .
 
 RUN npm run build
+RUN npm run migrate-deploy
 RUN npm run setup-admin-prod
 
 EXPOSE 3000
