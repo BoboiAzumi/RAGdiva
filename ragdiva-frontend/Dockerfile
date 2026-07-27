@@ -15,7 +15,7 @@ FROM nginx:1.31.3
 
 WORKDIR /app
 
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/default.conf
 RUN mkdir /var/www
 RUN mkdir /var/www/html
 COPY --from=builder /app/dist /var/www/html
