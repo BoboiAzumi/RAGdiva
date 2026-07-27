@@ -18,14 +18,14 @@ services:
         ipv4_address: 10.10.24.2
 
   db:
-    image: mysql:9.7.1
+    image: mariadb:11.4
     container_name: ragdiva-mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: toor
-      MYSQL_DATABASE: ragdiva
-      MYSQL_USER: ragdiva
-      MYSQL_PASSWORD: toor
+      MARIADB_ROOT_PASSWORD: toor
+      MARIADB_DATABASE: ragdiva
+      MARIADB_USER: ragdiva
+      MARIADB_PASSWORD: toor
     volumes:
       - ./mysql_stored_data:/var/lib/mysql
     ports:
