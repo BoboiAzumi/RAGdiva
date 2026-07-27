@@ -24,7 +24,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: toor
       MYSQL_DATABASE: ragdiva
-      MYSQL_USER: root
+      MYSQL_USER: ragdiva
       MYSQL_PASSWORD: toor
     volumes:
       - ./mysql_stored_data:/var/lib/mysql
