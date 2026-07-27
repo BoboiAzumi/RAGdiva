@@ -105,12 +105,13 @@ export async function dataIndexing(
             collection_name: process.env.MILVUS_COLLECTION || "ragdiva_rag_collection",
             data: milvusPayload,
         });
-    } catch {
+    } catch (e) {
         await Promise.all(
             milvusPayload.map(async (v) => {
                 await updateFileStatus(v.document_id, "Failed");
             }),
         );
+        throw e; // re-throw so dataInsertService catch block handles it
     }
 }
 
@@ -120,6 +121,14 @@ export async function dataInsertService(fileIds: string[]) {
             (e) => console.log(e),
         );
         const ingestions = await dataIngestion(fileIds);
+
+        if (ingestions.length === 0) {
+            broadcasting("rag", {
+                message: "Error",
+                data: "Semua file gagal diproses pada tahap ingestion",
+            }).catch((e) => console.log(e));
+            return;
+        }
 
         broadcasting("rag", {
             message: "Data Chunking",
