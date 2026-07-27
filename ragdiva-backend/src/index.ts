@@ -132,4 +132,8 @@ async function main() {
     });
 }
 
-main().catch((e) => console.log(e));
+main().catch((e) => {
+    console.error("Fatal startup error:", e);
+    process.exit(1);
+});
+
