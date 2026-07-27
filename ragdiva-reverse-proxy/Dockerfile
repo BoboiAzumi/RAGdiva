@@ -1,6 +1,6 @@
 FROM nginx:1.31.3
 
-COPY . /etc/nginx/conf.d
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
