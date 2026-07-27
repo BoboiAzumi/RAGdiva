@@ -1,4 +1,4 @@
-FROM node:26-alpine3.23
+FROM node:26-alpine3.23 AS builder
 
 WORKDIR /app
 
@@ -17,7 +17,7 @@ WORKDIR /app
 
 COPY nginx.conf /etc/nginx/nginx.conf
 RUN mkdir /var/www/html
-COPY ./dist /var/www/html
+COPY --from=builder /app/dist /var/www/html
 
 EXPOSE 80
 
