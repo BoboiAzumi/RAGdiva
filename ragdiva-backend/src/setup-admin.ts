@@ -2,7 +2,7 @@ import "dotenv/config"
 import { hashPassword } from "./utils/bcrypt.js";
 import { prisma } from "./lib/database/database.js";
 
-async function setupAdmin(){
+async function setupAdmin() {
     const defaultAdminUsername = 'admin'
 
     const user = await prisma.users.findFirst({
@@ -39,5 +39,4 @@ async function setupAdmin(){
     return
 }
 
-await setupAdmin()
-console.log("Press ctrl + c to exited")
+await setupAdmin().finally(() => process.exit(0))
