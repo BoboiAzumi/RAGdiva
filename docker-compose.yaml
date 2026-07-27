@@ -1,131 +1,164 @@
-# ============================================================
-# Docker Compose — Orkestrasi Multi-Container
-# ============================================================
-# Docker Compose memungkinkan kita menjalankan BANYAK container
-# (service) sekaligus dengan satu perintah: docker compose up
-#
-# KONSEP:
-# - Setiap "service" = satu container = satu aplikasi
-# - Semua service bisa saling berkomunikasi via network internal
-# - Container terisolasi satu sama lain (seperti VM ringan)
-#
-# PERINTAH PENTING:
-# - docker compose up -d        → Start semua service (background)
-# - docker compose down          → Stop & hapus semua container
-# - docker compose logs -f       → Lihat log semua service (realtime)
-# - docker compose logs -f converter → Lihat log service tertentu
-# - docker compose build         → Rebuild image (setelah ubah kode)
-# ============================================================
-
 services:
-
-  # ============================================================
-  # RABBITMQ — Message Broker
-  # ============================================================
-  # RabbitMQ = "kantor pos" untuk message antar service.
-  # Service tidak berkomunikasi langsung, tapi lewat RabbitMQ.
-  #
-  # Keuntungan message broker:
-  # 1. DECOUPLING: Service tidak perlu tahu alamat service lain
-  # 2. RELIABILITY: Message tidak hilang meskipun consumer mati
-  # 3. SCALABILITY: Bisa tambah consumer tanpa ubah producer
-  # 4. BUFFERING: Jika consumer lambat, message antri di RabbitMQ
-  # ============================================================
   rabbitmq:
-    # Image official RabbitMQ dengan Management Plugin.
-    # Tag "management" menyertakan web UI untuk monitoring.
     image: rabbitmq:4-management
-
-    # Port mapping: [port_host]:[port_container]
-    ports:
-      # 5672: Port AMQP — digunakan oleh aplikasi untuk connect
-      - "5672:5672"
-      # 15672: Port Management UI — buka http://localhost:15672
-      # di browser untuk monitoring queues, connections, dll.
-      # Default login: guest / guest
-      - "15672:15672"
-
-    # Environment variables untuk konfigurasi RabbitMQ
+    container_name: ragdiva-rabbitmq
     environment:
-      # Username dan password default.
-      # GANTI di production!
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
-
-    # Volume: Simpan data RabbitMQ di luar container.
-    # Tanpa volume, data hilang saat container dihapus.
-    # Named volume "rabbitmq_data" di-manage oleh Docker.
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
-
-    # Healthcheck: Docker secara berkala mengecek apakah
-    # RabbitMQ benar-benar siap menerima koneksi.
-    # rabbitmq-diagnostics check_port_connectivity mengecek
-    # apakah port AMQP (5672) sudah bisa menerima koneksi.
     healthcheck:
       test: ["CMD", "rabbitmq-diagnostics", "check_port_connectivity"]
-      interval: 10s    # Cek setiap 10 detik
-      timeout: 5s      # Timeout per cek
-      retries: 5       # Anggap unhealthy setelah 5x gagal
-      start_period: 30s # Tunggu 30 detik sebelum mulai cek
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      ragdiva_network:
+        ipv4_address: 10.10.24.2
 
-  # ============================================================
-  # DOCUMENT CONVERTER — Python Service
-  # ============================================================
-  # Service ini mengkonsumsi message dari RabbitMQ, mengkonversi
-  # dokumen ke Markdown via MarkItDown, dan mengirim hasilnya
-  # kembali ke RabbitMQ.
-  # ============================================================
+  db:
+    image: mysql:9.7.1
+    container_name: ragdiva-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: my_secret_password
+      MYSQL_DATABASE: my_local_db
+      MYSQL_USER: my_db_user
+      MYSQL_PASSWORD: user_password
+    volumes:
+      - ./mysql_stored_data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    networks:
+      ragdiva_network:
+        ipv4_address: 10.10.24.3
+
   document-converter:
-    # Build dari Dockerfile di folder ragdiva-document-converter
     build:
       context: ./ragdiva-document-converter
       dockerfile: Dockerfile
-
-    # Environment variables (override .env.example)
-    environment:
-      # "rabbitmq" = nama service di atas.
-      # Docker Compose membuat DNS internal sehingga
-      # service bisa saling akses menggunakan nama service.
-      # Jadi "rabbitmq" di sini akan resolve ke IP container RabbitMQ.
-      RABBITMQ_HOST: rabbitmq
-      RABBITMQ_PORT: 5672
-      RABBITMQ_USER: guest
-      RABBITMQ_PASS: guest
-      QUEUE_NAME: document_convert
-      MAX_WORKERS: 4
-
-    # Volume: Mount folder uploads dari host ke container.
-    # Ini memungkinkan Python service mengakses file yang
-    # di-upload oleh backend Node.js.
-    #
-    # Format: [path_host]:[path_container]
-    # Anda bisa sesuaikan path ini dengan kebutuhan.
-    volumes:
-      - ./uploads:/data/uploads
-
-    # depends_on + condition: Jangan start service ini
-    # SAMPAI RabbitMQ healthcheck statusnya "healthy".
-    #
-    # Tanpa ini, converter bisa start duluan dan crash
-    # karena RabbitMQ belum siap. depends_on TANPA condition
-    # hanya menunggu container START (bukan READY).
+    container_name: ragdiva-document-converter
+    restart: unless-stopped
     depends_on:
       rabbitmq:
         condition: service_healthy
+    networks:
+      ragdiva_network:
+        ipv4_address: 10.10.24.4
 
-    # Restart policy: Otomatis restart jika container crash.
-    # "unless-stopped" = restart terus kecuali di-stop manual.
-    # Berguna jika service crash karena error sementara.
-    restart: unless-stopped
+  ragdiva-backend:
+    build:
+      context: ./ragdiva-backend
+      dockerfile: Dockerfile
+    container_name: ragdiva-backend
+    restart: always
+    depends_on:
+      - rabbitmq
+      - db
+      - milvus
+    networks:
+      ragdiva_network:
+        ipv4_address: 10.10.24.5
+    volumes:
+      - ./files:/app/files
 
-# ============================================================
-# VOLUMES — Persistent Storage
-# ============================================================
-# Named volumes dikelola oleh Docker dan bertahan bahkan
-# setelah container dihapus (docker compose down).
-# Data hanya hilang jika volume dihapus secara eksplisit
-# (docker volume rm <nama_volume>).
-# ============================================================
+  ragdiva-frontend:
+    build:
+      context: ./ragdiva-frontend
+      dockerfile: Dockerfile
+    container_name: ragdiva-frontend
+    restart: always
+    depends_on:
+      - ragdiva-backend
+    networks:
+      ragdiva_network:
+        ipv4_address: 10.10.24.6
+  
+  ragdiva-reverse-proxy:
+    build:
+      context: ./ragdiva-reverse-proxy
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "8000:80"
+    depends_on:
+      - ragdiva-frontend
+      - ragdiva-backend
+    networks:
+      ragdiva_network:
+        ipv4_address: 10.10.24.7
+
+  etcd:
+    container_name: milvus-etcd
+    image: quay.io/coreos/etcd:v3.5.25
+    environment:
+      - ETCD_AUTO_COMPACTION_MODE=revision
+      - ETCD_AUTO_COMPACTION_RETENTION=1000
+      - ETCD_QUOTA_BACKEND_BYTES=4294967296
+      - ETCD_SNAPSHOT_COUNT=50000
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/etcd:/etcd
+    command: etcd -advertise-client-urls=http://etcd:2379 -listen-client-urls http://0.0.0.0:2379 --data-dir /etcd
+    healthcheck:
+      test: ["CMD", "etcdctl", "endpoint", "health"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    networks:
+      ragdiva_network:
+        ipv4_address: 10.10.24.8
+
+  minio:
+    container_name: milvus-minio
+    image: minio/minio:RELEASE.2024-12-18T13-15-44Z
+    environment:
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/minio:/minio_data
+    command: minio server /minio_data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    networks:
+      ragdiva_network:
+        ipv4_address: 10.10.24.9
+
+  milvus:
+    container_name: milvus-standalone
+    image: milvusdb/milvus:v2.6.20
+    command: ["milvus", "run", "standalone"]
+    security_opt:
+    - seccomp:unconfined
+    environment:
+      ETCD_ENDPOINTS: etcd:2379
+      MINIO_ADDRESS: minio:9000
+      MQ_TYPE: woodpecker
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9091/healthz"]
+      interval: 30s
+      start_period: 90s
+      timeout: 20s
+      retries: 3
+    depends_on:
+      - "etcd"
+      - "minio"
+    networks:
+      ragdiva_network:
+        ipv4_address: 10.10.24.10
+
 volumes:
   rabbitmq_data:
+
+networks:
+  ragdiva_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.10.24.0/24
+          gateway: 10.10.24.1

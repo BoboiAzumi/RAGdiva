@@ -11,6 +11,14 @@ COPY . .
 
 RUN npm run build
 
-EXPOSE 3000
+FROM nginx:1.31.3
 
-CMD ["npm", "run", "start"]
+WORKDIR /app
+
+COPY nginx.conf /etc/nginx/nginx.conf
+
+COPY ./dist ./var/www/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
