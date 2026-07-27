@@ -112,39 +112,46 @@ export async function dataIndexing(
 }
 
 export async function dataInsertService(fileIds: string[]) {
-    broadcasting("rag", { message: "Data Ingestion", data: Array.from(new Set(fileIds)).join(", ") }).catch(
-        (e) => console.log(e),
-    );
-    const ingestions = await dataIngestion(fileIds);
+    try {
+        broadcasting("rag", { message: "Data Ingestion", data: Array.from(new Set(fileIds)).join(", ") }).catch(
+            (e) => console.log(e),
+        );
+        const ingestions = await dataIngestion(fileIds);
 
-    broadcasting("rag", {
-        message: "Data Chunking",
-        data: Array.from(new Set(ingestions.map((v) => v.metadata.file_title))).join(", "),
-    }).catch((e) => console.log(e));
-    const chunk = await dataChunking(ingestions);
+        broadcasting("rag", {
+            message: "Data Chunking",
+            data: Array.from(new Set(ingestions.map((v) => v.metadata.file_title))).join(", "),
+        }).catch((e) => console.log(e));
+        const chunk = await dataChunking(ingestions);
 
-    broadcasting("rag", {
-        message: "Data Embedding",
-        data: Array.from(new Set(chunk.map((v) => v.metadata.file_title))).join(", "),
-    }).catch((e) => console.log(e));
-    const embedding = await dataEmbedding(chunk);
+        broadcasting("rag", {
+            message: "Data Embedding",
+            data: Array.from(new Set(chunk.map((v) => v.metadata.file_title))).join(", "),
+        }).catch((e) => console.log(e));
+        const embedding = await dataEmbedding(chunk);
 
-    broadcasting("rag", {
-        message: "Data Indexing",
-        data: Array.from(new Set(embedding.map((v) => v.document.metadata.file_title))).join(", "),
-    }).catch((e) => console.log(e));
-    await dataIndexing(embedding);
+        broadcasting("rag", {
+            message: "Data Indexing",
+            data: Array.from(new Set(embedding.map((v) => v.document.metadata.file_title))).join(", "),
+        }).catch((e) => console.log(e));
+        await dataIndexing(embedding);
 
-    broadcasting("rag", {
-        message: "Successfully",
-        data: `Berhasil memasukkan data ${Array.from(new Set(embedding.map((v) => v.document.metadata.file_title))).join(", ")}`,
-    }).catch((e) => console.log(e));
+        broadcasting("rag", {
+            message: "Successfully",
+            data: `Berhasil memasukkan data ${Array.from(new Set(embedding.map((v) => v.document.metadata.file_title))).join(", ")}`,
+        }).catch((e) => console.log(e));
 
-    await Promise.all(
-        embedding.map(async (v) => {
-            await updateFileStatus(v.document.metadata.id, "Completed");
-        }),
-    );
+        await Promise.all(
+            embedding.map(async (v) => {
+                await updateFileStatus(v.document.metadata.id, "Completed");
+            }),
+        );
+    }
+    catch (e: any) {
+        broadcasting("rag", { message: "Error", data: e.message }).catch(
+            (e) => console.log(e),
+        );
+    }
 }
 
 export async function retrievalService(query: string) {
