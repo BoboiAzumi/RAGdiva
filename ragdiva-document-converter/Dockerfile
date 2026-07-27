@@ -10,6 +10,7 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
+COPY .env-docker ./.env
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
