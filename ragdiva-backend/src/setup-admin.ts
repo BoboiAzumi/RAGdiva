@@ -1,6 +1,6 @@
 import "dotenv/config"
 import { hashPassword } from "./utils/bcrypt.js";
-import { prisma } from "./lib/database.js";
+import { prisma } from "./lib/database/database.js";
 
 async function setupAdmin(){
     const defaultAdminUsername = 'admin'

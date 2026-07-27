@@ -1,4 +1,4 @@
-import type { BroadcastMessageType } from "../types/broadcast-message-type.js";
+import type { BroadcastMessageType } from "../../types/broadcast-message-type.js";
 
 export const broadcastPool = new Set<{ id: string; write: (event: string, data: string) => Promise<void>}>()
 
