@@ -1,4 +1,7 @@
 import {
+    Brain,
+    BrainCircuit,
+    CloudCog,
     FileText,
     Form,
     LayoutDashboard,
@@ -75,6 +78,21 @@ export function SidebarLayout() {
                     name: "Pengguna",
                     icon: User,
                     path: `/${userInfo?.level}/pengguna`,
+                },
+                {
+                    name: "AI Providers",
+                    icon: CloudCog,
+                    path: `/${userInfo?.level}/ai-providers`,
+                },
+                {
+                    name: "AI Models",
+                    icon: Brain,
+                    path: `/${userInfo?.level}/ai-models`,
+                },
+                {
+                    name: "AI Embedding",
+                    icon: BrainCircuit,
+                    path: `/${userInfo?.level}/ai-embedding`,
                 },
             ],
         },

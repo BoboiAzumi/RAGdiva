@@ -109,6 +109,7 @@ export class AIAgent {
 
             this.isReady = true;
         } catch (e) {
+            console.log(e)
             throw e;
         }
     }
@@ -184,6 +185,7 @@ export class AIAgent {
                 attempt++;
 
                 if (!isResourceExhausted || attempt > this.maxRetries) {
+                    console.log(e)
                     throw e;
                 }
 

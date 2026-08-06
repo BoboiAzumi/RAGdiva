@@ -348,6 +348,9 @@
   --sidebar-accent-foreground: var(--color-accent-light);
   --sidebar-border: var(--color-border-light);
   --sidebar-ring: var(--color-accent-light-400);
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary);
 }
 
 .dark {
@@ -527,4 +530,24 @@ html {
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
 }

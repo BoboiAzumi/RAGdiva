@@ -40,6 +40,10 @@ export const Route = createFileRoute("/(auth)")({
                 toast(sse.message, { description: sse.data, position: "top-center" })
             })
 
+            es.onmessage = (e) => {
+                console.log(e)
+            }
+
         }, [])
 
         authContext.setUserInfo(data.data);

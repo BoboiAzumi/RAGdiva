@@ -10,7 +10,6 @@ import { Toaster } from "./components/ui/sonner";
 import { AuthProvider } from "./providers/auth-providers";
 import { TooltipProvider } from "./components/ui/tooltip";
 
-// Polyfill crypto.randomUUID for non-secure contexts (HTTP on local network)
 if (!crypto.randomUUID) {
     crypto.randomUUID = function (): `${string}-${string}-${string}-${string}-${string}` {
         const bytes = new Uint8Array(16);
@@ -43,7 +42,6 @@ createRoot(document.getElementById("root")!).render(
                 <QueryClientProvider client={queryClient}>
                     <TooltipProvider>
                         <RouterProvider router={router} />
-                        <ReactQueryDevtools />
                         <Toaster />
                     </TooltipProvider>
                 </QueryClientProvider>

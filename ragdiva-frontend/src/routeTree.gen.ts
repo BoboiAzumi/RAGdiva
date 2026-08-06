@@ -24,6 +24,9 @@ import { Route as authAdminDokumenBorangRouteImport } from './routes/(auth)/admi
 import { Route as authAdminDashboardRouteImport } from './routes/(auth)/admin/dashboard'
 import { Route as authAdminBerkasRouteImport } from './routes/(auth)/admin/berkas'
 import { Route as authAdminAichatRouteImport } from './routes/(auth)/admin/aichat'
+import { Route as authAdminAiProvidersRouteImport } from './routes/(auth)/admin/ai-providers'
+import { Route as authAdminAiModelsRouteImport } from './routes/(auth)/admin/ai-models'
+import { Route as authAdminAiEmbeddingRouteImport } from './routes/(auth)/admin/ai-embedding'
 import { Route as authAdminKriteriaFileIdRouteImport } from './routes/(auth)/admin/kriteria-file.$id'
 import { Route as authAdminAichatSidRouteImport } from './routes/(auth)/admin/aichat.$sid'
 
@@ -100,6 +103,21 @@ const authAdminAichatRoute = authAdminAichatRouteImport.update({
   path: '/admin/aichat',
   getParentRoute: () => authRouteRoute,
 } as any)
+const authAdminAiProvidersRoute = authAdminAiProvidersRouteImport.update({
+  id: '/admin/ai-providers',
+  path: '/admin/ai-providers',
+  getParentRoute: () => authRouteRoute,
+} as any)
+const authAdminAiModelsRoute = authAdminAiModelsRouteImport.update({
+  id: '/admin/ai-models',
+  path: '/admin/ai-models',
+  getParentRoute: () => authRouteRoute,
+} as any)
+const authAdminAiEmbeddingRoute = authAdminAiEmbeddingRouteImport.update({
+  id: '/admin/ai-embedding',
+  path: '/admin/ai-embedding',
+  getParentRoute: () => authRouteRoute,
+} as any)
 const authAdminKriteriaFileIdRoute = authAdminKriteriaFileIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -115,6 +133,9 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/logout': typeof LogoutRoute
   '/login': typeof publicLoginRoute
+  '/admin/ai-embedding': typeof authAdminAiEmbeddingRoute
+  '/admin/ai-models': typeof authAdminAiModelsRoute
+  '/admin/ai-providers': typeof authAdminAiProvidersRoute
   '/admin/aichat': typeof authAdminAichatRouteWithChildren
   '/admin/berkas': typeof authAdminBerkasRoute
   '/admin/dashboard': typeof authAdminDashboardRoute
@@ -132,6 +153,9 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/logout': typeof LogoutRoute
   '/login': typeof publicLoginRoute
+  '/admin/ai-embedding': typeof authAdminAiEmbeddingRoute
+  '/admin/ai-models': typeof authAdminAiModelsRoute
+  '/admin/ai-providers': typeof authAdminAiProvidersRoute
   '/admin/aichat': typeof authAdminAichatRouteWithChildren
   '/admin/berkas': typeof authAdminBerkasRoute
   '/admin/dashboard': typeof authAdminDashboardRoute
@@ -152,6 +176,9 @@ export interface FileRoutesById {
   '/(public)': typeof publicRouteRouteWithChildren
   '/logout': typeof LogoutRoute
   '/(public)/login': typeof publicLoginRoute
+  '/(auth)/admin/ai-embedding': typeof authAdminAiEmbeddingRoute
+  '/(auth)/admin/ai-models': typeof authAdminAiModelsRoute
+  '/(auth)/admin/ai-providers': typeof authAdminAiProvidersRoute
   '/(auth)/admin/aichat': typeof authAdminAichatRouteWithChildren
   '/(auth)/admin/berkas': typeof authAdminBerkasRoute
   '/(auth)/admin/dashboard': typeof authAdminDashboardRoute
@@ -171,6 +198,9 @@ export interface FileRouteTypes {
     | '/'
     | '/logout'
     | '/login'
+    | '/admin/ai-embedding'
+    | '/admin/ai-models'
+    | '/admin/ai-providers'
     | '/admin/aichat'
     | '/admin/berkas'
     | '/admin/dashboard'
@@ -188,6 +218,9 @@ export interface FileRouteTypes {
     | '/'
     | '/logout'
     | '/login'
+    | '/admin/ai-embedding'
+    | '/admin/ai-models'
+    | '/admin/ai-providers'
     | '/admin/aichat'
     | '/admin/berkas'
     | '/admin/dashboard'
@@ -207,6 +240,9 @@ export interface FileRouteTypes {
     | '/(public)'
     | '/logout'
     | '/(public)/login'
+    | '/(auth)/admin/ai-embedding'
+    | '/(auth)/admin/ai-models'
+    | '/(auth)/admin/ai-providers'
     | '/(auth)/admin/aichat'
     | '/(auth)/admin/berkas'
     | '/(auth)/admin/dashboard'
@@ -335,6 +371,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authAdminAichatRouteImport
       parentRoute: typeof authRouteRoute
     }
+    '/(auth)/admin/ai-providers': {
+      id: '/(auth)/admin/ai-providers'
+      path: '/admin/ai-providers'
+      fullPath: '/admin/ai-providers'
+      preLoaderRoute: typeof authAdminAiProvidersRouteImport
+      parentRoute: typeof authRouteRoute
+    }
+    '/(auth)/admin/ai-models': {
+      id: '/(auth)/admin/ai-models'
+      path: '/admin/ai-models'
+      fullPath: '/admin/ai-models'
+      preLoaderRoute: typeof authAdminAiModelsRouteImport
+      parentRoute: typeof authRouteRoute
+    }
+    '/(auth)/admin/ai-embedding': {
+      id: '/(auth)/admin/ai-embedding'
+      path: '/admin/ai-embedding'
+      fullPath: '/admin/ai-embedding'
+      preLoaderRoute: typeof authAdminAiEmbeddingRouteImport
+      parentRoute: typeof authRouteRoute
+    }
     '/(auth)/admin/kriteria-file/$id': {
       id: '/(auth)/admin/kriteria-file/$id'
       path: '/$id'
@@ -378,6 +435,9 @@ const authAdminKriteriaFileRouteWithChildren =
   )
 
 interface authRouteRouteChildren {
+  authAdminAiEmbeddingRoute: typeof authAdminAiEmbeddingRoute
+  authAdminAiModelsRoute: typeof authAdminAiModelsRoute
+  authAdminAiProvidersRoute: typeof authAdminAiProvidersRoute
   authAdminAichatRoute: typeof authAdminAichatRouteWithChildren
   authAdminBerkasRoute: typeof authAdminBerkasRoute
   authAdminDashboardRoute: typeof authAdminDashboardRoute
@@ -391,6 +451,9 @@ interface authRouteRouteChildren {
 }
 
 const authRouteRouteChildren: authRouteRouteChildren = {
+  authAdminAiEmbeddingRoute: authAdminAiEmbeddingRoute,
+  authAdminAiModelsRoute: authAdminAiModelsRoute,
+  authAdminAiProvidersRoute: authAdminAiProvidersRoute,
   authAdminAichatRoute: authAdminAichatRouteWithChildren,
   authAdminBerkasRoute: authAdminBerkasRoute,
   authAdminDashboardRoute: authAdminDashboardRoute,

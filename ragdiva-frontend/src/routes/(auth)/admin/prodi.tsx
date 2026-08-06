@@ -1,9 +1,7 @@
+import { ProdiPages } from '@/pages/prodi-pages'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/(auth)/admin/prodi')({
-  component: RouteComponent,
+  component: ProdiPages,
 })
 
-function RouteComponent() {
-  return <div>Hello "/(auth)/admin/prodi"!</div>
-}

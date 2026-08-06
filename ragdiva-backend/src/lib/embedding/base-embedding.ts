@@ -64,7 +64,6 @@ export class BaseEmbedding implements Embedding {
 
             const batchCount = Math.ceil(content.length / this.maxBatch);
             for (let i = 0; i < batchCount; i++) {
-                console.log(`Batch ${i + 1} / ${batchCount}`)
                 const batch = content.slice(
                     i * this.maxBatch,
                     this.maxBatch * (i + 1),
