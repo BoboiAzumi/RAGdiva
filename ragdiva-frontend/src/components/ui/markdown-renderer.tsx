@@ -418,7 +418,6 @@ export function MarkdownRenderer({
                         <hr className="my-6 border-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
                     ),
 
-                    // Images
                     img: ({ src, alt }) => (
                         <span className="my-4 block overflow-hidden rounded-xl border border-border/60 shadow-sm">
                             <img
