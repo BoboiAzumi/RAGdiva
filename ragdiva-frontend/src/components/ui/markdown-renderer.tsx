@@ -105,7 +105,6 @@ function CodeBlock({
 
     return (
         <div className="group relative my-4 overflow-hidden rounded-xl border border-border/70 bg-zinc-950 dark:bg-zinc-950 text-zinc-100 shadow-md font-mono text-xs md:text-sm">
-            {/* Header Bar */}
             <div className="flex items-center justify-between border-b border-zinc-800 bg-zinc-900/90 px-4 py-2 text-xs font-sans text-zinc-400">
                 <div className="flex items-center gap-1.5 font-medium">
                     <FileCode className="h-3.5 w-3.5 text-accent" />
