@@ -10,7 +10,7 @@ export function PenggunaPage(){
 
     return (
         <div className="m-5">
-            <h2 className="text-2xl font-semibold">Pengguna</h2>
+            <h2 className="text-2xl font-semibold">Pengguna</h2> 
             <div className="grid grid-cols-1 grid-flow-row-dense mt-5 gap-2">
                 <Card>
                     <CardContent>
@@ -54,7 +54,7 @@ export function PenggunaPage(){
                                 </TableRow>
                             </TableBody>
                         </Table>
-                        <div className="flex justify-center gap-2">
+                        <div className="flex justify-center gap-2 mt-5">
                             <Button variant={"outline"}>
                                 <ChevronLeft />
                             </Button>

@@ -1,21 +1,27 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Select, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useTitle } from "@/hooks/use-title";
-import { ChevronLeft, ChevronRight, Edit, Search, SquarePlus, Trash } from "lucide-react";
+import { ChevronLeft, ChevronRight, RotateCcw, Search, SquarePlus } from "lucide-react";
 
-export function ProdiPages() {
-    useTitle("Program Studi");
+export function FileIngestionPage(){
+    useTitle("File Ingestion")
 
     return (
         <div className="m-5">
-            <h2 className="text-2xl font-semibold">Program Studi</h2> 
+            <h2 className="text-2xl font-semibold">File Ingestion</h2> 
             <div className="grid grid-cols-1 grid-flow-row-dense mt-5 gap-2">
                 <Card>
                     <CardContent>
                         <form className="flex gap-2">
                             <Input placeholder="Pencarian" />
+                            <Select>
+                                <SelectTrigger>
+                                    <SelectValue placeholder="Status Ingestion" />
+                                </SelectTrigger>
+                            </Select>
                             <Button>
                                 <Search className="dark:text-text-dark" />
                             </Button>
@@ -27,22 +33,21 @@ export function ProdiPages() {
                             <TableHeader>
                                 <TableRow>
                                     <TableHead>No</TableHead>
-                                    <TableHead>Nama Prodi</TableHead>
-                                    <TableHead>Akreditasi</TableHead>
+                                    <TableHead>File Name</TableHead>
+                                    <TableHead>File Hash</TableHead>
+                                    <TableHead>Ingestion Status</TableHead>
                                     <TableHead>Aksi</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
                                 <TableRow>
                                     <TableCell>1</TableCell>
-                                    <TableCell>Teknik Waifu</TableCell>
-                                    <TableCell>Unggul</TableCell>
+                                    <TableCell>Abcd.pdf</TableCell>
+                                    <TableCell>asdfsasdds</TableCell>
+                                    <TableCell>Complete</TableCell>
                                     <TableCell className="flex flex-col md:flex-row gap-2">
                                         <Button variant={"outline"}>
-                                            <Edit className="text-accent" />
-                                        </Button>
-                                        <Button variant={"outline"}>
-                                            <Trash className="text-red-600" />
+                                            <RotateCcw className="text-accent" />
                                         </Button>
                                     </TableCell>
                                 </TableRow>
@@ -63,5 +68,5 @@ export function ProdiPages() {
                 </Card>
             </div>
         </div>
-    );
+    )
 }

@@ -2,6 +2,7 @@ import {
     Brain,
     BrainCircuit,
     CloudCog,
+    FileCog,
     FileText,
     Form,
     LayoutDashboard,
@@ -110,6 +111,11 @@ export function SidebarLayout() {
                     icon: FileText,
                     path: `/${userInfo?.level}/kriteria-file`,
                 },
+                {
+                    name: "File Ingestion",
+                    icon: FileCog,
+                    path: `/${userInfo?.level}/file-ingestion`
+                }
             ],
         },
         {

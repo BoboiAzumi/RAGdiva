@@ -20,6 +20,7 @@ import { Route as authAdminSettingsRouteImport } from './routes/(auth)/admin/set
 import { Route as authAdminProdiRouteImport } from './routes/(auth)/admin/prodi'
 import { Route as authAdminPenggunaRouteImport } from './routes/(auth)/admin/pengguna'
 import { Route as authAdminKriteriaFileRouteImport } from './routes/(auth)/admin/kriteria-file'
+import { Route as authAdminFileIngestionRouteImport } from './routes/(auth)/admin/file-ingestion'
 import { Route as authAdminDokumenBorangRouteImport } from './routes/(auth)/admin/dokumen-borang'
 import { Route as authAdminDashboardRouteImport } from './routes/(auth)/admin/dashboard'
 import { Route as authAdminBerkasRouteImport } from './routes/(auth)/admin/berkas'
@@ -83,6 +84,11 @@ const authAdminKriteriaFileRoute = authAdminKriteriaFileRouteImport.update({
   path: '/admin/kriteria-file',
   getParentRoute: () => authRouteRoute,
 } as any)
+const authAdminFileIngestionRoute = authAdminFileIngestionRouteImport.update({
+  id: '/admin/file-ingestion',
+  path: '/admin/file-ingestion',
+  getParentRoute: () => authRouteRoute,
+} as any)
 const authAdminDokumenBorangRoute = authAdminDokumenBorangRouteImport.update({
   id: '/admin/dokumen-borang',
   path: '/admin/dokumen-borang',
@@ -140,6 +146,7 @@ export interface FileRoutesByFullPath {
   '/admin/berkas': typeof authAdminBerkasRoute
   '/admin/dashboard': typeof authAdminDashboardRoute
   '/admin/dokumen-borang': typeof authAdminDokumenBorangRoute
+  '/admin/file-ingestion': typeof authAdminFileIngestionRoute
   '/admin/kriteria-file': typeof authAdminKriteriaFileRouteWithChildren
   '/admin/pengguna': typeof authAdminPenggunaRoute
   '/admin/prodi': typeof authAdminProdiRoute
@@ -160,6 +167,7 @@ export interface FileRoutesByTo {
   '/admin/berkas': typeof authAdminBerkasRoute
   '/admin/dashboard': typeof authAdminDashboardRoute
   '/admin/dokumen-borang': typeof authAdminDokumenBorangRoute
+  '/admin/file-ingestion': typeof authAdminFileIngestionRoute
   '/admin/kriteria-file': typeof authAdminKriteriaFileRouteWithChildren
   '/admin/pengguna': typeof authAdminPenggunaRoute
   '/admin/prodi': typeof authAdminProdiRoute
@@ -183,6 +191,7 @@ export interface FileRoutesById {
   '/(auth)/admin/berkas': typeof authAdminBerkasRoute
   '/(auth)/admin/dashboard': typeof authAdminDashboardRoute
   '/(auth)/admin/dokumen-borang': typeof authAdminDokumenBorangRoute
+  '/(auth)/admin/file-ingestion': typeof authAdminFileIngestionRoute
   '/(auth)/admin/kriteria-file': typeof authAdminKriteriaFileRouteWithChildren
   '/(auth)/admin/pengguna': typeof authAdminPenggunaRoute
   '/(auth)/admin/prodi': typeof authAdminProdiRoute
@@ -205,6 +214,7 @@ export interface FileRouteTypes {
     | '/admin/berkas'
     | '/admin/dashboard'
     | '/admin/dokumen-borang'
+    | '/admin/file-ingestion'
     | '/admin/kriteria-file'
     | '/admin/pengguna'
     | '/admin/prodi'
@@ -225,6 +235,7 @@ export interface FileRouteTypes {
     | '/admin/berkas'
     | '/admin/dashboard'
     | '/admin/dokumen-borang'
+    | '/admin/file-ingestion'
     | '/admin/kriteria-file'
     | '/admin/pengguna'
     | '/admin/prodi'
@@ -247,6 +258,7 @@ export interface FileRouteTypes {
     | '/(auth)/admin/berkas'
     | '/(auth)/admin/dashboard'
     | '/(auth)/admin/dokumen-borang'
+    | '/(auth)/admin/file-ingestion'
     | '/(auth)/admin/kriteria-file'
     | '/(auth)/admin/pengguna'
     | '/(auth)/admin/prodi'
@@ -341,6 +353,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/kriteria-file'
       fullPath: '/admin/kriteria-file'
       preLoaderRoute: typeof authAdminKriteriaFileRouteImport
+      parentRoute: typeof authRouteRoute
+    }
+    '/(auth)/admin/file-ingestion': {
+      id: '/(auth)/admin/file-ingestion'
+      path: '/admin/file-ingestion'
+      fullPath: '/admin/file-ingestion'
+      preLoaderRoute: typeof authAdminFileIngestionRouteImport
       parentRoute: typeof authRouteRoute
     }
     '/(auth)/admin/dokumen-borang': {
@@ -442,6 +461,7 @@ interface authRouteRouteChildren {
   authAdminBerkasRoute: typeof authAdminBerkasRoute
   authAdminDashboardRoute: typeof authAdminDashboardRoute
   authAdminDokumenBorangRoute: typeof authAdminDokumenBorangRoute
+  authAdminFileIngestionRoute: typeof authAdminFileIngestionRoute
   authAdminKriteriaFileRoute: typeof authAdminKriteriaFileRouteWithChildren
   authAdminPenggunaRoute: typeof authAdminPenggunaRoute
   authAdminProdiRoute: typeof authAdminProdiRoute
@@ -458,6 +478,7 @@ const authRouteRouteChildren: authRouteRouteChildren = {
   authAdminBerkasRoute: authAdminBerkasRoute,
   authAdminDashboardRoute: authAdminDashboardRoute,
   authAdminDokumenBorangRoute: authAdminDokumenBorangRoute,
+  authAdminFileIngestionRoute: authAdminFileIngestionRoute,
   authAdminKriteriaFileRoute: authAdminKriteriaFileRouteWithChildren,
   authAdminPenggunaRoute: authAdminPenggunaRoute,
   authAdminProdiRoute: authAdminProdiRoute,

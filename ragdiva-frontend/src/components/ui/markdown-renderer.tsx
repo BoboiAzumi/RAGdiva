@@ -29,9 +29,7 @@ interface MarkdownRendererProps {
 function preprocessMarkdown(text: string): string {
     if (!text) return "";
     return text
-        // Unwrap backticked markdown links like `[text](/path)` -> [text](/path)
         .replace(/`\[([^\]]+)\]\(([^)]+)\)`/g, "[$1]($2)")
-        // Unwrap backticked HTML links like `<a href="...">text</a>` -> [text](href)
         .replace(/`<a\s+[^>]*href=["']([^"']+)["'][^>]*>(.*?)<\/a>`/gi, "[$2]($1)");
 }
 
@@ -135,7 +133,6 @@ function CodeBlock({
                     )}
                 </button>
             </div>
-            {/* Content */}
             <div className="overflow-x-auto p-4 leading-relaxed scrollbar-thin scrollbar-thumb-zinc-800">
                 <pre className="m-0 bg-transparent p-0 font-mono text-xs md:text-sm leading-relaxed">
                     <code>{children}</code>
@@ -145,7 +142,6 @@ function CodeBlock({
     );
 }
 
-// Custom Blockquote / Callout Component
 function CustomBlockquote({ children }: { children: React.ReactNode }) {
     const extractText = (node: React.ReactNode): string => {
         if (typeof node === "string") return node;
@@ -249,7 +245,6 @@ export function MarkdownRenderer({
                 remarkPlugins={[remarkGfm, remarkMath]}
                 rehypePlugins={[rehypeHighlight, rehypeKatex]}
                 components={{
-                    // Headers
                     h1: ({ children }) => (
                         <h1 className="mt-6 mb-3 text-xl font-bold tracking-tight text-foreground border-b pb-2 border-border/60 first:mt-0">
                             {children}
@@ -271,14 +266,12 @@ export function MarkdownRenderer({
                         </h4>
                     ),
 
-                    // Paragraph
                     p: ({ children }) => (
                         <p className="my-2.5 leading-relaxed text-foreground/95 first:mt-0 last:mb-0">
                             {children}
                         </p>
                     ),
 
-                    // Code (Inline & Block)
                     code: ({ className, children, ...props }) => {
                         const match = /language-(\w+)/.exec(className || "");
                         const isInline = !match && !className?.includes("hljs");
@@ -289,6 +282,7 @@ export function MarkdownRenderer({
                                     className="rounded-md bg-muted/80 dark:bg-muted/50 px-1.5 py-0.5 font-mono text-[0.875em] font-semibold text-accent border border-border/40"
                                     {...props}
                                 >
+                                    {className?.toString()}
                                     {children}
                                 </code>
                             );
@@ -301,15 +295,12 @@ export function MarkdownRenderer({
                         );
                     },
 
-                    // Pre tag override to prevent double wrapping with CodeBlock
                     pre: ({ children }) => <>{children}</>,
 
-                    // Blockquotes / Callouts
                     blockquote: ({ children }) => (
                         <CustomBlockquote>{children}</CustomBlockquote>
                     ),
 
-                    // Tables
                     table: ({ children }) => (
                         <div className="my-4 w-full overflow-x-auto rounded-xl border border-border/80 bg-card/40 shadow-xs">
                             <table className="w-full text-left text-sm border-collapse min-w-[400px]">
@@ -338,7 +329,6 @@ export function MarkdownRenderer({
                         </tr>
                     ),
 
-                    // Links
                     a: ({ href, children }) => {
                         const isFileLink =
                             href?.startsWith("/api/file/") ||
@@ -385,7 +375,6 @@ export function MarkdownRenderer({
                         );
                     },
 
-                    // Lists
                     ul: ({ children }) => (
                         <ul className="my-2.5 ml-5 list-disc space-y-1 text-foreground/95 marker:text-accent">
                             {children}
@@ -410,7 +399,6 @@ export function MarkdownRenderer({
                         );
                     },
 
-                    // Custom Checkboxes for Task List
                     input: ({ type, checked, disabled }) => {
                         if (type === "checkbox") {
                             return (
@@ -426,7 +414,6 @@ export function MarkdownRenderer({
                         return <input type={type} checked={checked} disabled={disabled} />;
                     },
 
-                    // Horizontal Rule
                     hr: () => (
                         <hr className="my-6 border-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
                     ),
