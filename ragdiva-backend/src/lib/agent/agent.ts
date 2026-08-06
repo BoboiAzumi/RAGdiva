@@ -8,7 +8,7 @@ import { getAiModel } from "../../repositories/ai-model-repo.js";
 import { ChatOpenAI } from "@langchain/openai";
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { ChatOpenRouter } from "@langchain/openrouter";
-import { ChatOllama } from "@langchain/ollama"
+import { ChatOllama } from "@langchain/ollama";
 import { getAiConfig } from "../../repositories/ai-config-repo.js";
 import {
     getAiChatHistory,
@@ -54,6 +54,16 @@ export class AIAgent {
                             configuration: {
                                 baseURL: aiConfig.get("nvidia_base_url"),
                             },
+                            ...(modelProfile.modelName
+                                .toLowerCase()
+                                .includes("deepseek")
+                                ? {
+                                      modelKwargs: {
+                                          reasoning_effort: "none",
+                                      },
+                                  }
+                                : {}),
+                            maxRetries: 0,
                         });
                         break;
                     case "GoogleGenAI":
@@ -61,39 +71,58 @@ export class AIAgent {
                             apiKey: aiConfig.get("google_api_key"),
                             model: modelProfile.modelName,
                             thinkingConfig: {
-                                thinkingLevel: "MEDIUM",
+                                thinkingLevel: modelProfile.modelName.includes(
+                                    "gemma",
+                                )
+                                    ? ("MINIMAL" as any)
+                                    : "MEDIUM",
                             },
+                            maxRetries: 0,
+                            maxConcurrency: 1,
                         });
                         break;
                     case "OpenRouter":
                         model = new ChatOpenRouter({
                             apiKey: aiConfig.get("openrouter_api_key"),
                             model: modelProfile.modelName,
+                            maxRetries: 0,
                         });
                         break;
                     case "OpenAI":
                         model = new ChatOpenAI({
                             apiKey: aiConfig.get("openai_api_key"),
-                            model: modelProfile.modelName
-                        })
+                            model: modelProfile.modelName,
+                            maxRetries: 0,
+                        });
                         break;
                     case "ZenOpenCode":
                         model = new ChatOpenAI({
                             apiKey: aiConfig.get("zen_opencode_api_key"),
                             model: modelProfile.modelName,
                             configuration: {
-                                baseURL: aiConfig.get("zen_opencode_base_url")
-                            }
-                        })
+                                baseURL: aiConfig.get("zen_opencode_base_url"),
+                            },
+                            ...(modelProfile.modelName
+                                .toLowerCase()
+                                .includes("deepseek")
+                                ? {
+                                    modelKwargs: {
+                                            reasoning_effort: "none",
+                                        },
+                                    }
+                                : {}),
+                            maxRetries: 0,
+                        });
                         break;
                     case "Ollama":
                         model = new ChatOllama({
                             model: modelProfile.modelName,
                             baseUrl: aiConfig.get("ollama_base_url"),
                             headers: {
-                                Authorization: `Bearer ${aiConfig.get("ollama_api_key")}`
-                            }
-                        })
+                                Authorization: `Bearer ${aiConfig.get("ollama_api_key")}`,
+                            },
+                            maxRetries: 0,
+                        });
                     default:
                         continue;
                 }
@@ -109,7 +138,7 @@ export class AIAgent {
 
             this.isReady = true;
         } catch (e) {
-            console.log(e)
+            console.log(e);
             throw e;
         }
     }
@@ -126,13 +155,17 @@ export class AIAgent {
     ) {
         const chatHistory = await this.findChatHistory(sid);
         const agentInstance = this.agents.get(model);
+
         if (!agentInstance) throw new Error("Model not found");
 
         await insertAiChatHistory(sid, "user", message);
+
         let attempt = 0;
 
         while (true) {
+            const controller = new AbortController();
             await semaphore.acquire();
+
             try {
                 const stream = await agentInstance.streamEvents(
                     {
@@ -140,6 +173,8 @@ export class AIAgent {
                     },
                     {
                         version: "v3",
+                        signal: controller.signal,
+                        recursionLimit: 40,
                     },
                 );
 
@@ -185,7 +220,11 @@ export class AIAgent {
                 attempt++;
 
                 if (!isResourceExhausted || attempt > this.maxRetries) {
-                    console.log(e)
+                    await insertAiChatHistory(sid, "agent", e.message);
+                    await callback({
+                        type: "text",
+                        content: e.message,
+                    });
                     throw e;
                 }
 
@@ -193,8 +232,8 @@ export class AIAgent {
 
                 await callback({
                     type: "agent-error",
-                    content: JSON.stringify(e)
-                })
+                    content: JSON.stringify(e),
+                });
 
                 await callback({
                     type: "agent-retry",
@@ -219,7 +258,9 @@ export class AIAgent {
             if (v.role === "user") {
                 return new HumanMessage(v.content);
             } else {
-                return new AIMessage(v.content);
+                return new AIMessage({
+                    content: v.content,
+                });
             }
         });
 

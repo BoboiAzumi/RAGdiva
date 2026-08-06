@@ -273,7 +273,8 @@ export function MarkdownRenderer({
 
                     code: ({ className, children, ...props }) => {
                         const match = /language-(\w+)/.exec(className || "");
-                        const isInline = !match && !className?.includes("hljs");
+                        const codeString = String(children).replace(/\n$/, "");
+                        const isInline = !codeString.includes("\n");
 
                         if (isInline) {
                             return (
@@ -281,7 +282,6 @@ export function MarkdownRenderer({
                                     className="rounded-md bg-muted/80 dark:bg-muted/50 px-1.5 py-0.5 font-mono text-[0.875em] font-semibold text-accent border border-border/40"
                                     {...props}
                                 >
-                                    {className?.toString()}
                                     {children}
                                 </code>
                             );

@@ -1,0 +1,40 @@
+diff --git a/node_modules/@langchain/openai/dist/converters/completions.cjs b/node_modules/@langchain/openai/dist/converters/completions.cjs
+index e6953a9..10593ce 100644
+--- a/node_modules/@langchain/openai/dist/converters/completions.cjs
++++ b/node_modules/@langchain/openai/dist/converters/completions.cjs
+@@ -472,6 +472,7 @@ const convertStandardContentMessageToCompletionsMessage = ({ message, model }) =
+ 		};
+ 		if (_langchain_core_messages.AIMessage.isInstance(message) && !!message.tool_calls?.length) completionParam.tool_calls = message.tool_calls.map(_langchain_core_output_parsers_openai_tools.convertLangChainToolCallToOpenAI);
+ 		else if (message.additional_kwargs.tool_calls != null) completionParam.tool_calls = message.additional_kwargs.tool_calls;
++		if (message.additional_kwargs.reasoning_content !== undefined) completionParam.reasoning_content = message.additional_kwargs.reasoning_content;
+ 		return completionParam;
+ 	} else if (role === "tool" && _langchain_core_messages.ToolMessage.isInstance(message)) return {
+ 		role: "tool",
+@@ -590,6 +591,7 @@ const convertMessagesToCompletionsMessageParams = ({ messages, model }) => {
+ 			if (message.additional_kwargs.tool_calls != null) completionParam.tool_calls = message.additional_kwargs.tool_calls;
+ 			if (_langchain_core_messages.ToolMessage.isInstance(message) && message.tool_call_id != null) completionParam.tool_call_id = message.tool_call_id;
+ 		}
++		if (message.additional_kwargs.reasoning_content !== undefined) completionParam.reasoning_content = message.additional_kwargs.reasoning_content;
+ 		if (message.additional_kwargs.audio && typeof message.additional_kwargs.audio === "object" && "id" in message.additional_kwargs.audio) return [completionParam, {
+ 			role: "assistant",
+ 			audio: { id: message.additional_kwargs.audio.id }
+diff --git a/node_modules/@langchain/openai/dist/converters/completions.js b/node_modules/@langchain/openai/dist/converters/completions.js
+index 10fa07a..3651c5e 100644
+--- a/node_modules/@langchain/openai/dist/converters/completions.js
++++ b/node_modules/@langchain/openai/dist/converters/completions.js
+@@ -472,6 +472,7 @@ const convertStandardContentMessageToCompletionsMessage = ({ message, model }) =
+ 		};
+ 		if (AIMessage.isInstance(message) && !!message.tool_calls?.length) completionParam.tool_calls = message.tool_calls.map(convertLangChainToolCallToOpenAI);
+ 		else if (message.additional_kwargs.tool_calls != null) completionParam.tool_calls = message.additional_kwargs.tool_calls;
++		if (message.additional_kwargs.reasoning_content !== undefined) completionParam.reasoning_content = message.additional_kwargs.reasoning_content;
+ 		return completionParam;
+ 	} else if (role === "tool" && ToolMessage.isInstance(message)) return {
+ 		role: "tool",
+@@ -590,6 +591,7 @@ const convertMessagesToCompletionsMessageParams = ({ messages, model }) => {
+ 			if (message.additional_kwargs.tool_calls != null) completionParam.tool_calls = message.additional_kwargs.tool_calls;
+ 			if (ToolMessage.isInstance(message) && message.tool_call_id != null) completionParam.tool_call_id = message.tool_call_id;
+ 		}
++		if (message.additional_kwargs.reasoning_content !== undefined) completionParam.reasoning_content = message.additional_kwargs.reasoning_content;
+ 		if (message.additional_kwargs.audio && typeof message.additional_kwargs.audio === "object" && "id" in message.additional_kwargs.audio) return [completionParam, {
+ 			role: "assistant",
+ 			audio: { id: message.additional_kwargs.audio.id }

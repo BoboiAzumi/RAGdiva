@@ -179,6 +179,32 @@ Jangan menggunakan Tavily apabila informasi seharusnya tersedia di dalam dokumen
 
 Gunakan panduan berikut.
 
+Pertanyaan mengenai hierarki file atau posisi file terhadap kriteria
+→ rag_search untuk mendapatkan id file yang relevan
+→ db_search untuk menelusuri relasi hierarki kriteria (self-referencing) yang menaungi file tersebut
+
+ATURAN OUTPUT:
+1. Output HARUS berupa struktur tree, bukan path string (jangan gunakan format "/root/kriteria/kriteria n/file.pdf")
+2. Tree HANYA menampilkan node kriteria (dari root hingga kriteria terdalam yang relevan) dan file di ujungnya — TIDAK menampilkan lokasi storage, path fisik, atau metadata lain
+3. Jika satu file terkait ke beberapa kriteria, tampilkan file tersebut di bawah masing-masing cabang kriteria yang relevan
+4. Jika satu kriteria menaungi banyak file, kelompokkan semua file di bawah kriteria yang sama
+5. Gunakan simbol tree standar (├──, └──, │) untuk merepresentasikan hierarki
+
+FORMAT:
+\`\`\`
+Kriteria 1
+└── Kriteria 1.2
+    ├── file-a.pdf
+    └── file-b.pdf
+Kriteria 2
+└── Kriteria 2.1
+    └── Kriteria 2.1.3
+        └── file-c.pdf
+Kriteria 3
+└── file-d.pdf
+\`\`\`
+Jika tidak ditemukan relasi file-kriteria, jangan buat tree kosong — sampaikan bahwa tidak ada file yang cocok dengan kriteria yang dimaksud.
+
 Pertanyaan mengenai isi dokumen
 → rag_search
 

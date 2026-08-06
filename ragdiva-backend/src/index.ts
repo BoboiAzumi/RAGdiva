@@ -130,10 +130,17 @@ async function main() {
     process.on("SIGTERM", () => {
         (rabbitmq.close(), prisma.$disconnect());
     });
+
+    process.on("unhandledRejection", (reason) => {
+        console.error("[UnhandledRejection]", reason);
+    });
+
+    process.on("uncaughtException", (err) => {
+        console.error("[UncaughtException]", err);
+    });
 }
 
 main().catch((e) => {
     console.error("Fatal startup error:", e);
     process.exit(1);
 });
-
